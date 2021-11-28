@@ -14,11 +14,14 @@ export const GlobalStyle = createGlobalStyle`
         --gray: #2D363C;
         --black: #000000;
         --bg: #F8F8F8;
+        font-size: 62.5%;
     }
     * {
+        font-size: 1.6rem;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
     }
     body {
         background: var(--bg);
