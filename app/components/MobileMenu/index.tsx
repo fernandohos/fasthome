@@ -17,12 +17,16 @@ export function MobileMenu() {
                 <div className="line"></div>
             </C.Icon>
             <AnimatePresence>
-                {   
+                {
                     showMenu && (
                         <C.MobileMenu
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 10 }}
+                            transition={{
+                                x: { type: "spring", stiffness: 100 },
+                                default: { duration: .2 },
+                            }}
                         >
                             <div className="user-image">
                                 <Image src={userImage ?? defaultProfileImage} layout="fill" alt="user profile image" />
