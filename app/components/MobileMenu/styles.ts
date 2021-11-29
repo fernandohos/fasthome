@@ -1,9 +1,11 @@
 import styled, { keyframes, css } from 'styled-components';
+import { motion } from 'framer-motion';
 
-
+export const Container = styled.div`
+    position: relative;
+`;
 
 export const Icon = styled.div<{ show: boolean }>`
-    position: relative;
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
@@ -32,4 +34,42 @@ export const Icon = styled.div<{ show: boolean }>`
         }
     }
     
+`;
+
+export const MobileMenu = styled(motion.div)`
+    position: absolute;
+    right: 0;
+    top: 140%;
+    width: min(90vw, 20rem);
+    padding: 2rem;
+    background: var(--white);
+    border-radius: .5rem;
+    border: .1rem solid rgba(0, 0, 0, .1);
+    box-shadow: 0 .2rem .6rem rgba(0, 0, 0, .2);
+
+    ul {
+        list-style: none;
+        box-sizing: content-box;
+
+        li {
+            list-style: none;
+            padding: 1rem 0;
+            box-sizing: content-box;
+            white-space: nowrap;    
+            
+            
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .user-image {
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            height: 4rem;
+            width: 4rem;
+            background: #ddd;
+        }
 `;
