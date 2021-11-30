@@ -5,12 +5,15 @@ import logo from '../../../public/images/Logo.svg';
 import { Nav } from '../../components/Nav';
 import { ButtonStyleType } from '../../types/ButtonStyleType';
 import { Button } from '../../components/Button';
+import { AnimatePresence } from 'framer-motion';
 import defaultProfileImage from '../../../public/images/default-user-image.svg';
 import { MobileMenu } from '../../components/MobileMenu';
+import { ProfileTab } from '../../components/ProfileTab';
 
 export function Header() {
     const userImage = null;
     const [windowWidth, setWindowWidth] = useState<number>(0);
+    const [showProfileTab, setShowProfileTab] = useState(false);
 
     useEffect(() => {
 
@@ -38,9 +41,25 @@ export function Header() {
 
                 {
                     windowWidth >= 780 && (
-                        <div className="user-image-container">
-                            <Image src={userImage ?? defaultProfileImage} layout="fill" alt="user profile image" />
-                        </div>
+                        <C.ProfileTabContainer>
+                            <div className="user-image-container" onClick={e => setShowProfileTab(v => !v)}>
+                                <Image src={userImage ?? defaultProfileImage} layout="fill" alt="user profile image" />
+                            </div>
+                            <AnimatePresence>
+                                {
+                                    showProfileTab && (
+                                        <ProfileTab
+                                            initial={{ opacity: 0, x: 10 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: 10 }}
+                                            transition={{
+                                                default: { duration: .2 },
+                                            }} />
+                                    )
+                                }
+                            </AnimatePresence>
+
+                        </C.ProfileTabContainer>
                     )
                 }
 

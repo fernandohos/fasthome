@@ -32,3 +32,8 @@ export const Container = styled.header`
         }
     }
 `;
+
+export const ProfileTabContainer = styled.div`
+    position: relative;
+
+`;
