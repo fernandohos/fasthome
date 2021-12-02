@@ -56,6 +56,7 @@ const Home: NextPage = () => {
       }
     ]
   }
+  const featuredRental = {...featuredSales, title: 'Featured Rental', linkTo:"/for-rental"}
 
   return (
     <C.Container>
@@ -63,6 +64,7 @@ const Home: NextPage = () => {
       <Banner />
       <main>
         <Featured {...featuredSales} />
+        <Featured {...featuredRental} />
       </main>
     </C.Container>
   )
