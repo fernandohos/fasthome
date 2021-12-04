@@ -1,9 +1,11 @@
 import React from 'react';
+import * as C from '../app/styles/app';
 import type { NextPage } from 'next';
 import { Header } from '../app/patterns/Header';
 import { Banner } from '../app/patterns/Banner';
 import { Featured } from '../app/patterns/Featured';
-import * as C from '../app/styles/app';
+import { SearchOnMapBanner } from '../app/patterns/SearchOnMapBanner';
+
 
 const Home: NextPage = () => {
   const featuredSales = {
@@ -56,7 +58,7 @@ const Home: NextPage = () => {
       }
     ]
   }
-  const featuredRental = {...featuredSales, title: 'Featured Rental', linkTo:"/for-rental"}
+  const featuredRental = { ...featuredSales, title: 'Featured Rental', linkTo: "/for-rental" }
 
   return (
     <C.Container>
@@ -65,6 +67,7 @@ const Home: NextPage = () => {
       <main>
         <Featured {...featuredSales} />
         <Featured {...featuredRental} />
+        <SearchOnMapBanner />
       </main>
     </C.Container>
   )

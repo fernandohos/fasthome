@@ -8,7 +8,8 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     
-    > .content {
+    
+    .content {
         padding: 2rem 3rem;
         display: flex;
         flex-direction: column;
@@ -29,6 +30,33 @@ export const Container = styled.div`
         }
     }
 
+@media (max-width: 888px) {
+    background-image: url('/images/searching-on-map.png');
+    background-repeat:  no-repeat;
+    background-size: cover;
+    background-position: center top;
+    padding: 0;
+    height: 20rem;
+
+    @media (max-width: 430px) {
+        height: 22rem;
+    }
+
+    > .content {
+        width: 100%;
+        background: #fff4;
+        backdrop-filter: blur(1px);
+        
+        p {
+            color: #000c;
+        }
+
+    }
+
+    .image-container {
+        display: none;
+    }
+}
     .image-container {
         position: relative;
         height: calc(min(35vw, 47.5rem) * .5625);
