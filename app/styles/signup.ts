@@ -119,6 +119,7 @@ export const GoogleButton = styled.button`
     justify-content: center;
     height: 4rem;
     position: relative;
+    cursor: pointer;
 
     .google-logo-container {
         position: absolute;

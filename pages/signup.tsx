@@ -89,6 +89,7 @@ export default function Signup() {
                             <input type="password" />
                             <label>Confirm Password</label>
                         </C.InputContainer>
+                        <C.SignupButton>Sign Up</C.SignupButton>
                     </div>
                 </C.Form>
             </div>
