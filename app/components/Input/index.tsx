@@ -8,24 +8,24 @@ enum ActionTypes {
     UPDATE_CONFIRM_PASSWORD = 'update_confirm_password'
 }
 
-type Action = {
-    type: ActionTypes;
+type Action<P> = {
+    type: P;
     payload: string;
 }
 
-type Props = {
+type Props<T> = {
     label: string;
     value: string;
-    dispatch: Dispatch<Action>;
-    type: ActionTypes;
+    dispatch: Dispatch<Action<T>>;
+    type: T;
     input: InputHTMLAttributes<HTMLInputElement>;
 }
 
-export function Input({ type, value, label, dispatch, input }: Props) {
+export function Input<T>({ type, value, label, dispatch, input }: Props<T>) {
     return (
         <C.Container isEmpty={!value}>
             <input 
-                {...input} 
+                {...input}
                 id={label} 
                 onChange={e => (
                     dispatch({
