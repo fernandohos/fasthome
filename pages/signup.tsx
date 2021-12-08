@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import * as C from '../app/styles/signup';
 import Image from 'next/image';
-
-import GoogleLogo from '../public/images/google-logo.svg';
+import { GoogleButton } from '../app/components/GoogleButton';
 import { Input } from '../app/components/Input';
 import { AuthLayout } from '../app/patterns/AuthLayout';
 
@@ -77,10 +76,7 @@ export default function Signup() {
 
     return (
         <AuthLayout>
-            <C.GoogleButton>
-                <div className="google-logo-container"><Image src={GoogleLogo} alt="google logo" layout="fill" /></div>
-                <p>Connect with Google</p>
-            </C.GoogleButton>
+            <GoogleButton />
             <C.Separator>
                 <div />
                 <p>or</p>
