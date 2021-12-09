@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import * as C from '../app/styles/signup';
-import Image from 'next/image';
+import Link from 'next/link';
 import { GoogleButton } from '../app/components/GoogleButton';
 import { Input } from '../app/components/Input';
 import { AuthLayout } from '../app/patterns/AuthLayout';
@@ -115,6 +115,9 @@ export default function Signup() {
                 !isPasswordEqual && <p>passwords do not match</p>
             }
             <C.SignupButton>Sign Up</C.SignupButton>
+            <C.LoginLink>
+                <span>Alredy a member? <Link href="/login">Login now</Link>!</span>
+            </C.LoginLink>
         </AuthLayout>
     )
 }
