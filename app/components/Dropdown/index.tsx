@@ -13,8 +13,8 @@ export function Dropdown({ label, children }: Props) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <C.Container isOpen={isOpen} onClick={e => setIsOpen(p => !p)}>
-            <div className="summary">
+        <C.Container isOpen={isOpen} >
+            <div className="summary" onClick={e => setIsOpen(p => !p)}>
                 <p>
                     {label}
                 </p>
