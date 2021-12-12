@@ -30,6 +30,8 @@ export const Container = styled.div<{isOpen: boolean}>`
 
     .detail {
         position: absolute;
+        z-index: 4;
+        box-shadow: 0 2px 4px #0005;
         top: 105%;
         left: 0;
         min-width: 100%;
