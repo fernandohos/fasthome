@@ -9,6 +9,7 @@ export const Container = styled(motion.div)`
     right: 0;
     top: 130%;
     background: var(--white);
+    z-index: 5;
 `;
 
 export const Tab = styled.div`
