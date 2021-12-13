@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { GoogleButton } from '../app/components/GoogleButton';
 import { Input } from '../app/components/Input';
 import { AuthLayout } from '../app/patterns/AuthLayout';
-import { signUpWithGoogle } from '../app/firebase/auth';
+import { signUp, signUpWithGoogle } from '../app/firebase/auth';
+import isEmail from 'validator/lib/isEmail';
 
 type FormType = {
     name: string;
@@ -67,13 +68,36 @@ function reducer(state: ReducerState, action: Action): FormType {
 }
 
 export default function Signup() {
-
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [isPasswordEqual, setIsPasswordEqual] = useState(false);
+    const [inputErrors, setInputErrors] = useState({
+        name: false,
+        email: false,
+        password: false,
+        confirmPassord: false
+    })
+    
+    const handleSignUp = () => {
+        const { name, email, password } = state;
+        console.log(isEmail(email));
 
-    useEffect(() => {
-        setIsPasswordEqual(state.password === state.confirmPassword);
-    }, [state])
+        if(!isEmail(email)) {
+            setInputErrors(p => ({...p, email: true}));
+            return;
+        }
+
+        if (state.name !== '' && state.email !== '' && state.password !== '' && state.confirmPassword !== '' && state.confirmPassword === state.password) {
+            signUp(email, password, name);
+        }
+        else {
+            setInputErrors(prev => ({
+                ...prev,
+                name: state.name === '',
+                email: state.email === '',
+                password: (state.password === '' ? true : state.password === state.confirmPassword),
+                confirmPassword: (state.confirmPassword === '' ? true : state.password === state.confirmPassword)
+            }));
+        }
+    }
 
     return (
         <AuthLayout>
@@ -113,9 +137,18 @@ export default function Signup() {
             />
 
             {
-                !isPasswordEqual && <p>passwords do not match</p>
+                state.password !== state.confirmPassword && <p>passwords do not match</p>
             }
-            <C.SignupButton>Sign Up</C.SignupButton>
+            {
+                inputErrors.password && state.password === '' && <p>password is empty</p>
+            }
+            {
+                inputErrors.name && state.name === '' && <p>name is empty</p>
+            }
+            {
+                inputErrors.email && <p>invalid email</p>
+            }
+            <C.SignupButton onClick={handleSignUp}>Sign Up</C.SignupButton>
             <C.LoginLink>
                 <span>Alredy a member? <Link href="/login">Login now</Link>!</span>
             </C.LoginLink>
