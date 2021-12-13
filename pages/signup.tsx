@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { GoogleButton } from '../app/components/GoogleButton';
 import { Input } from '../app/components/Input';
 import { AuthLayout } from '../app/patterns/AuthLayout';
+import { signUpWithGoogle } from '../app/firebase/auth';
 
 type FormType = {
     name: string;
@@ -76,7 +77,7 @@ export default function Signup() {
 
     return (
         <AuthLayout>
-            <GoogleButton />
+            <GoogleButton onClick={signUpWithGoogle} />
             <C.Separator>
                 <div />
                 <p>or</p>
