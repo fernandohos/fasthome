@@ -42,7 +42,7 @@ function reducer(state: StateType, action: ActionType) {
 export default function Login() {
     const [state, dispatch] = useReducer(reducer, { email: '', password: '' });
     const [inputErrors, setInputErrors] = useState({ email: false, password: false });
-    const { signIn } = useAuth();
+    const { signIn, signUpWithGoogle } = useAuth();
 
     function handleSignIn() {
         const { email, password } = state;
@@ -56,13 +56,12 @@ export default function Login() {
                 password: state.password === ''
             }))
         }
-
     }
 
     return (
         <AuthLayout>
             <C.LoginForm>
-                <GoogleButton />
+                <GoogleButton onClick={signUpWithGoogle} />
                 <C.Separator>
                     <div />
                     <p>or</p>
