@@ -5,13 +5,20 @@ import {
     signInWithPopup,
     signOut
 } from 'firebase/auth';
-import {collection, addDoc} from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
+import Router from 'next/router';
 
 
 export const signIn = async (email: string, password: string) => {
-    const res = await signInWithEmailAndPassword(auth, email, password);
-    console.log(res)
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        Router.push('/');
+    }
+    catch (e) {
+        console.log(e);
+    }
+    console.log('teste');
 }
 
 export const signUp = async (email: string, password: string, name: string) => {
@@ -53,7 +60,7 @@ export const signUpWithGoogle = async () => {
             address: '',
         });
     }
-    catch(err) {
+    catch (err) {
         throw (err);
     }
 }
