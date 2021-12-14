@@ -1,9 +1,11 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import * as C from '../app/styles/login';
 import { AuthLayout } from '../app/patterns/AuthLayout';
 import { Input } from '../app/components/Input';
 import { GoogleButton } from '../app/components/GoogleButton';
+import useAuth from '../app/hooks/useAuth';
 import Link from 'next/link';
+import isEmail from 'validator/lib/isEmail';
 
 enum ActionTypes {
     UPDATE_EMAIL = 'update_email',
@@ -39,6 +41,23 @@ function reducer(state: StateType, action: ActionType) {
 
 export default function Login() {
     const [state, dispatch] = useReducer(reducer, { email: '', password: '' });
+    const [inputErrors, setInputErrors] = useState({ email: false, password: false });
+    const { signIn } = useAuth();
+
+    function handleSignIn() {
+        const { email, password } = state;
+
+        if (isEmail(email) && password !== '') {
+            signIn(email, password);
+        }
+        else {
+            setInputErrors(prev => ({
+                email: state.email === '',
+                password: state.password === ''
+            }))
+        }
+
+    }
 
     return (
         <AuthLayout>
@@ -63,10 +82,16 @@ export default function Login() {
                     type={ActionTypes.UPDATE_PASSWORD}
                     input={{ type: 'password' }}
                 />
+                {
+                    inputErrors.email && !state.email && <p>invalid email</p>
+                }
+                {
+                    inputErrors.password && !state.password && <p>password is empty</p>
+                }
                 <Link href="/reset-password" passHref>
                     <p className="link">I forgot my password</p>
                 </Link>
-                <C.LoginButton>
+                <C.LoginButton onClick={handleSignIn}>
                     login
                 </C.LoginButton>
                 <p className="signup-link">Still not a member? <Link href="/signup" passHref><span className="link">Sign Up Now!</span></Link></p>
