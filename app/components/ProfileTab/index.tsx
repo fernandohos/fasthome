@@ -5,6 +5,8 @@ import Link from 'next/link';
 import loginIcon from '../../../public/images/login-icon.svg';
 import signupIcon from '../../../public/images/signup-icon.svg';
 import infoIcon from '../../../public/images/info-icon.svg';
+import logOutIcon from '../../../public/images/logout-icon.svg';
+import { logOut } from '../../firebase/auth';
 
 type Props = {
     initial: { opacity: number, x: number };
@@ -47,6 +49,12 @@ export function ProfileTab({ initial, animate, exit, transition }: Props) {
                     Profile information
                 </C.Tab>
             </Link>
+            <C.Tab onClick={logOut}>
+                <div className="detail-tab-image">
+                    <Image src={logOutIcon} layout="fill" alt="logout icon" />
+                </div>
+                Sign out
+            </C.Tab>
         </C.Container>
     )
 }

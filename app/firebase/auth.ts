@@ -2,7 +2,8 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    signOut
 } from 'firebase/auth';
 import {collection, addDoc} from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
@@ -55,4 +56,8 @@ export const signUpWithGoogle = async () => {
     catch(err) {
         throw (err);
     }
+}
+
+export const logOut = async () => {
+    signOut(auth);
 }
