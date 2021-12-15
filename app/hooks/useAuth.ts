@@ -5,38 +5,58 @@ import {
     signInWithPopup,
     signOut
 } from 'firebase/auth';
-import { collection, addDoc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
 import Router from 'next/router';
+import { useState } from 'react';
+import { User } from '../types/User';
 
 export default function useAuth() {
+    const [user, setUser] = useState<null | User>(null);
 
     const signIn = async (email: string, password: string) => {
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const res = await signInWithEmailAndPassword(auth, email, password);
+            const { displayName, email: userEmail, photoURL, uid } = res.user;
+            setUser({
+                uid,
+                displayName,
+                email: userEmail,
+                photoURL,
+                province: null,
+                district: null,
+                mobileNumber: null,
+                mobileNumber2: null,
+                telephone: null,
+                address: null,
+            });
             Router.push('/');
         }
-        catch (e) {
-            console.log(e);
+        catch (error) {
+            throw error
         }
-}   
+    }
 
     const signUp = async (email: string, password: string, name: string) => {
         try {
-            const user = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(user);
-            const ref = collection(db, "users");
-            await addDoc(ref, {
-                email: user.user.email,
-                name,
-                photoUrl: '',
-                province: '',
-                district: '',
-                mobileNumber: '',
-                mobileNumber2: '',
-                telephone: '',
-                address: '',
-            })
+            const res = await createUserWithEmailAndPassword(auth, email, password);
+            const { displayName, email: userEmail, photoURL, uid } = res.user;
+            const newUser = {
+                uid,
+                displayName,
+                email: userEmail,
+                photoURL,
+                province: null,
+                district: null,
+                mobileNumber: null,
+                mobileNumber2: null,
+                telephone: null,
+                address: null,
+            }
+            const ref = doc(db, uid, "users");
+            await setDoc(ref, newUser)
+            setUser(newUser);
+            Router.push('/');
         }
         catch (error) {
             throw (error);
@@ -46,19 +66,24 @@ export default function useAuth() {
     const signUpWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
         try {
-            const user = await signInWithPopup(auth, provider);
-            const ref = collection(db, 'users');
-            await addDoc(ref, {
-                name: user.user.displayName,
-                email: user.user.email,
-                photoUrl: user.user.photoURL,
-                province: '',
-                district: '',
-                mobileNumber: '',
-                mobileNumber2: '',
-                telephone: '',
-                address: '',
-            });
+            const res = await signInWithPopup(auth, provider);
+            const { displayName, email: userEmail, photoURL, uid } = res.user;
+            const newUser = {
+                uid,
+                displayName,
+                email: userEmail,
+                photoURL,
+                province: null,
+                district: null,
+                mobileNumber: null,
+                mobileNumber2: null,
+                telephone: null,
+                address: null,
+            }
+            const ref = doc(db, uid, 'users');
+            await setDoc(ref, newUser);
+            setUser(newUser);
+            Router.push('/');
         }
         catch (err) {
             throw (err);
@@ -67,9 +92,11 @@ export default function useAuth() {
 
     const logOut = async () => {
         signOut(auth);
+        setUser(null);
     }
 
     return {
+        user,
         logOut,
         signIn,
         signUp,
