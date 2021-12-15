@@ -53,7 +53,7 @@ export default function useAuth() {
                 telephone: null,
                 address: null,
             }
-            const ref = doc(db, uid, "users");
+            const ref = doc(db, "users", uid);
             await setDoc(ref, newUser)
             setUser(newUser);
             Router.push('/');
@@ -80,7 +80,7 @@ export default function useAuth() {
                 telephone: null,
                 address: null,
             }
-            const ref = doc(db, uid, 'users');
+            const ref = doc(db, 'users', uid);
             await setDoc(ref, newUser);
             setUser(newUser);
             Router.push('/');
