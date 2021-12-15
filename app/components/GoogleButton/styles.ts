@@ -14,9 +14,13 @@ export const GoogleButton = styled.button`
     cursor: pointer;
 
     .google-logo-container {
+        > div {
+            position: relative;
+            width: 3rem;
+            height: 3rem;
+        }
+
         position: absolute;
         left: 1rem;
-        width: 3rem;
-        height: 3rem;
     }
 `;
