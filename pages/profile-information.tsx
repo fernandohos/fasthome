@@ -1,8 +1,9 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import * as C from '../app/styles/profileInformation';
 import { Header } from '../app/patterns/Header';
 import { Input } from '../app/components/Input';
 import { Button } from '../app/components/Button';
+import useAuth from '../app/hooks/useAuth';
 
 enum ActionType {
     UPDATE_NAME = 'update_name',
@@ -90,7 +91,43 @@ const initialState = {
 }
 
 export default function ProfileInformation() {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const { user } = useAuth();
+    useEffect(() => {
+        dispatch({
+            type: ActionType.UPDATE_ADDRESS,
+            payload: user?.address ?? ''
+        })
+        dispatch({
+            type: ActionType.UPDATE_DISTRICT,
+            payload: user?.district ?? ''
+        })
+        dispatch({
+            type: ActionType.UPDATE_EMAIL,
+            payload: user?.email ?? ''
+        })
+        dispatch({
+            type: ActionType.UPDATE_MOBILE_NUMBER,
+            payload: user?.mobileNumber ?? ''
+        })
+        dispatch({
+            type: ActionType.UPDATE_MOBILE_NUMBER2,
+            payload: user?.mobileNumber2 ?? ''
+        })
+        dispatch({
+            type: ActionType.UPDATE_NAME,
+            payload: user?.displayName ?? ''
+        })
+        dispatch({
+            type: ActionType.UPDATE_PROVINCE,
+            payload: user?.province ?? ''
+        })
+        dispatch({
+            type: ActionType.UPDATE_TELEPHONE,
+            payload: user?.telephone ?? ''
+        })
+    }, [user])
+
     return (
         <C.Container>
             <Header />
