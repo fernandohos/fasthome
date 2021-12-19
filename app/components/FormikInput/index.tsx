@@ -14,7 +14,7 @@ type Props<T> = {
 export function FormikInput<T>({ label, name, type, value, error, isTextarea = false }: Props<T>) {
     return (
         <C.Container error={!!error} isEmpty={!value}>
-            <Field as={isTextarea && 'textarea'} type={type} name={name} required />
+            <Field id={name} as={isTextarea && 'textarea'} type={type} name={name} required />
             <label htmlFor={name}>
                 {label}
             </label>
