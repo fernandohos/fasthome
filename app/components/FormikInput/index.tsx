@@ -8,12 +8,13 @@ type Props<T> = {
     type: string;
     value: T;
     error: string | undefined;
+    isTextarea?: boolean;
 }
 
-export function FormikInput<T>({ label, name, type, value, error }: Props<T>) {
+export function FormikInput<T>({ label, name, type, value, error, isTextarea = false }: Props<T>) {
     return (
         <C.Container error={!!error} isEmpty={!value}>
-            <Field type={type} name={name} required />
+            <Field as={isTextarea && 'textarea'} type={type} name={name} required />
             <label htmlFor={name}>
                 {label}
             </label>

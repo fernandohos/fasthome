@@ -4,7 +4,7 @@ export const Container = styled.div<{ isEmpty: boolean, error: boolean}>`
     position: relative;
     margin: 2rem 0;
 
-    input {
+    input, textarea {
         border: 2px solid ${props => props.error ? 'var(--red2)' : '#0008'};
         border-radius: .5rem;
         background: none;
@@ -23,7 +23,7 @@ export const Container = styled.div<{ isEmpty: boolean, error: boolean}>`
         user-select: none;
     }
     
-    input:focus ~ label {
+    input:focus ~ label, textarea:focus ~ label {
         top: 0;
     }
 `;
