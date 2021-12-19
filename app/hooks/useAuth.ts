@@ -69,10 +69,11 @@ export default function useAuth() {
         }
     }
 
-    const signUp = async (email: string, password: string, name: string) => {
+    const signUp = async (email: string, password: string, displayName: string) => {
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password);
-            const { displayName, email: userEmail, photoURL, uid } = res.user;
+            console.log('res on signup', res);
+            const { email: userEmail, photoURL, uid } = res.user;
             const newUser = {
                 uid,
                 displayName,
