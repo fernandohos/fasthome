@@ -6,6 +6,7 @@ export const LoginForm = styled.div`
         text-align: center;
         text-decoration: none;
         cursor: pointer;
+        margin-top: 2rem;
     }
     .signup-link {
         text-align: center;
@@ -43,4 +44,9 @@ export const Separator = styled.div`
         height: 1px;
         background: #0008;
     }
+`;
+
+export const Error = styled.div`
+    margin: -1rem 0;
+    color: var(--red2);
 `;

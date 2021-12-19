@@ -1,61 +1,29 @@
-import React, { useReducer, useState } from 'react';
+import React from 'react';
 import * as C from '../app/styles/login';
 import { AuthLayout } from '../app/patterns/AuthLayout';
-import { Input } from '../app/components/Input';
 import { GoogleButton } from '../app/components/GoogleButton';
 import useAuth from '../app/hooks/useAuth';
 import Link from 'next/link';
-import isEmail from 'validator/lib/isEmail';
+import { Formik, Form, FormikHelpers, ErrorMessage } from 'formik';
+import { FormikInput } from '../app/components/FormikInput';
+import * as Yup from 'yup';
 
-enum ActionTypes {
-    UPDATE_EMAIL = 'update_email',
-    UPDATE_PASSWORD = 'update_password',
-}
-
-type StateType = {
+type FormType = {
     email: string;
     password: string;
 }
 
-type ActionType = {
-    type: ActionTypes;
-    payload: string;
-}
-
-function reducer(state: StateType, action: ActionType) {
-    switch (action.type) {
-        case ActionTypes.UPDATE_EMAIL:
-            return {
-                ...state,
-                email: action.payload
-            };
-        case ActionTypes.UPDATE_PASSWORD:
-            return {
-                ...state,
-                password: action.payload
-            };
-        default:
-            return state;
-    }
-}
-
 export default function Login() {
-    const [state, dispatch] = useReducer(reducer, { email: '', password: '' });
-    const [inputErrors, setInputErrors] = useState({ email: false, password: false });
     const { signIn, signUpWithGoogle } = useAuth();
 
-    function handleSignIn() {
-        const { email, password } = state;
+    const YupSchema = Yup.object().shape({
+        email: Yup.string().email().required(),
+        password: Yup.string().required()
+    })
 
-        if (isEmail(email) && password !== '') {
-            signIn(email, password);
-        }
-        else {
-            setInputErrors(prev => ({
-                email: state.email === '',
-                password: state.password === ''
-            }))
-        }
+    function onSubmit({ email, password }: FormType, actions: FormikHelpers<FormType>) {
+        signIn(email, password);
+        actions.resetForm();
     }
 
     return (
@@ -67,33 +35,47 @@ export default function Login() {
                     <p>or</p>
                     <div />
                 </C.Separator>
-                <Input
-                    label="Email"
-                    value={state.email}
-                    dispatch={dispatch}
-                    type={ActionTypes.UPDATE_EMAIL}
-                    input={{ type: 'text' }}
-                />
-                <Input
-                    label="Password"
-                    value={state.password}
-                    dispatch={dispatch}
-                    type={ActionTypes.UPDATE_PASSWORD}
-                    input={{ type: 'password' }}
-                />
-                {
-                    inputErrors.email && !state.email && <p>invalid email</p>
-                }
-                {
-                    inputErrors.password && !state.password && <p>password is empty</p>
-                }
-                <Link href="/reset-password" passHref>
-                    <p className="link">I forgot my password</p>
-                </Link>
-                <C.LoginButton onClick={handleSignIn}>
-                    login
-                </C.LoginButton>
-                <p className="signup-link">Still not a member? <Link href="/signup" passHref><span className="link">Sign Up Now!</span></Link></p>
+                <Formik
+                    initialValues={{
+                        email: '',
+                        password: ''
+                    }}
+                    validationSchema={YupSchema}
+                    onSubmit={onSubmit}
+                >
+                    {({ values, errors }) => (
+                        <Form>
+                            <FormikInput label="Email" error={errors.email} value={values.email} name="email" type="email" />
+                            <ErrorMessage name="email">
+                                {msg => (
+                                    <C.Error>{msg}</C.Error>
+                                )}
+                            </ErrorMessage>
+
+                            <FormikInput label="Password" error={errors.password} value={values.password} name="password" type="password" />
+                            <ErrorMessage name="password">
+                                {msg => (
+                                    <C.Error>{msg}</C.Error>
+                                )
+                                }</ErrorMessage>
+
+                            <Link href="/reset-password" passHref>
+                                <p className="link">I forgot my password</p>
+                            </Link>
+
+                            <C.LoginButton type="submit">
+                                login
+                            </C.LoginButton>
+
+                            <p className="signup-link">
+                                Still not a member?
+                                <Link href="/signup" passHref>
+                                    <span className="link">Sign Up Now!</span>
+                                </Link>
+                            </p>
+                        </Form>
+                    )}
+                </Formik>
             </C.LoginForm>
         </AuthLayout>
     )
