@@ -3,14 +3,25 @@ import * as C from '../app/styles/profileInformation';
 import { Header } from '../app/patterns/Header';
 import { Button } from '../app/components/Button';
 import useAuth from '../app/hooks/useAuth';
-import { Formik } from 'formik';
+import { Formik, Form } from 'formik';
 import { FormikInput } from '../app/components/FormikInput';
 
+type FormUser = {
+    displayName: string | null;
+    email: string | null;
+    province: string | null;
+    district: string | null;
+    mobileNumber: string | null;
+    mobileNumber2: string | null;
+    telephone: string | null;
+    address: string | null;
+}
+
 export default function ProfileInformation() {
-    const { user } = useAuth();
+    const { user, updateUser } = useAuth();
 
     const initialValues = {
-        name: user?.displayName ?? '',
+        displayName: user?.displayName ?? '',
         email: user?.email ?? '',
         province: user?.province ?? '',
         district: user?.district ?? '',
@@ -20,8 +31,10 @@ export default function ProfileInformation() {
         address: user?.address ?? ''
     }
 
-    function onSubmit() {
-        console.log('SUBMIT');
+    function onSubmit(values: FormUser) {
+        if (user) {
+            updateUser(user.uid, values);
+        }
     }
 
     return (
@@ -35,13 +48,13 @@ export default function ProfileInformation() {
                     onSubmit={onSubmit}
                 >
                     {({ values, errors }) => (
-                        <>
+                        <Form>
                             <C.InputContainer>
                                 <FormikInput
-                                    name="name"
-                                    value={values.name}
+                                    name="displayName"
+                                    value={values.displayName}
                                     label="Name"
-                                    error={errors.name}
+                                    error={errors.displayName}
                                     type="text"
                                 />
                                 <FormikInput
@@ -95,12 +108,12 @@ export default function ProfileInformation() {
                                 type="text"
                                 isTextarea
                             />
-                        </>
+                            <div className="button">
+                                <Button type="submit">Save</Button>
+                            </div>
+                        </Form>
                     )}
                 </Formik>
-                <div className="button">
-                    <Button>Save</Button>
-                </div>
             </C.ProfileInfo>
         </C.Container >
     )
