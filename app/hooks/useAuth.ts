@@ -7,11 +7,22 @@ import {
     signOut,
     onAuthStateChanged
 } from 'firebase/auth';
-import { setDoc, doc, getDoc } from 'firebase/firestore';
+import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
 import Router from 'next/router';
 import { useState } from 'react';
 import { User } from '../types/User';
+
+type UpdateUser = {
+    displayName?: string | null;
+    email?: string | null;
+    province?: string | null;
+    district?: string | null;
+    mobileNumber?: string | null;
+    mobileNumber2?: string | null;
+    telephone?: string | null;
+    address?: string | null;
+}
 
 export default function useAuth() {
     const [user, setUser] = useState<null | User>(null);
@@ -123,6 +134,27 @@ export default function useAuth() {
         }
     }
 
+    const updateUser = async (uid: string, data: UpdateUser) => {
+        const ref = doc(db, "users", uid);
+
+        const obj = {...data};
+
+        Object.keys(data).filter(k => {
+            const key = k as keyof UpdateUser;
+            if(obj[key] === '' || obj[key] === null || obj[key] === undefined) {
+                delete data[key];
+            }
+        })
+
+        try {
+            const respoea = await updateDoc(ref, data);
+            console.log(respoea);
+        }
+        catch(error) {
+            console.log(error);
+        }
+    }
+
     const logOut = async () => {
         signOut(auth);
         setUser(null);
@@ -133,6 +165,7 @@ export default function useAuth() {
         logOut,
         signIn,
         signUp,
+        updateUser,
         signUpWithGoogle
     }
 }
