@@ -28,9 +28,9 @@ export function PostingPhotos() {
         }
     });
 
-    const images = files.map(file => {
-        return <Image key={file.name} src={file.preview} width="200" height="100" alt={file.name} />
-    })
+    function handleRemoveFiles() {
+        setFiles([]);
+    }
 
     return (
         <Fieldset title="Posting Photos">
@@ -59,6 +59,7 @@ export function PostingPhotos() {
                         </C.DropContainer>
                     ) : (
                         <C.ImagesContainer>
+                            <div className="remove" onClick={handleRemoveFiles} />
                             {
                                 files.map((file, i) => {
                                     if (i > 5) return null;

@@ -75,6 +75,30 @@ export const ImagesContainer = styled.div`
     width: 100%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    position: relative;
+
+    .remove {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+
+        &:after {
+            content: '';
+            transform: rotate(45deg);
+            background-image:url('/images/plus-icon.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            background-color: #0005;
+        }
+
+    }
     
     @media (max-width: 700px) {
         grid-template-columns: repeat(2, 1fr);
