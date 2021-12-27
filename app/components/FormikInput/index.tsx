@@ -1,21 +1,38 @@
 import React from 'react';
-import { Field } from 'formik';
+import { Field, useField } from 'formik';
 import * as C from './styles';
 
-type Props<T> = {
+type Props = {
     label: string;
     name: string;
     type: string;
-    value: T;
-    error: string | undefined;
     isTextarea?: boolean;
     required?: boolean
 }
 
-export function FormikInput<T>({ label, name, type, value, error, isTextarea = false, required = false }: Props<T>) {
+export function FormikInput({ 
+    label,
+    name,
+    type,
+    isTextarea = false,
+    required = false
+    }: Props) {
+
+    const [inputProps, meta] = useField(name);
+
+    console.log('meta', meta);
+    console.log('input props', inputProps);
+
     return (
-        <C.Container error={!!error} isEmpty={!value}>
-            <Field id={name} as={isTextarea && 'textarea'} type={type} name={name} required={required} />
+        <C.Container error={!!meta.error} isEmpty={!meta.value}>
+            <Field
+                {...inputProps}
+                id={name}
+                as={isTextarea && 'textarea'}
+                type={type}
+                name={name}
+                required={required}
+            />
             <label htmlFor={name}>
                 {label}
             </label>
