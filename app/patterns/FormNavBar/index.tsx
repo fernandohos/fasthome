@@ -37,27 +37,35 @@ export function FormNavBar() {
         <C.Container>
             <C.IconContainer title="advertise">
                 <Link href="/advertise/form" passHref>
-                    <Image draggable="false" layout='fill' src={advertiseColor} alt="preview" />
+                    <C.Link>
+                        <Image draggable="false" layout='fill' src={advertiseColor} alt="preview" />
+                    </C.Link>
                 </Link>
             </C.IconContainer>
-            <C.Separator active={currentStage > 1}/>
+            <C.Separator active={currentStage > 1} />
             <C.IconContainer title="preview">
                 <Link href="/advertise/preview" passHref>
-                    <Image draggable="false" layout='fill' src={currentStage > 1 ? previewColor : preview} alt="preview" />
+                    <C.Link>
+                        <Image draggable="false" layout='fill' src={currentStage > 1 ? previewColor : preview} alt="preview" />
+                    </C.Link>
                 </Link>
             </C.IconContainer>
             <C.Separator active={currentStage > 2} />
             <C.IconContainer title="contact">
                 <Link href="/advertise/contact" passHref>
-                    <Image draggable="false" layout='fill' src={currentStage > 2 ? contactColor : contact} alt="contact" />
+                    <C.Link>
+                        <Image draggable="false" layout='fill' src={currentStage > 2 ? contactColor : contact} alt="contact" />
+                    </C.Link>
                 </Link>
             </C.IconContainer>
             <C.Separator active={currentStage > 3} />
             <C.IconContainer title="confirm">
                 <Link href="/advertise/confirm" passHref>
-                    <Image draggable="false" layout='fill' src={currentStage > 3 ? confirmColor : confirm} alt="confirm" />
+                    <C.Link>
+                        <Image draggable="false" layout='fill' src={currentStage > 3 ? confirmColor : confirm} alt="confirm" />
+                    </C.Link>
                 </Link>
             </C.IconContainer>
-        </C.Container>
+        </C.Container >
     )
 }

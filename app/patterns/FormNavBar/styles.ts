@@ -15,6 +15,12 @@ export const IconContainer = styled.div`
     margin: .4rem;
     cursor: pointer;
 
+    /* > a {
+        position: relative;
+        width: 4rem;
+        height: 4rem;
+    } */
+
     &:last-child {
         margin-right: 0;
     }
@@ -28,4 +34,11 @@ export const Separator = styled.div<{ active: boolean }>`
     flex: 1;
     height: 2px;
     background: ${({ active }) => active ? 'var(--red2)' : '#aeaeae'};
+`;
+
+export const Link = styled.a`
+    display: block;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
 `;
