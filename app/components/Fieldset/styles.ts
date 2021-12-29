@@ -5,6 +5,7 @@ export const Container = styled.fieldset`
     padding: 1.5rem;
     background: var(--white);
     border: 1px solid #0003;
+    text-align: left;
     margin: 2rem 0;
 
     h3 {
