@@ -6,17 +6,24 @@ import imageIcon from '../../../public/images/image-icon.svg';
 import cameraIcon from '../../../public/images/camera-icon.svg';
 import plusIcon from '../../../public/images/plus-icon.svg';
 import { useDropzone } from 'react-dropzone';
+import { FieldProps } from 'formik';
 
 interface FileType extends File {
     preview: string;
 }
 
-export function PostingPhotos() {
+export function PostingPhotos({ form }: FieldProps) {
     const [files, setFiles] = useState<FileType[]>([]);
+    const { setFieldValue } = form;
+
+    React.useEffect(() => {
+        setFieldValue("files", files);
+    }, [files, setFieldValue]);
 
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
         maxFiles: 10,
+        maxSize: 5000000,
         onDrop: (acceptedFiles) => {
             setFiles(acceptedFiles.map(file => {
                 return (
@@ -30,6 +37,7 @@ export function PostingPhotos() {
 
     function handleRemoveFiles() {
         setFiles([]);
+        setFieldValue("files", []);
     }
 
     return (
@@ -40,7 +48,7 @@ export function PostingPhotos() {
                 </div>
                 <p>You can add 10 photos to your ad</p>
 
-                <button {...getRootProps()}>
+                <button type="button" {...getRootProps()}>
                     <div className="image-container camera-icon">
                         <Image src={cameraIcon} alt="image icon" layout="fill" />
                         <input {...getInputProps()} />
