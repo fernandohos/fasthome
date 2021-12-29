@@ -1,20 +1,21 @@
-import React from 'react';
-import { Field } from 'formik';
+import React, { ReactNode } from 'react';
+import { Field, useField } from 'formik';
 import * as C from './styles';
 
-type Props<T> = {
+type Props = {
+    children?: ReactNode;
     label: string;
     name: string;
-    value: T;
-    error: string | undefined;
-    options: [string, string][];
+    options: [string, string][] | string[][];
     required?: boolean;
 }
 
-export function FormikSelect<T>({ label, name, value, error, required = false, options }: Props<T>) {
+export function FormikSelect({ label, name, required = false, options }: Props) {
+    const [inputProps, meta] = useField(name);
     return (
-        <C.Container error={!!error} isEmpty={!value}>
+        <C.Container error={!!meta.error} isEmpty={!meta.value}>
             <Field id={name} as='select' name={name} required={required}>
+                <option></option>
                 {
                     options.map((option, i) => (
                         <option key={i} value={option[1]}>
