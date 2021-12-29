@@ -49,3 +49,13 @@ export const Container = styled.div`
         }
     }
 `;
+
+export const CheckboxContainer = styled.div`
+    display: grid;
+    margin: 1rem 0;
+    grid-template-columns: repeat(3, 1fr);
+
+    @media (max-width: 630px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+`;
