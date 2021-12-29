@@ -7,7 +7,7 @@ type Props = {
     name: string;
     type: string;
     isTextarea?: boolean;
-    required?: boolean
+    required?: boolean;
 }
 
 export function FormikInput({ 
@@ -20,9 +20,6 @@ export function FormikInput({
 
     const [inputProps, meta] = useField(name);
 
-    console.log('meta', meta);
-    console.log('input props', inputProps);
-
     return (
         <C.Container error={!!meta.error} isEmpty={!meta.value}>
             <Field
@@ -32,6 +29,7 @@ export function FormikInput({
                 type={type}
                 name={name}
                 required={required}
+                style={{resize:"vertical", height: isTextarea && 100}}
             />
             <label htmlFor={name}>
                 {label}
