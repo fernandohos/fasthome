@@ -8,6 +8,7 @@ import { FormCategory } from '../../app/patterns/FormCategory';
 import FormGeneralInformation from '../../app/patterns/FormGeneralInformation';
 import { PostingPhotos } from '../../app/components/PostingPhotos';
 import FormAdvertiseFeatures from '../../app/patterns/FormAdvertiseFeatures';
+import { schema } from '../../app/utils/formValitationSchema';
 
 interface FileType extends File {
     preview: string;
@@ -34,6 +35,8 @@ type ValuesType = {
     rentalIncome: number,
     address: string;
     files: FileType[];
+    externalFeatures: string[],
+    interiorFeatures: string[]
 }
 
 const initialValues: ValuesType = {
@@ -56,7 +59,9 @@ const initialValues: ValuesType = {
     front: '',
     rentalIncome: 0,
     address: '',
-    files: []
+    files: [],
+    interiorFeatures: [],
+    externalFeatures: []
 }
 
 export const Map = dynamic(
@@ -77,6 +82,7 @@ export default function AdvertiseForm() {
                 <Formik
                     initialValues={initialValues}
                     onSubmit={onSubmit}
+                    validationSchema={schema}
                 >
                     {() => (
                         <Form style={{ textAlign: 'center', marginBottom: '4rem' }}>
