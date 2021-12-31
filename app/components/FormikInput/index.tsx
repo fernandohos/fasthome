@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, useField } from 'formik';
+import { Field, useField, ErrorMessage } from 'formik';
 import * as C from './styles';
 
 type Props = {
@@ -10,30 +10,37 @@ type Props = {
     required?: boolean;
 }
 
-export function FormikInput({ 
+export function FormikInput({
     label,
     name,
     type,
     isTextarea = false,
     required = false
-    }: Props) {
+}: Props) {
 
     const [inputProps, meta] = useField(name);
 
     return (
-        <C.Container error={!!meta.error} isEmpty={!meta.value}>
-            <Field
-                {...inputProps}
-                id={name}
-                as={isTextarea && 'textarea'}
-                type={type}
-                name={name}
-                required={required}
-                style={{resize:"vertical", height: isTextarea && 100}}
-            />
-            <label htmlFor={name}>
-                {label}
-            </label>
-        </C.Container>
+        <>
+            <C.Container error={!!meta.error && meta.touched} isEmpty={!meta.value}>
+                <Field
+                    {...inputProps}
+                    id={name}
+                    as={isTextarea && 'textarea'}
+                    type={type}
+                    name={name}
+                    required={required}
+                    style={{ resize: "vertical", height: isTextarea && 100 }}
+                />
+                <label htmlFor={name}>
+                    {label}
+                </label>
+            </C.Container>
+            <ErrorMessage name={name}>
+                {message => (
+                    <C.ErrorMessage>{message}</C.ErrorMessage>
+                )}
+            </ErrorMessage>
+        </>
     )
 }

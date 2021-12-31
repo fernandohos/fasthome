@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div<{ isEmpty: boolean, error: boolean}>`
     position: relative;
-    margin: 2rem 0;
+    margin: 2rem 0 .2rem;
 
     input, textarea {
         border: 2px solid ${props => props.error ? 'var(--red2)' : '#0008'};
@@ -26,4 +26,9 @@ export const Container = styled.div<{ isEmpty: boolean, error: boolean}>`
     input:focus ~ label, textarea:focus ~ label {
         top: 0;
     }
+`;
+
+export const ErrorMessage = styled.p`
+    color: var(--red2);
+    margin-bottom: 2rem;
 `;
