@@ -21,5 +21,6 @@ export const schema = Yup.object().shape({
     rentalIncome: Yup.number().min(0, "Insert a valid Rental Income"),
     address: Yup.string().required(),
     interiorFeatures: Yup.array().of(Yup.string()),
-    externalFeatures: Yup.array().of(Yup.string())
+    externalFeatures: Yup.array().of(Yup.string()),
+    files: Yup.array().of(Yup.mixed().test("fileSize", "file is too large", () => true))
 });
