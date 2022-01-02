@@ -18,9 +18,12 @@ export const FlexWrapper = styled.div`
     gap: 2rem;
 `;
 
-export const Button = styled.button`
+export const Button = styled.a`
+    display: block;
     padding: .8rem 5rem;
-    background: var(--red2);
+    width: 20rem;
+    text-decoration: none;
+    background-color: var(--red2);
     color: var(--white);
     border: none;
     border-radius: .5rem;
