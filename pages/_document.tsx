@@ -32,8 +32,8 @@ export default class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    
                     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+                    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
                 </Head>
                 <body>
                     <Main />
