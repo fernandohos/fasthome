@@ -1,13 +1,24 @@
 import type { AppProps } from 'next/app';
 import { GlobalStyle } from '../app/styles/global';
-import { FormProvider } from '../app/contexts/formContext';
+import type { NextPage } from 'next';
+import type { ReactElement, ReactNode } from 'react';
 
-function MyApp({ Component, pageProps }: AppProps) {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
-    <FormProvider>
-        <GlobalStyle />
-        <Component {...pageProps} />
-    </FormProvider>
+    <>
+      <GlobalStyle />
+      {getLayout(<Component {...pageProps} />)}
+    </>
   );
 }
 
