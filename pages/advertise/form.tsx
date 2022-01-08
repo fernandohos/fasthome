@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Field } from 'formik';
+import { Field, useFormikContext } from 'formik';
 import dynamic from 'next/dynamic';
 import * as C from '../../app/styles/form';
 import { Header } from '../../app/patterns/Header';
@@ -16,6 +16,8 @@ const DynamicMap = dynamic(
 )
 
 function AdvertiseForm() {
+    const { errors } = useFormikContext();
+    console.log(errors)
     return (
         <C.Container>
             <FormCategory />
@@ -23,9 +25,11 @@ function AdvertiseForm() {
             <DynamicMap />
             <Field component={PostingPhotos} />
             <FormAdvertiseFeatures />
-            <Link href="/advertise/preview" passHref>
-                <C.Button>Next</C.Button>
-            </Link>
+            {
+                Object.keys(errors).length === 0 && <Link href="/advertise/preview" passHref>
+                    <C.Button>Next</C.Button>
+                </Link>
+            }
         </C.Container>
     )
 }
