@@ -8,6 +8,7 @@ import FormGeneralInformation from '../../app/patterns/FormGeneralInformation';
 import { PostingPhotos } from '../../app/components/PostingPhotos';
 import FormAdvertiseFeatures from '../../app/patterns/FormAdvertiseFeatures';
 import { FormikWrapper } from '../../app/patterns/FormikWrapper';
+import { FormNavBar } from '../../app/patterns/FormNavBar';
 import Link from 'next/link';
 
 const DynamicMap = dynamic(
@@ -20,6 +21,7 @@ function AdvertiseForm() {
     console.log(errors)
     return (
         <C.Container>
+            <FormNavBar />
             <FormCategory />
             <FormGeneralInformation />
             <DynamicMap />
