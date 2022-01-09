@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import * as C from './styles';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -37,7 +37,7 @@ export function MobileMenu() {
                      <C.UserInfo opened={showUserDetails}>
                         <div className="user-info-summary" onClick={e => setShowUserDetails(v => !v)}>
                            <div className="user-image">
-                              <Image src={user?.photoURL ?? defaultProfileImage} layout="fill" alt="user profile image" />
+                              <Image src={user.current?.photoURL ?? defaultProfileImage} layout="fill" alt="user profile image" />
                            </div>
                            <div className="arrow-icon">
                               <Image src={arrowIcon} alt="arrow" layout="fill" />

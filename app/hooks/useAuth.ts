@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
@@ -25,7 +25,8 @@ type UpdateUser = {
 }
 
 export default function useAuth() {
-    const [user, setUser] = useState<null | User>(null);
+    const user = useRef<null | User>(null);
+    const mountedRef = useRef(true);
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async currentUser => {
@@ -39,7 +40,7 @@ export default function useAuth() {
                 if (data) {
                     const { uid, displayName, email, photoURL, province, district, mobileNumber, mobileNumber2, telephone, address } = data;
 
-                    setUser({
+                    user.current = {
                         uid,
                         displayName,
                         email,
@@ -50,18 +51,21 @@ export default function useAuth() {
                         mobileNumber2,
                         telephone,
                         address
-                    });
+                    };
                 }
             }
         })
-        return unsub;
+        return () => {
+            mountedRef.current = false;
+            unsub();
+        };
     }, [])
 
     const signIn = async (email: string, password: string) => {
         try {
             const res = await signInWithEmailAndPassword(auth, email, password);
             const { displayName, email: userEmail, photoURL, uid } = res.user;
-            setUser({
+            user.current = ({
                 uid,
                 displayName,
                 email: userEmail,
@@ -99,7 +103,7 @@ export default function useAuth() {
             }
             const ref = doc(db, "users", uid);
             await setDoc(ref, newUser)
-            setUser(newUser);
+            user.current = newUser;
             Router.push('/');
         }
         catch (error) {
@@ -126,7 +130,7 @@ export default function useAuth() {
             }
             const ref = doc(db, 'users', uid);
             await setDoc(ref, newUser);
-            setUser(newUser);
+            user.current = (newUser);
             Router.push('/');
         }
         catch (err) {
@@ -157,7 +161,7 @@ export default function useAuth() {
 
     const logOut = async () => {
         signOut(auth);
-        setUser(null);
+        user.current = (null);
     }
 
     return {
