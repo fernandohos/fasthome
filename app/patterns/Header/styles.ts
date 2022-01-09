@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 
 export const Container = styled.header`
     background: var(--white);
@@ -36,4 +37,16 @@ export const Container = styled.header`
 export const ProfileTabContainer = styled.div`
     position: relative;
 
+`;
+
+export const Button = styled.a`
+    display: block;
+    padding: .8rem 1.5rem;
+    text-decoration: none;
+    background-color: var(--red2);
+    color: var(--white);
+    border: none;
+    border-radius: .5rem;
+    margin: auto;
+    cursor: pointer;
 `;

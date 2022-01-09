@@ -3,13 +3,12 @@ import * as C from './styles';
 import Image from 'next/image';
 import logo from '../../../public/images/Logo.svg';
 import { Nav } from '../../components/Nav';
-import { ButtonStyleType } from '../../types/ButtonStyleType';
-import { Button } from '../../components/Button';
 import { AnimatePresence } from 'framer-motion';
 import defaultProfileImage from '../../../public/images/default-user-image.svg';
 import { MobileMenu } from '../../components/MobileMenu';
 import { ProfileTab } from '../../components/ProfileTab';
 import useAuth from '../../hooks/useAuth';
+import Link from 'next/link';
 
 export function Header() {
     const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -29,7 +28,7 @@ export function Header() {
         <C.Container>
             <div className="logo-nav">
                 <div className="logo-container">
-                    <Image src={logo} alt="logo" layout="fill" />
+                    <Image src={logo} priority alt="logo" layout="fill" />
                 </div>
 
                 {
@@ -38,7 +37,7 @@ export function Header() {
 
             </div>
             <div className="advertise-user-profile">
-                <Button buttonStyleType={ButtonStyleType.FILLED}>Advertise</Button>
+                <Link href="/advertise/form" passHref><C.Button>Advertise</C.Button></Link>
 
                 {
                     windowWidth >= 780 && (
