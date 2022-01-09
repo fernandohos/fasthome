@@ -1,41 +1,13 @@
 import React, { ReactNode } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { schema } from '../../utils/formValitationSchema';
+import { FormValuesType } from '../../types/FormValuesType';
 
 type Props = {
     children: ReactNode;
 }
 
-interface FileType extends File {
-    preview: string;
-}
-
-type ValuesType = {
-    housing: string,
-    sale: string,
-    title: string,
-    explanation: string,
-    price: number,
-    numberOfRoom: number,
-    grossM2: number,
-    netM2: number,
-    warmingType: string,
-    buildingAge: number,
-    floorLocation: number,
-    avaliableForLoan: string,
-    furnished: string,
-    status: string,
-    dues: number,
-    swap: string,
-    front: string,
-    rentalIncome: number,
-    address: string;
-    files: FileType[];
-    externalFeatures: string[],
-    interiorFeatures: string[]
-}
-
-const initialValues: ValuesType = {
+const initialValues: FormValuesType = {
     housing: '',
     sale: '',
     title: '',
@@ -61,7 +33,7 @@ const initialValues: ValuesType = {
 }
 
 export function FormikWrapper({ children }: Props) {
-    function onSubmit(values: ValuesType, actions: FormikHelpers<ValuesType>) {
+    function onSubmit(values: FormValuesType, actions: FormikHelpers<FormValuesType>) {
         console.log("SUBMITED", values);
         actions.resetForm();
     }
