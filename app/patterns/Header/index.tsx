@@ -9,11 +9,12 @@ import { AnimatePresence } from 'framer-motion';
 import defaultProfileImage from '../../../public/images/default-user-image.svg';
 import { MobileMenu } from '../../components/MobileMenu';
 import { ProfileTab } from '../../components/ProfileTab';
+import useAuth from '../../hooks/useAuth';
 
 export function Header() {
-    const userImage = null;
     const [windowWidth, setWindowWidth] = useState<number>(0);
     const [showProfileTab, setShowProfileTab] = useState(false);
+    const { user } = useAuth();
 
     useEffect(() => {
 
@@ -43,7 +44,7 @@ export function Header() {
                     windowWidth >= 780 && (
                         <C.ProfileTabContainer>
                             <div className="user-image-container" onClick={e => setShowProfileTab(v => !v)}>
-                                <Image src={userImage ?? defaultProfileImage} layout="fill" alt="user profile image" />
+                                <Image src={user?.photoURL ?? defaultProfileImage} layout="fill" alt="user profile image" />
                             </div>
                             <AnimatePresence>
                                 {
