@@ -18,6 +18,7 @@
     "react-dropzone": "^11.4.2",
     "react-leaflet": "^3.2.2",
     "styled-components": "^5.3.3",
+    "use-draggable-scroll": "^0.1.0",
     "validator": "^13.7.0",
     "yup": "^0.32.11"
   },
