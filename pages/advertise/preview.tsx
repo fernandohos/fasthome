@@ -11,30 +11,8 @@ import mapIcon from '../../public/images/map-icon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const values = {
-    housing: 'Housing',
-    sale: 'For Sale',
-    title: 'House For Sale',
-    explanation: 'Im saling this house because my husband died in there',
-    price: 3000,
-    numberOfRoom: 3,
-    grossM2: 230,
-    netM2: 80,
-    warmingType: 'No Heating',
-    buildingAge: 4,
-    floorLocation: 0,
-    avaliableForLoan: 'All Of',
-    furnished: 'Furnished',
-    status: 'Second Hand',
-    dues: 0,
-    swap: 'No Swap',
-    front: 'North',
-    rentalIncome: 2000,
-    address: '4th street with 9th street, 590 - California',
-}
-
 function Preview() {
-    const { values: valuess } = useFormikContext<FormValuesType>();
+    const { values } = useFormikContext<FormValuesType>();
     const currencyFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -44,9 +22,9 @@ function Preview() {
         <C.Container>
             <FormNavBar />
             {
-                !!valuess.files && valuess.files.length > 0 && <Carousel images={valuess.files} />
+                !!values.files && values.files.length > 0 && <Carousel images={values.files} />
             }
-            <main style={{marginTop: valuess.files.length > 0 ? '-7rem' : ''}}>
+            <main style={{marginTop: values.files.length > 0 ? '-7rem' : ''}}>
                 <C.ContainerGroup>
                     <C.Title>
                         <h1>{values.title}</h1>
@@ -98,21 +76,21 @@ function Preview() {
                     <C.SecondTitle>Explanation</C.SecondTitle>
                     <p>{values.explanation}</p>
                 </C.ContainerGroup>
-                {(valuess.externalFeatures.length > 0 || valuess.interiorFeatures.length > 0) && <C.ContainerGroup>
+                {(values.externalFeatures.length > 0 || values.interiorFeatures.length > 0) && <C.ContainerGroup>
                     <C.GridContainer>
-                        {valuess.interiorFeatures.length > 0 && <div>
+                        {values.interiorFeatures.length > 0 && <div>
                             <C.SecondTitle>Interior Features</C.SecondTitle>
                             <C.FeaturesList>
                                 {interiorFeatures.map((feature, i) => (
-                                    valuess.interiorFeatures.indexOf(feature[1]) > - 1 ? <li key={feature[1]}>{feature[0]}</li> : null
+                                    values.interiorFeatures.indexOf(feature[1]) > - 1 ? <li key={feature[1]}>{feature[0]}</li> : null
                                 ))}
                             </C.FeaturesList>
                         </div>}
-                        {valuess.externalFeatures.length > 0 && <div>
+                        {values.externalFeatures.length > 0 && <div>
                             <C.SecondTitle>External Features</C.SecondTitle>
                             <C.FeaturesList>
                                 {externalFeatures.map((feature, i) => (
-                                    valuess.externalFeatures.indexOf(feature[1]) > -1 ? <li key={feature[1]}>{feature[0]}</li> : null
+                                    values.externalFeatures.indexOf(feature[1]) > -1 ? <li key={feature[1]}>{feature[0]}</li> : null
                                 ))}
                             </C.FeaturesList>
                         </div>}
