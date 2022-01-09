@@ -96,7 +96,7 @@ function Preview() {
                         </div>}
                     </C.GridContainer>
                 </C.ContainerGroup>}
-                <Link href="/advertise/contact">
+                <Link href="/advertise/contact" passHref>
                     <C.Button>Next</C.Button>
                 </Link>
             </main>
