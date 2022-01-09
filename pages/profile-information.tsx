@@ -18,8 +18,8 @@ type FormUser = {
 }
 
 export default function ProfileInformation() {
-    const { user, updateUser } = useAuth();
-
+    const { user: currentUser, updateUser } = useAuth();
+    const user = currentUser.current;
     const initialValues = {
         displayName: user?.displayName ?? '',
         email: user?.email ?? '',
@@ -52,59 +52,43 @@ export default function ProfileInformation() {
                             <C.InputContainer>
                                 <FormikInput
                                     name="displayName"
-                                    value={values.displayName}
                                     label="Name"
-                                    error={errors.displayName}
                                     type="text"
                                 />
                                 <FormikInput
                                     name="email"
-                                    value={values.email}
                                     label="Email"
-                                    error={errors.email}
                                     type="email"
                                 />
                                 <FormikInput
                                     name="province"
-                                    value={values.province}
                                     label="Province"
-                                    error={errors.province}
                                     type="text"
                                 />
                                 <FormikInput
                                     name="district"
-                                    value={values.district}
                                     label="District"
-                                    error={errors.district}
                                     type="text"
                                 />
                                 <FormikInput
                                     name="mobileNumber"
-                                    value={values.mobileNumber}
                                     label="Mobile Number"
-                                    error={errors.mobileNumber}
                                     type="text"
                                 />
                                 <FormikInput
                                     name="mobileNumber2"
-                                    value={values.mobileNumber2}
                                     label="Mobile Number 2"
-                                    error={errors.mobileNumber2}
                                     type="text"
                                 />
                                 <FormikInput
                                     name="telephone"
-                                    value={values.telephone}
                                     label="Telephone"
-                                    error={errors.telephone}
                                     type="text"
                                 />
                             </C.InputContainer>
                             <FormikInput
                                 name="address"
-                                value={values.address}
                                 label="Address"
-                                error={errors.address}
                                 type="text"
                                 isTextarea
                             />
@@ -115,6 +99,6 @@ export default function ProfileInformation() {
                     )}
                 </Formik>
             </C.ProfileInfo>
-        </C.Container >
+        </C.Container>
     )
 }
