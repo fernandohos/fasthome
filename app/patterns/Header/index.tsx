@@ -43,7 +43,7 @@ export function Header() {
                     windowWidth >= 780 && (
                         <C.ProfileTabContainer>
                             <div className="user-image-container" onClick={e => setShowProfileTab(v => !v)}>
-                                <Image src={user.current?.photoURL ?? defaultProfileImage} layout="fill" alt="user profile image" />
+                                <Image src={user?.photoURL ?? defaultProfileImage} layout="fill" alt="user profile image" />
                             </div>
                             <AnimatePresence>
                                 {
