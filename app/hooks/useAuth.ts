@@ -25,7 +25,7 @@ type UpdateUser = {
 }
 
 export default function useAuth() {
-    const user = useRef<null | User>(null);
+    const [user, setUser] = useState<null | User>(null);
     const mountedRef = useRef(true);
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export default function useAuth() {
                 if (data) {
                     const { uid, displayName, email, photoURL, province, district, mobileNumber, mobileNumber2, telephone, address } = data;
 
-                    user.current = {
+                    setUser({
                         uid,
                         displayName,
                         email,
@@ -51,7 +51,7 @@ export default function useAuth() {
                         mobileNumber2,
                         telephone,
                         address
-                    };
+                    });
                 }
             }
         })
@@ -65,7 +65,7 @@ export default function useAuth() {
         try {
             const res = await signInWithEmailAndPassword(auth, email, password);
             const { displayName, email: userEmail, photoURL, uid } = res.user;
-            user.current = ({
+            setUser({
                 uid,
                 displayName,
                 email: userEmail,
@@ -103,7 +103,7 @@ export default function useAuth() {
             }
             const ref = doc(db, "users", uid);
             await setDoc(ref, newUser)
-            user.current = newUser;
+            setUser(newUser);
             Router.push('/');
         }
         catch (error) {
@@ -130,7 +130,7 @@ export default function useAuth() {
             }
             const ref = doc(db, 'users', uid);
             await setDoc(ref, newUser);
-            user.current = (newUser);
+            setUser(newUser);
             Router.push('/');
         }
         catch (err) {
@@ -161,7 +161,7 @@ export default function useAuth() {
 
     const logOut = async () => {
         signOut(auth);
-        user.current = (null);
+        setUser(null);
     }
 
     return {
