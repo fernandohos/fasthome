@@ -22,5 +22,10 @@ export const schema = Yup.object().shape({
     address: Yup.string().required(),
     interiorFeatures: Yup.array().of(Yup.string()),
     externalFeatures: Yup.array().of(Yup.string()),
-    files: Yup.array().of(Yup.mixed().test("fileSize", "file is too large", () => true))
+    files: Yup.array().of(Yup.mixed().test("fileSize", "file is too large", () => true)),
+    name: Yup.string().required(),
+    email: Yup.string().email().required(),
+    mobileNumber: Yup.string(),
+    mobileNumber2: Yup.string(),
+    telephone: Yup.string(),
 });

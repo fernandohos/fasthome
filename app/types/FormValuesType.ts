@@ -24,5 +24,10 @@ export type FormValuesType = {
     address: string;
     files: FileType[];
     externalFeatures: string[],
-    interiorFeatures: string[]
+    interiorFeatures: string[],
+    name: string;
+    email: string;
+    mobileNumber: string;
+    mobileNumber2: string;
+    telephone: string;
 }
