@@ -9,7 +9,7 @@ import loginIcon from '../../../public/images/login-icon.svg';
 import signupIcon from '../../../public/images/signup-icon.svg';
 import infoIcon from '../../../public/images/info-icon.svg';
 import { logOut } from '../../firebase/auth';
-import useAuth from '../../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 export function MobileMenu() {
    const [showMenu, setShowMenu] = useState(false);
@@ -37,7 +37,7 @@ export function MobileMenu() {
                      <C.UserInfo opened={showUserDetails}>
                         <div className="user-info-summary" onClick={e => setShowUserDetails(v => !v)}>
                            <div className="user-image">
-                              <Image src={user.current?.photoURL ?? defaultProfileImage} layout="fill" alt="user profile image" />
+                              <Image src={user?.photoURL ?? defaultProfileImage} layout="fill" alt="user profile image" />
                            </div>
                            <div className="arrow-icon">
                               <Image src={arrowIcon} alt="arrow" layout="fill" />

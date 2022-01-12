@@ -2,9 +2,9 @@ import React from 'react';
 import * as C from '../app/styles/login';
 import { AuthLayout } from '../app/patterns/AuthLayout';
 import { GoogleButton } from '../app/components/GoogleButton';
-import useAuth from '../app/hooks/useAuth';
+import { useAuth } from '../app/hooks/useAuth';
 import Link from 'next/link';
-import { Formik, Form, FormikHelpers, ErrorMessage } from 'formik';
+import { Formik, Form, FormikHelpers } from 'formik';
 import { FormikInput } from '../app/components/FormikInput';
 import * as Yup from 'yup';
 
@@ -45,19 +45,9 @@ export default function Login() {
                 >
                     {({ values, errors }) => (
                         <Form>
-                            <FormikInput label="Email" error={errors.email} value={values.email} name="email" type="email" />
-                            <ErrorMessage name="email">
-                                {msg => (
-                                    <C.Error>{msg}</C.Error>
-                                )}
-                            </ErrorMessage>
+                            <FormikInput label="Email" name="email" type="email" />
 
-                            <FormikInput label="Password" error={errors.password} value={values.password} name="password" type="password" />
-                            <ErrorMessage name="password">
-                                {msg => (
-                                    <C.Error>{msg}</C.Error>
-                                )
-                                }</ErrorMessage>
+                            <FormikInput label="Password" name="password" type="password" />
 
                             <Link href="/reset-password" passHref>
                                 <p className="link">I forgot my password</p>

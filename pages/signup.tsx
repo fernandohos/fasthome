@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useReducer } from 'react';
 import * as C from '../app/styles/signup';
 import Link from 'next/link';
 import { GoogleButton } from '../app/components/GoogleButton';
 import { Input } from '../app/components/Input';
 import { AuthLayout } from '../app/patterns/AuthLayout';
 import isEmail from 'validator/lib/isEmail';
-import useAuth from '../app/hooks/useAuth';
+import { useAuth } from '../app/hooks/useAuth';
 
 type FormType = {
     name: string;
@@ -79,7 +79,6 @@ export default function Signup() {
 
     const handleSignUp = () => {
         const { name, email, password } = state;
-        console.log(isEmail(email));
 
         if (!isEmail(email)) {
             setInputErrors(p => ({ ...p, email: true }));

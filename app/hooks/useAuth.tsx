@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useContext, createContext } from 'react';
 import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
@@ -24,9 +24,25 @@ type UpdateUser = {
     address?: string | null;
 }
 
-export default function useAuth() {
+type AuthProviderType = {
+    children: ReactNode;
+}
+
+type AuthContextType = {
+    user: null | User;
+    logOut: () => void;
+    signIn: (email: string, password: string) => Promise<void>;
+    signUp: (email: string, password: string, displayName: string) => Promise<void>;
+    updateUser: (uid: string, data: UpdateUser) => Promise<void>;
+    signUpWithGoogle: () => Promise<void>;
+}
+
+const AuthContext = createContext({} as AuthContextType);
+
+export const useAuth = () => useContext(AuthContext);
+
+export function AuthProvider({ children }: AuthProviderType) {
     const [user, setUser] = useState<null | User>(null);
-    const mountedRef = useRef(true);
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async currentUser => {
@@ -55,10 +71,7 @@ export default function useAuth() {
                 }
             }
         })
-        return () => {
-            mountedRef.current = false;
-            unsub();
-        };
+        return unsub;
     }, [])
 
     const signIn = async (email: string, password: string) => {
@@ -141,11 +154,11 @@ export default function useAuth() {
     const updateUser = async (uid: string, data: UpdateUser) => {
         const ref = doc(db, "users", uid);
 
-        const obj = {...data};
+        const obj = { ...data };
 
         Object.keys(data).filter(k => {
             const key = k as keyof UpdateUser;
-            if(obj[key] === '' || obj[key] === null || obj[key] === undefined) {
+            if (obj[key] === '' || obj[key] === null || obj[key] === undefined) {
                 delete data[key];
             }
         })
@@ -154,7 +167,7 @@ export default function useAuth() {
             const respoea = await updateDoc(ref, data);
             console.log(respoea);
         }
-        catch(error) {
+        catch (error) {
             console.log(error);
         }
     }
@@ -164,12 +177,16 @@ export default function useAuth() {
         setUser(null);
     }
 
-    return {
-        user,
-        logOut,
-        signIn,
-        signUp,
-        updateUser,
-        signUpWithGoogle
-    }
+    return (
+        <AuthContext.Provider value={{
+            user,
+            logOut,
+            signIn,
+            signUp,
+            updateUser,
+            signUpWithGoogle
+        }}>
+            {children}
+        </AuthContext.Provider>
+    )
 }

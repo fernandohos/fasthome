@@ -6,7 +6,7 @@ import loginIcon from '../../../public/images/login-icon.svg';
 import signupIcon from '../../../public/images/signup-icon.svg';
 import infoIcon from '../../../public/images/info-icon.svg';
 import logOutIcon from '../../../public/images/logout-icon.svg';
-import { logOut } from '../../firebase/auth';
+import { useAuth } from '../../hooks/useAuth';
 
 type Props = {
     initial: { opacity: number, x: number };
@@ -18,6 +18,7 @@ type Props = {
 }
 
 export function ProfileTab({ initial, animate, exit, transition }: Props) {
+    const { logOut } = useAuth();
     return (
         <C.Container
             initial={initial}

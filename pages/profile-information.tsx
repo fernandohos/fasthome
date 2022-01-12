@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as C from '../app/styles/profileInformation';
 import { Header } from '../app/patterns/Header';
 import { Button } from '../app/components/Button';
-import useAuth from '../app/hooks/useAuth';
+import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form } from 'formik';
 import { FormikInput } from '../app/components/FormikInput';
 
@@ -18,8 +18,7 @@ type FormUser = {
 }
 
 export default function ProfileInformation() {
-    const { user: currentUser, updateUser } = useAuth();
-    const user = currentUser.current;
+    const { user, updateUser } = useAuth();
     const initialValues = {
         displayName: user?.displayName ?? '',
         email: user?.email ?? '',
