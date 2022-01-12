@@ -27,9 +27,11 @@ export function Header() {
     return (
         <C.Container>
             <div className="logo-nav">
-                <div className="logo-container">
-                    <Image src={logo} priority alt="logo" layout="fill" />
-                </div>
+                <Link href="/" passHref>
+                    <div className="logo-container">
+                        <Image src={logo} alt="logo" layout="fill" />
+                    </div>
+                </Link>
 
                 {
                     windowWidth >= 780 && <Nav />
