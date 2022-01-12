@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div<{ isEmpty: boolean, error: boolean}>`
     position: relative;
-    margin: 2rem 0 .2rem;
+    margin: 2rem 0 ${props => props.error ? '.2rem' : '2rem'};
 
     input, textarea {
         border: 2px solid ${props => props.error ? 'var(--red2)' : '#0008'};
