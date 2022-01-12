@@ -10,6 +10,7 @@ import FormAdvertiseFeatures from '../../app/patterns/FormAdvertiseFeatures';
 import { FormikWrapper } from '../../app/patterns/FormikWrapper';
 import { FormNavBar } from '../../app/patterns/FormNavBar';
 import Link from 'next/link';
+import { FormValuesType } from '../../app/types/FormValuesType';
 
 const DynamicMap = dynamic(
     () => import('../../app/patterns/FormLocationInformation'),
@@ -17,7 +18,32 @@ const DynamicMap = dynamic(
 )
 
 function AdvertiseForm() {
-    const { errors } = useFormikContext();
+    const { errors } = useFormikContext<FormValuesType>();
+    const hasErrors = (
+        errors.housing ||
+        errors.sale ||
+        errors.title ||
+        errors.explanation ||
+        errors.price ||
+        errors.numberOfRoom ||
+        errors.grossM2 ||
+        errors.netM2 ||
+        errors.warmingType ||
+        errors.buildingAge ||
+        errors.floorLocation ||
+        errors.avaliableForLoan ||
+        errors.furnished ||
+        errors.status ||
+        errors.dues ||
+        errors.swap ||
+        errors.rentalIncome ||
+        errors.address ||
+        errors.externalFeatures ||
+        errors.interiorFeatures ||
+        errors.files
+        ?
+        true : false
+    )
     return (
         <C.Container>
             <FormNavBar />
@@ -26,11 +52,9 @@ function AdvertiseForm() {
             <DynamicMap />
             <Field component={PostingPhotos} />
             <FormAdvertiseFeatures />
-            {
-                Object.keys(errors).length === 0 && <Link href="/advertise/preview" passHref>
-                    <C.Button>Next</C.Button>
-                </Link>
-            }
+            <Link href={!hasErrors ? "/advertise/preview" : "/advertise/form"} passHref>
+                <C.Button disabled={hasErrors}>Next</C.Button>
+            </Link>
         </C.Container>
     )
 }

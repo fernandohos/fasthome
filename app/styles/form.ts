@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.main`
     width: 86%;
@@ -18,7 +18,12 @@ export const FlexWrapper = styled.div`
     gap: 2rem;
 `;
 
-export const Button = styled.a`
+const disabledStyle = css`
+    cursor: not-allowed;
+    filter: brightness(60%);
+`;
+
+export const Button = styled.a<{ disabled?: boolean }>`
     display: block;
     padding: .8rem 5rem;
     width: 20rem;
@@ -29,4 +34,5 @@ export const Button = styled.a`
     border-radius: .5rem;
     margin: auto;
     cursor: pointer;
+    ${props => props.disabled && disabledStyle}
 `;
