@@ -100,7 +100,6 @@ export function AuthProvider({ children }: AuthProviderType) {
     const signUp = async (email: string, password: string, displayName: string) => {
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password);
-            console.log('res on signup', res);
             const { email: userEmail, photoURL, uid } = res.user;
             const newUser = {
                 uid,
@@ -165,10 +164,9 @@ export function AuthProvider({ children }: AuthProviderType) {
 
         try {
             const respoea = await updateDoc(ref, data);
-            console.log(respoea);
         }
-        catch (error) {
-            console.log(error);
+        catch (err) {
+            throw err;
         }
     }
 

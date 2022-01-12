@@ -15,16 +15,14 @@ export const signIn = async (email: string, password: string) => {
         await signInWithEmailAndPassword(auth, email, password);
         Router.push('/');
     }
-    catch (e) {
-        console.log(e);
+    catch (err) {
+        throw err;
     }
-    console.log('teste');
 }
 
 export const signUp = async (email: string, password: string, name: string) => {
     try {
         const user = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(user);
         const ref = collection(db, "users");
         await addDoc(ref, {
             email: user.user.email,

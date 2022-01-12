@@ -18,7 +18,6 @@ const DynamicMap = dynamic(
 
 function AdvertiseForm() {
     const { errors } = useFormikContext();
-    console.log(errors)
     return (
         <C.Container>
             <FormNavBar />
