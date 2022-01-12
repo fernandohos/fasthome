@@ -8,6 +8,7 @@ import arrowIcon from '../../../public/images/arrow.svg';
 import loginIcon from '../../../public/images/login-icon.svg';
 import signupIcon from '../../../public/images/signup-icon.svg';
 import infoIcon from '../../../public/images/info-icon.svg';
+import signOut from '../../../public/images/logout-icon.svg';
 import { logOut } from '../../firebase/auth';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -83,7 +84,7 @@ export function MobileMenu() {
                                        </Link>
                                        <C.UserDetailTab onClick={logOut}>
                                           <div className="detail-tab-image">
-                                             <Image src={infoIcon} layout="fill" alt="login icon" />
+                                             <Image src={signOut} layout="fill" alt="login icon" />
                                           </div>
                                           Sign out
                                        </C.UserDetailTab>
