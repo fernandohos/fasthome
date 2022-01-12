@@ -106,6 +106,13 @@ export default function FormGeneralInformation() {
                 />
             </C.InputContainer>
             <C.InputContainer>
+                <FormikSelect
+                    label="Front"
+                    name="front"
+                    options={formOptions.front}
+                />
+            </C.InputContainer>
+            <C.InputContainer>
                 <FormikInput
                     label="Rental Income"
                     name="rentalIncome"
