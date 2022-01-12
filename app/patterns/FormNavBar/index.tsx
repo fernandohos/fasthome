@@ -44,7 +44,7 @@ export function FormNavBar() {
             </C.IconContainer>
             <C.Separator active={currentStage > 1} />
             <C.IconContainer title="preview">
-                <Link href="/advertise/preview" passHref>
+                <Link href={currentStage > 1 ? "/advertise/preview" : "/advertise/form"} passHref>
                     <C.Link>
                         <Image draggable="false" layout='fill' src={currentStage > 1 ? previewColor : preview} alt="preview" />
                     </C.Link>
@@ -52,7 +52,7 @@ export function FormNavBar() {
             </C.IconContainer>
             <C.Separator active={currentStage > 2} />
             <C.IconContainer title="contact">
-                <Link href="/advertise/contact" passHref>
+                <Link href={currentStage > 2 ? "/advertise/contact" : "/advertise/form"} passHref>
                     <C.Link>
                         <Image draggable="false" layout='fill' src={currentStage > 2 ? contactColor : contact} alt="contact" />
                     </C.Link>
@@ -60,7 +60,7 @@ export function FormNavBar() {
             </C.IconContainer>
             <C.Separator active={currentStage > 3} />
             <C.IconContainer title="confirm">
-                <Link href="/advertise/confirm" passHref>
+                <Link href={currentStage > 3 ? "/advertise/confirm" : "/advertise/form"} passHref>
                     <C.Link>
                         <Image draggable="false" layout='fill' src={currentStage > 3 ? confirmColor : confirm} alt="confirm" />
                     </C.Link>
