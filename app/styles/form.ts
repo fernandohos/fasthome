@@ -36,3 +36,21 @@ export const Button = styled.a<{ disabled?: boolean }>`
     cursor: pointer;
     ${props => props.disabled && disabledStyle}
 `;
+
+export const LoginGroup = styled.div`
+    background: #fff;
+    border: 1px solid #0003;
+    margin-top: 2rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 50vh;
+    
+    h1 {
+        font-size: 2rem;
+        font-weight: 500;
+        margin-bottom: 5rem;
+    }
+`;
