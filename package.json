@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "browser-image-compression": "^1.0.17",
     "firebase": "^9.6.1",
     "formik": "^2.2.9",
     "framer-motion": "^5.3.3",
