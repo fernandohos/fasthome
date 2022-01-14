@@ -9,7 +9,6 @@ import {
 } from 'firebase/auth';
 import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
-import Router from 'next/router';
 import { useState } from 'react';
 import { User } from '../types/User';
 
@@ -90,7 +89,6 @@ export function AuthProvider({ children }: AuthProviderType) {
                 telephone: null,
                 address: null,
             });
-            Router.push('/');
         }
         catch (error) {
             throw error
@@ -116,7 +114,6 @@ export function AuthProvider({ children }: AuthProviderType) {
             const ref = doc(db, "users", uid);
             await setDoc(ref, newUser)
             setUser(newUser);
-            Router.push('/');
         }
         catch (error) {
             throw (error);
@@ -143,7 +140,6 @@ export function AuthProvider({ children }: AuthProviderType) {
             const ref = doc(db, 'users', uid);
             await setDoc(ref, newUser);
             setUser(newUser);
-            Router.push('/');
         }
         catch (err) {
             throw (err);
