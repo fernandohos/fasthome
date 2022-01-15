@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { FormikInput } from '../app/components/FormikInput';
 import * as Yup from 'yup';
+import {useRouter} from 'next/router';
 
 type FormType = {
     email: string;
@@ -15,6 +16,7 @@ type FormType = {
 
 export default function Login() {
     const { signIn, signUpWithGoogle } = useAuth();
+    const router = useRouter();
 
     const YupSchema = Yup.object().shape({
         email: Yup.string().email().required(),
@@ -24,12 +26,28 @@ export default function Login() {
     function onSubmit({ email, password }: FormType, actions: FormikHelpers<FormType>) {
         signIn(email, password);
         actions.resetForm();
+        console.log(router.query)
+        router.push(
+            typeof router.query.redirect === "string" ? 
+            router.query.redirect :
+            "/"
+        );
+    }
+
+    function handleGoogleLogin() {
+        signUpWithGoogle().then(() => {
+            router.push(
+                typeof router.query.redirect === "string" ?
+                router.query.redirect :
+                "/"
+            );
+        })
     }
 
     return (
         <AuthLayout>
             <C.LoginForm>
-                <GoogleButton onClick={signUpWithGoogle} />
+                <GoogleButton onClick={handleGoogleLogin} />
                 <C.Separator>
                     <div />
                     <p>or</p>
@@ -59,7 +77,7 @@ export default function Login() {
 
                             <p className="signup-link">
                                 Still not a member?
-                                <Link href="/signup" passHref>
+                                <Link href={{pathname: "/signup", query: router.query}} passHref>
                                     <span className="link">Sign Up Now!</span>
                                 </Link>
                             </p>

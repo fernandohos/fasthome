@@ -7,6 +7,7 @@ import { AuthLayout } from '../app/patterns/AuthLayout';
 import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import {useRouter} from 'next/router';
 
 type FormType = {
     name: string;
@@ -39,15 +40,32 @@ const schema = Yup.object().shape({
 
 export default function Signup() {
     const { signUp, signUpWithGoogle } = useAuth();
+    const router = useRouter();
+    console.log(router.query);
 
     function onSubmit({name, email, password}: FormValuesType, actions: FormikHelpers<FormValuesType>) {
         signUp(email, password, name);
-        actions.resetForm;  
+        actions.resetForm;
+        router.push(
+            typeof router.query.redirect === "string" ?
+            router.query.redirect :
+            "/"
+        );
+    }
+
+    function handleGoogleSignUp() {
+        signUpWithGoogle().then(() => {
+            router.push(
+                typeof router.query.redirect === "string" ?
+                router.query.redirect :
+                "/"
+            );
+        })
     }
 
     return (
         <AuthLayout>
-            <GoogleButton onClick={signUpWithGoogle} />
+            <GoogleButton onClick={handleGoogleSignUp} />
             <Formik
                 validationSchema={schema}
                 initialValues={initialValues}
@@ -81,7 +99,7 @@ export default function Signup() {
                     />
                     <C.SignupButton type="submit">Sign Up</C.SignupButton>
                     <C.LoginLink>
-                        <span>Alredy a member? <Link href="/login">Login now</Link>!</span>
+                        <span>Alredy a member? <Link href={{pathname: "/login", query: router.query}}>Login now</Link>!</span>
                     </C.LoginLink>
                 </Form>
             </Formik>
