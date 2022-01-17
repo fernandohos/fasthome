@@ -1,9 +1,9 @@
 export type CardHouseType = {
     id: string;
     image: string;
-    name: string;
+    title: string;
     price: number;
-    location: string;
+    address: string;
     createdAt: number;
     bedrooms: number;
     floor: number;

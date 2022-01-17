@@ -15,7 +15,7 @@ export function HouseCard(house: CardHouseType) {
         <Link href={`/house/${house.id}`} passHref>
             <C.Card >
                 <div className="image-container">
-                    <Image src={house.image} alt={house.name} layout="fill" />
+                    <Image src={house.image} alt={house.title} layout="fill" />
                 </div>
                 <div className="card-info">
                     <p className="info-price">{
@@ -24,8 +24,8 @@ export function HouseCard(house: CardHouseType) {
                             currency: 'USD',
                         })
                     }</p>
-                    <p className="info-name">{house.name}</p>
-                    <p className="info-location">{house.location}</p>
+                    <p className="info-name">{house.title}</p>
+                    <p className="info-location">{house.address}</p>
                     <p className="info-date">{new Date(house.createdAt).toLocaleDateString('en-US', {
                         month: 'long', day: 'numeric', year: 'numeric'
                     })}</p>
