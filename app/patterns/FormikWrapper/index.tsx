@@ -46,6 +46,7 @@ export function FormikWrapper({ children }: Props) {
         mobileNumber: user?.mobileNumber ?? '',
         mobileNumber2: user?.mobileNumber2 ?? '',
         telephone: user?.telephone ?? '',
+        createdAt: 0,
     }
 
 
@@ -87,6 +88,7 @@ export function FormikWrapper({ children }: Props) {
                 const data = JSON.parse(JSON.stringify(values));
                 delete data.files;
                 data.images = imagesUrls;
+                data.createdAt = new Date().getTime()
                 return data;
             }
             const docRes = await addDoc(collectionRef, getAdData());
