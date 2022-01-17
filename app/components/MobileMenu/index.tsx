@@ -104,7 +104,7 @@ export function MobileMenu() {
                            </Link>
                         </li>
                         <li>
-                           <Link href="/for-sale">
+                           <Link href="/for-rental">
                               <a>
                                  For Rent
                               </a>

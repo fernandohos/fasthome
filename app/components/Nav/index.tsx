@@ -14,7 +14,7 @@ export function Nav() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/for-sale">
+                    <Link href="/for-rental">
                         <a>
                             For Rent
                         </a>
