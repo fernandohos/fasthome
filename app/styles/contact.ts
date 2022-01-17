@@ -26,8 +26,7 @@ export const FlexInput = styled.div`
 
 export const Button = styled.button`
     display: block;
-    padding: .8rem 5rem;
-    width: 20rem;
+    padding: .8rem 7rem;
     text-decoration: none;
     background-color: var(--red2);
     color: var(--white);
