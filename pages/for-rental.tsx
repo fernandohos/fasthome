@@ -1,99 +1,82 @@
-import React from 'react';
-import * as C from '../app/styles/forRental';
+import React, { useEffect, useState } from 'react';
+import * as C from '../app/styles/forSale';
 import { Header } from '../app/patterns/Header';
-import { SmartSorting } from '../app/components/SmartSorting';
-import { HousesGrid } from '../app/components/HousesGrid';
 import { Filter } from '../app/patterns/Filter';
+import { HousesGrid } from '../app/components/HousesGrid';
+import { SmartSorting } from '../app/components/SmartSorting';
+import { collection, getDocs, limit, query, where } from 'firebase/firestore';
+import { db } from '../app/services/firebase';
+import { FormValuesType } from '../app/types/FormValuesType';
 
-const data = [
-    {
-        id: '1',
-        image: '/images/house.jpg',
-        name: 'house',
-        price: 3456,
-        location: 'praça da esquina',
-        createdAt: new Date().getTime(),
-        bedrooms: 3,
-        floor: 2,
-        squareMeters: 150,
-    },
-    {
-        id: '2',
-        image: '/images/house.jpg',
-        name: 'house',
-        price: 1236,
-        location: 'praça da esquina',
-        createdAt: new Date().getTime(),
-        bedrooms: 3,
-        floor: 2,
-        squareMeters: 150,
-    },
-    {
-        id: '3',
-        image: '/images/house.jpg',
-        name: 'house',
-        price: 1456,
-        location: 'praça da esquina',
-        createdAt: new Date().getTime(),
-        bedrooms: 3,
-        floor: 2,
-        squareMeters: 150,
-    },
-    {
-        id: '4',
-        image: '/images/house.jpg',
-        name: 'house',
-        price: 2456,
-        location: 'praça da esquina',
-        createdAt: new Date().getTime(),
-        bedrooms: 3,
-        floor: 2,
-        squareMeters: 150,
-    },
-    {
-        id: '5',
-        image: '/images/house.jpg',
-        name: 'house',
-        price: 3456,
-        location: 'praça da esquina',
-        createdAt: new Date().getTime(),
-        bedrooms: 3,
-        floor: 2,
-        squareMeters: 150,
-    },
-    {
-        id: '6',
-        image: '/images/house.jpg',
-        name: 'house',
-        price: 1236,
-        location: 'praça da esquina',
-        createdAt: new Date().getTime(),
-        bedrooms: 3,
-        floor: 2,
-        squareMeters: 150,
-    },
-    {
-        id: '7',
-        image: '/images/house.jpg',
-        name: 'house',
-        price: 1236,
-        location: 'praça da esquina',
-        createdAt: new Date().getTime(),
-        bedrooms: 3,
-        floor: 2,
-        squareMeters: 150,
-    },
-]
+interface HouseType extends FormValuesType {
+    id: string;
+    images: string[];
+}
 
-export default function forRental() {
+type Props = {
+    data: HouseType[];
+}
+
+export default function ForSale({ data }: Props) {
+    const [housing, setHousing] = useState('');
+    const [price, setPrice] = useState({ min: 0, max: 0 });
+    const [size, setSize] = useState({ min: 0, max: 0 });
+    const [houses, setHouses] = useState<HouseType[]>(data);
+    const [numberOfRoom, setNumberOfRoom] = useState(0);
+
+    useEffect(() => {
+        setHouses(data.filter(house => {
+            const priceFilter = house.price >= price.min ? house.price <= (!!price.max ? price.max : Infinity) : false;
+            const housingFilter = !!housing ? house.housing === housing : true;
+            const sizeFilter = house.grossM2 >= size.min ? house.grossM2 <= (!!size.max ? size.max : Infinity) : false;
+            const numberOfRoomFilter = !!numberOfRoom ?
+                numberOfRoom === 7 ? house.numberOfRoom > 7 : 
+                house.numberOfRoom === numberOfRoom : true;
+
+            return priceFilter && housingFilter && sizeFilter && numberOfRoomFilter;
+        }))
+    }, [price, data, housing, size, numberOfRoom]);
+
     return (
-        <C.Container>
+        <div>
             <Header />
-            <div>
-                <Filter />
-                <SmartSorting title="Apartment for rental" resultsFound={2000} />
-                <HousesGrid houses={data}/>
-            </div>
-        </C.Container>
+            <C.Container>
+                <Filter
+                    setHousing={setHousing}
+                    setPrice={setPrice}
+                    setSize={setSize}
+                    setNumberOfRoom={setNumberOfRoom}
+                />
+                <SmartSorting resultsFound={300} title="Apartment for rental" />
+                <HousesGrid houses={houses.map(house => ({
+                    id: house.id,
+                    image: house.images[0],
+                    title: house.title,
+                    price: house.price,
+                    address: house.address,
+                    createdAt: house.createdAt,
+                    bedrooms: house.numberOfRoom,
+                    floor: house.floorLocation,
+                    squareMeters: house.grossM2
+                })
+                )} />
+            </C.Container>
+        </div>
     )
+}
+
+export async function getServerSideProps() {
+    const ref = collection(db, "houses");
+    const q = query(ref, where("sale", "==", "forRental"), limit(25));
+    let data: HouseType[] = [];
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+        const docData = doc.data() as HouseType;
+        docData.id = doc.id;
+        data.push(docData);
+    })
+
+    return {
+        props: { data }
+    }
 }
