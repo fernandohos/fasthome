@@ -88,7 +88,9 @@ export function FormikWrapper({ children }: Props) {
                 const data = JSON.parse(JSON.stringify(values));
                 delete data.files;
                 data.images = imagesUrls;
-                data.createdAt = new Date().getTime()
+                data.createdAt = new Date().getTime();
+                data.userId = user?.uid;
+                data.userPhotoUrl = user?.photoURL;
                 return data;
             }
             const docRes = await addDoc(collectionRef, getAdData());
