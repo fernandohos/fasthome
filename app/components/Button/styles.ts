@@ -17,6 +17,7 @@ const outlinedButton = css`
 export const Button = styled.button<{ buttonStyleType?: ButtonStyleType }>`
     padding: .5rem 1.2rem;
     border-radius: .5rem;
+    cursor: pointer;
 
     ${props => {
         switch (props.buttonStyleType) {

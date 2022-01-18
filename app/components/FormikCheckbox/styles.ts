@@ -3,16 +3,20 @@ import styled from 'styled-components';
 export const Container = styled.div`
     position: relative;
     margin: 2rem 0;
-
+    
     input {
         display: none;
     }
-
+    
     .checkbox {
         display: flex;
         align-items: center;
         gap: .6rem;
         margin: 1rem 0;
+    }
+
+    label {
+        cursor: pointer;
     }
 
     label.input {

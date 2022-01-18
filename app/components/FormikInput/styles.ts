@@ -21,6 +21,7 @@ export const Container = styled.div<{ isEmpty: boolean, error: boolean}>`
         left: 1rem;
         transform: translateY(-50%);
         user-select: none;
+        cursor: text;
     }
     
     input:focus ~ label, textarea:focus ~ label {

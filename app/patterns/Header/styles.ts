@@ -16,12 +16,13 @@ export const Container = styled.header`
         position: relative;
         height: 4rem;
         width: 12rem;
+        cursor: pointer;
     }
 
     .advertise-user-profile {
         display: flex;
         align-items: center;
-
+        
         .user-image-container {
             position: relative;
             border-radius: 50%;
@@ -30,6 +31,7 @@ export const Container = styled.header`
             width: 4rem;
             background: #ddd;
             margin-left: 2rem;
+            cursor: pointer;
         }
     }
 `;

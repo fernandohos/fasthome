@@ -3,16 +3,18 @@ import styled from 'styled-components';
 export const Container = styled.div<{ isEmpty: boolean, error: boolean }>`
     position: relative;
     margin: 2rem 0 .2rem;
-
+    
     input, select {
+        cursor: pointer;
         border: 2px solid ${props => props.error ? 'var(--red2)' : '#0008'};
         border-radius: .5rem;
         background: none;
         width: 100%;
         padding: 1rem;
     }
-
+    
     > label {
+        cursor: pointer;
         transition: all .2s ease;
         position: absolute;
         background: var(--white);

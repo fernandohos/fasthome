@@ -17,6 +17,7 @@ export const Tab = styled.div`
     display: flex;
     align-items: center;
     transition: background-color .2s ease;
+    cursor: pointer;
     
     &:hover {
         background: #eee;
