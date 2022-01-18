@@ -24,6 +24,7 @@ export default function ForSale({ data }: Props) {
     const [size, setSize] = useState({ min: 0, max: 0 });
     const [houses, setHouses] = useState<HouseType[]>(data);
     const [numberOfRoom, setNumberOfRoom] = useState(0);
+    const [sortMethod, setSortMethod] = useState('mostCurrentFirst');
     const housingArray = formOptions.housing.map(option => option[1]);
 
     useEffect(() => {
@@ -32,24 +33,86 @@ export default function ForSale({ data }: Props) {
             const housingFilter = !!housing ? house.housing === housing : true;
             const sizeFilter = house.grossM2 >= size.min ? house.grossM2 <= (!!size.max ? size.max : Infinity) : false;
             const numberOfRoomFilter = !!numberOfRoom ?
-                numberOfRoom === 7 ? house.numberOfRoom > 7 : 
-                house.numberOfRoom === numberOfRoom : true;
+                numberOfRoom === 7 ? house.numberOfRoom > 7 :
+                    house.numberOfRoom === numberOfRoom : true;
 
             return priceFilter && housingFilter && sizeFilter && numberOfRoomFilter;
-        }))
-    }, [price, data, housing, size, numberOfRoom]);
+        }).sort((a, b) => {
+            switch (sortMethod) {
+                case "descendingPrice":
+                    return b.price - a.price;
+                case "increasingPrice":
+                    return a.price - b.price;
+                case "mostCurrentFirst":
+                    return b.createdAt - a.createdAt;
+                case "mostOldestFirst":
+                    return a.createdAt - b.createdAt;
+                case "byAddressAZ":
+                    if (a.address[0] === b.address[0]) return 0;
+                    return a.address[0] > b.address[0] ? 1 : -1;
+                case "byAddressZA":
+                    if (a.address[0] === b.address[0]) return 0;
+                    return a.address[0] < b.address[0] ? 1 : -1;
+                default:
+                    return 0;
+            }
+        })
+        )
+    }, [price, data, housing, size, numberOfRoom, sortMethod]);
+
+    // useEffect(() => {
+    // console.log("sort method", sortMethod);
+    // switch (sortMethod) {
+    //     case "increasingPrice":
+    //         setHouses(prev => prev.sort((a, b) => b.price - a.price));
+    //         break;
+    //     case "descendingPrice":
+    //         setHouses(prev => prev.sort((a, b) => a.price - b.price));
+    //         break;
+    //     case "mostCurrentFirst":
+    //         setHouses(prev => prev.sort((a, b) => a.createdAt - b.createdAt));
+    //         break;
+    //     case "mostOldestFirst":
+    //         setHouses(prev => prev.sort((a, b) => {
+    //             if (a.createdAt === b.createdAt) return 0;
+    //             return a.createdAt > b.createdAt ? 1 : -1;
+    //         }))
+    //         break;
+    // case "byAddressAZ":
+    //     setHouses(prev => prev.sort((a, b) => {
+    //         if (a.address[0] === b.address[0]) return 0;
+    //         return a.address[0] < b.address[0] ? 1 : -1;
+    //     }))
+    //     break;
+    // case "byAddressZA":
+    //     setHouses(prev => prev.sort((a, b) => {
+    //         if (a.address[0] === b.address[0]) return 0;
+    //         return a.address[0] > b.address[0] ? 1 : -1
+    //     }))
+    //     break;
+    // default:
+    //             setHouses(p => p);
+    //             break;
+    //     }
+    // }, [sortMethod]);
 
     return (
         <div>
             <Header />
             <C.Container>
                 <Filter
-                    setHousing={setHousing}
-                    setPrice={setPrice}
-                    setSize={setSize}
-                    setNumberOfRoom={setNumberOfRoom}
+                    {...{
+                        setHousing,
+                        setPrice,
+                        setSize,
+                        setNumberOfRoom
+                    }}
                 />
-                <SmartSorting resultsFound={300} title="Apartment for sale" />
+                <SmartSorting
+                    setSortMethod={setSortMethod}
+                    resultsFound={houses.length}
+                    title="Apartment for sale"
+                />
                 <HousesGrid houses={houses.map(house => ({
                     id: house.id,
                     image: house.images[0],

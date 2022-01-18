@@ -6,11 +6,21 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 type Props = {
     title: string;
-    resultsFound: number
+    resultsFound: number;
+    setSortMethod: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SmartSorting({ title, resultsFound }: Props) {
+export function SmartSorting({ title, resultsFound, setSortMethod }: Props) {
     const [openSorting, setOpenSorting] = useState(false);
+    const sortMethods = [
+        ["Increasing Price", "increasingPrice"],
+        ["Descending Price", "descendingPrice"],
+        ["Most Current First", "mostCurrentFirst"],
+        ["Most Oldest First", "mostOldestFirst"],
+        ["By Address (A-Z)", "byAddressAZ"],
+        ["By Address (Z-A)", "byAddressZA"],
+    ];
+
     return (
         <C.Container>
             <h1>{title}</h1>
@@ -34,12 +44,18 @@ export function SmartSorting({ title, resultsFound }: Props) {
                                 }}
                                 className="detail"
                             >
-                                <p>Increasing Price</p>
-                                <p>Descending Price</p>
-                                <p>Most Current First</p>
-                                <p>Most Oldest First</p>
-                                <p>By Address &#40;A-Z&#41;</p>
-                                <p>By Address &#40;Z-A&#41;</p>
+                                {sortMethods.map(method => (
+                                    <p
+                                        key={method[1]}
+                                        onClick={() => {
+                                            setSortMethod(method[1]);
+                                            setOpenSorting(p => !p);
+                                        }}
+                                    >
+                                        {method[0]}
+                                    </p>
+                                ))
+                                }
                             </motion.div>
                         )
                     }
