@@ -59,6 +59,7 @@ export const Thumb = styled.div<{ isActive: boolean }>`
     width: min-content;
     height: min-content;
     border: 2px solid #fff0;
+    margin: 0 .2rem;
     ${props => props.isActive ? activeThumb : ''};
 `;
 
@@ -71,7 +72,7 @@ export const ThumbContainer = styled.div`
 
 export const ThumbsWrapper = styled.div`
         overflow-x: auto;
-        margin-top: 1rem;
+        margin-top: .4rem;
         &::-webkit-scrollbar {
             display: none;
         }
