@@ -23,6 +23,7 @@ export default function ForSale({ data }: Props) {
     const [size, setSize] = useState({ min: 0, max: 0 });
     const [houses, setHouses] = useState<HouseType[]>(data);
     const [numberOfRoom, setNumberOfRoom] = useState(0);
+    const [sortMethod, setSortMethod] = useState('mostCurrentFirst');
 
     useEffect(() => {
         setHouses(data.filter(house => {
@@ -30,12 +31,32 @@ export default function ForSale({ data }: Props) {
             const housingFilter = !!housing ? house.housing === housing : true;
             const sizeFilter = house.grossM2 >= size.min ? house.grossM2 <= (!!size.max ? size.max : Infinity) : false;
             const numberOfRoomFilter = !!numberOfRoom ?
-                numberOfRoom === 7 ? house.numberOfRoom > 7 : 
-                house.numberOfRoom === numberOfRoom : true;
+                numberOfRoom === 7 ? house.numberOfRoom > 7 :
+                    house.numberOfRoom === numberOfRoom : true;
 
             return priceFilter && housingFilter && sizeFilter && numberOfRoomFilter;
-        }))
-    }, [price, data, housing, size, numberOfRoom]);
+        }).sort((a, b) => {
+            switch (sortMethod) {
+                case "descendingPrice":
+                    return b.price - a.price;
+                case "increasingPrice":
+                    return a.price - b.price;
+                case "mostCurrentFirst":
+                    return b.createdAt - a.createdAt;
+                case "mostOldestFirst":
+                    return a.createdAt - b.createdAt;
+                case "byAddressAZ":
+                    if (a.address[0] === b.address[0]) return 0;
+                    return a.address[0] > b.address[0] ? 1 : -1;
+                case "byAddressZA":
+                    if (a.address[0] === b.address[0]) return 0;
+                    return a.address[0] < b.address[0] ? 1 : -1;
+                default:
+                    return 0;
+            }
+        })
+        )
+    }, [price, data, housing, size, numberOfRoom, sortMethod]);
 
     return (
         <div>
@@ -47,7 +68,11 @@ export default function ForSale({ data }: Props) {
                     setSize={setSize}
                     setNumberOfRoom={setNumberOfRoom}
                 />
-                <SmartSorting resultsFound={300} title="Apartment for rental" />
+                <SmartSorting
+                    resultsFound={houses.length}
+                    title="Apartment for rental"
+                    setSortMethod={setSortMethod}
+                />
                 <HousesGrid houses={houses.map(house => ({
                     id: house.id,
                     image: house.images[0],
