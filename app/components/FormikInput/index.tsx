@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, useField, ErrorMessage } from 'formik';
+import { FastField, useField, ErrorMessage } from 'formik';
 import * as C from './styles';
 
 type Props = {
@@ -23,7 +23,7 @@ export function FormikInput({
     return (
         <>
             <C.Container error={!!meta.error && meta.touched} isEmpty={!meta.value}>
-                <Field
+                <FastField
                     {...inputProps}
                     id={name}
                     as={isTextarea && 'textarea'}
