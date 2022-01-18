@@ -6,7 +6,6 @@ import { HousesGrid } from '../app/components/HousesGrid';
 import { SmartSorting } from '../app/components/SmartSorting';
 import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { db } from '../app/services/firebase';
-import { formOptions } from '../app/utils/formOptions';
 import { FormValuesType } from '../app/types/FormValuesType';
 
 interface HouseType extends FormValuesType {
@@ -25,7 +24,6 @@ export default function ForSale({ data }: Props) {
     const [houses, setHouses] = useState<HouseType[]>(data);
     const [numberOfRoom, setNumberOfRoom] = useState(0);
     const [sortMethod, setSortMethod] = useState('mostCurrentFirst');
-    const housingArray = formOptions.housing.map(option => option[1]);
 
     useEffect(() => {
         setHouses(data.filter(house => {
@@ -59,42 +57,6 @@ export default function ForSale({ data }: Props) {
         })
         )
     }, [price, data, housing, size, numberOfRoom, sortMethod]);
-
-    // useEffect(() => {
-    // console.log("sort method", sortMethod);
-    // switch (sortMethod) {
-    //     case "increasingPrice":
-    //         setHouses(prev => prev.sort((a, b) => b.price - a.price));
-    //         break;
-    //     case "descendingPrice":
-    //         setHouses(prev => prev.sort((a, b) => a.price - b.price));
-    //         break;
-    //     case "mostCurrentFirst":
-    //         setHouses(prev => prev.sort((a, b) => a.createdAt - b.createdAt));
-    //         break;
-    //     case "mostOldestFirst":
-    //         setHouses(prev => prev.sort((a, b) => {
-    //             if (a.createdAt === b.createdAt) return 0;
-    //             return a.createdAt > b.createdAt ? 1 : -1;
-    //         }))
-    //         break;
-    // case "byAddressAZ":
-    //     setHouses(prev => prev.sort((a, b) => {
-    //         if (a.address[0] === b.address[0]) return 0;
-    //         return a.address[0] < b.address[0] ? 1 : -1;
-    //     }))
-    //     break;
-    // case "byAddressZA":
-    //     setHouses(prev => prev.sort((a, b) => {
-    //         if (a.address[0] === b.address[0]) return 0;
-    //         return a.address[0] > b.address[0] ? 1 : -1
-    //     }))
-    //     break;
-    // default:
-    //             setHouses(p => p);
-    //             break;
-    //     }
-    // }, [sortMethod]);
 
     return (
         <div>
