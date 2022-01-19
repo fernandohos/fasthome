@@ -12,16 +12,30 @@ import { Fieldset } from '../../../app/components/Fieldset';
 import defaultUserImage from '../../../public/images/default-user-image.svg';
 import phoneIcon from '../../../public/images/phone-icon.svg';
 import emailIcon from '../../../public/images/email-icon.svg';
+import { LatLngLiteral } from 'leaflet';
+import dynamic from 'next/dynamic';
+
+type PositionNull = {
+    lat: null;
+    lng: null;
+}
 
 interface HouseType extends FormValuesType {
     images: string[];
     userId: string;
     userPhotoUrl: string;
+    position: LatLngLiteral | PositionNull;
+    latlng: LatLngLiteral;
 }
 
 type Props = {
     data: HouseType | undefined;
 }
+
+const DynamicMap = dynamic(
+    () => import('../../../app/components/AdMap'),
+    { ssr: false }
+)
 
 export default function House({ data }: Props) {
     const [showPhone, setShowPhone] = useState(false);
@@ -109,6 +123,13 @@ export default function House({ data }: Props) {
                                         </C.Features>
                                     </div>
                                 </C.FeaturesContainer>
+                            </Fieldset>
+                            <Fieldset title="Location Information">
+                                {
+                                    data.latlng ? (
+                                        <DynamicMap position={data.latlng} />
+                                    ) : null
+                                }
                             </Fieldset>
                         </C.Content>
                         <C.Owner>

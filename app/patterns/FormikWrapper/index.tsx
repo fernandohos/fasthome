@@ -55,6 +55,13 @@ export function FormikWrapper({ children }: Props) {
         actions: FormikHelpers<FormValuesType>) {
         setUploading(true);
 
+        const promise1 = new Promise(async (resolve, reject) => {
+            // get latitude and longitude from address
+            const res = await fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.NEXT_PUBLIC_ADDRESS_API_KEY}&query=${values.address}`).then(res => res.json());
+
+            resolve({lat: res.data[0].latitude, lng: res.data[0].longitude});
+        })
+
         const promise2 = new Promise((resolve, reject) => {
             values.files.map(file => {
                 const storageRef = ref(storage, `/houses/${file.name}`);
@@ -82,7 +89,7 @@ export function FormikWrapper({ children }: Props) {
             })
         });
 
-        Promise.all([promise2]).then(async () => {
+        Promise.all([promise1, promise2]).then(async (promiseValues) => {
             const collectionRef = collection(db, "houses");
             const getAdData = () => {
                 const data = JSON.parse(JSON.stringify(values));
@@ -91,9 +98,22 @@ export function FormikWrapper({ children }: Props) {
                 data.createdAt = new Date().getTime();
                 data.userId = user?.uid;
                 data.userPhotoUrl = user?.photoURL;
+                data.latlng = promiseValues[1];
                 return data;
             }
-            const docRes = await addDoc(collectionRef, getAdData());
+            const getAdData2 = () => {
+                const data = JSON.parse(JSON.stringify(values));
+                delete data.files;
+                data.images = imagesUrls;
+                data.createdAt = new Date().getTime();
+                data.userId = user?.uid;
+                data.userPhotoUrl = user?.photoURL;
+                data.sale = 'forRental';
+                data.price = values.price / 100;
+                return data;
+            }
+            await addDoc(collectionRef, getAdData());
+            await addDoc(collectionRef, getAdData2());
             actions.resetForm();
             router.push("/advertise/confirm");
             setUploading(false);
