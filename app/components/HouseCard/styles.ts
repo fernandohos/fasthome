@@ -4,7 +4,7 @@ export const Card = styled.a`
     padding: 1rem;
     background: var(--white);
     border: 1px solid #0003;
-    width: 100%;
+    width: 30rem;
     text-decoration: none;
     color: var(--black);
 
