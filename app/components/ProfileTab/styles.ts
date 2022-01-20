@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 export const Container = styled(motion.div)`
     width: 20rem;
     border-radius: .5rem;
+    overflow: hidden;
     box-shadow: 0 .2rem .6rem rgba(0, 0, 0, .2);
     position: absolute;
     right: 0;

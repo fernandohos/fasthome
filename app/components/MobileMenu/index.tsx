@@ -58,36 +58,36 @@ export function MobileMenu() {
                                           delay: 0
                                        }}
                                     >
-                                       <Link href="/login" passHref>
+                                       {!user && <Link href="/login" passHref>
                                           <C.UserDetailTab>
                                              <div className="detail-tab-image">
                                                 <Image src={loginIcon} layout="fill" alt="login icon" />
                                              </div>
                                              Login
                                           </C.UserDetailTab>
-                                       </Link>
-                                       <Link href="/signup" passHref>
+                                       </Link>}
+                                       {!user && <Link href="/signup" passHref>
                                           <C.UserDetailTab>
                                              <div className="detail-tab-image">
                                                 <Image src={signupIcon} layout="fill" alt="login icon" />
                                              </div>
                                              Signup
                                           </C.UserDetailTab>
-                                       </Link>
-                                       <Link href="/profile-information" passHref>
+                                       </Link>}
+                                       {user && <Link href="/profile-information" passHref>
                                           <C.UserDetailTab>
                                              <div className="detail-tab-image">
                                                 <Image src={infoIcon} layout="fill" alt="login icon" />
                                              </div>
                                              Profile information
                                           </C.UserDetailTab>
-                                       </Link>
-                                       <C.UserDetailTab onClick={logOut}>
+                                       </Link>}
+                                       {user && <C.UserDetailTab onClick={logOut}>
                                           <div className="detail-tab-image">
                                              <Image src={signOut} layout="fill" alt="login icon" />
                                           </div>
                                           Sign out
-                                       </C.UserDetailTab>
+                                       </C.UserDetailTab>}
                                     </C.UserInfoDetail>
                                  )
                               }

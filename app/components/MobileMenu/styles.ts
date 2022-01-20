@@ -44,6 +44,7 @@ export const MobileMenu = styled(motion.div)`
     padding: 2rem;
     background: var(--white);
     border-radius: .5rem;
+    overflow: hidden;
     border: .1rem solid rgba(0, 0, 0, .1);
     box-shadow: 0 .2rem .6rem rgba(0, 0, 0, .2);
     z-index: 5;

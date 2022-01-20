@@ -18,7 +18,7 @@ type Props = {
 }
 
 export function ProfileTab({ initial, animate, exit, transition }: Props) {
-    const { logOut } = useAuth();
+    const { user, logOut } = useAuth();
     return (
         <C.Container
             initial={initial}
@@ -26,36 +26,36 @@ export function ProfileTab({ initial, animate, exit, transition }: Props) {
             exit={exit}
             transition={transition}
         >
-            <Link href="/login" passHref>
+            {!user && <Link href="/login" passHref>
                 <C.Tab>
                     <div className="detail-tab-image">
                         <Image src={loginIcon} layout="fill" alt="login icon" />
                     </div>
                     Login
                 </C.Tab>
-            </Link>
-            <Link href="/signup" passHref>
+            </Link>}
+            {!user && <Link href="/signup" passHref>
                 <C.Tab>
                     <div className="detail-tab-image">
                         <Image src={signupIcon} layout="fill" alt="login icon" />
                     </div>
                     Signup
                 </C.Tab>
-            </Link>
-            <Link href="/profile-information" passHref>
+            </Link>}
+            {user && <Link href="/profile-information" passHref>
                 <C.Tab>
                     <div className="detail-tab-image">
                         <Image src={infoIcon} layout="fill" alt="login icon" />
                     </div>
                     Profile information
                 </C.Tab>
-            </Link>
-            <C.Tab onClick={logOut}>
+            </Link>}
+            {user && <C.Tab onClick={logOut}>
                 <div className="detail-tab-image">
                     <Image src={logOutIcon} layout="fill" alt="logout icon" />
                 </div>
                 Sign out
-            </C.Tab>
+            </C.Tab>}
         </C.Container>
     )
 }
