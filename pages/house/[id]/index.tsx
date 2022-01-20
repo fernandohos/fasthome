@@ -14,6 +14,7 @@ import phoneIcon from '../../../public/images/phone-icon.svg';
 import emailIcon from '../../../public/images/email-icon.svg';
 import { LatLngLiteral } from 'leaflet';
 import dynamic from 'next/dynamic';
+import { interiorFeatures, externalFeatures } from '../../../app/utils/formCheckboxes';
 
 type PositionNull = {
     lat: null;
@@ -109,17 +110,27 @@ export default function House({ data }: Props) {
                                     <div>
                                         <C.TitleFeatures>Interior Features</C.TitleFeatures>
                                         <C.Features>
-                                            {data.interiorFeatures.map(feature => (
-                                                <li key={feature}>{feature}</li>
-                                            ))}
+                                            {data.interiorFeatures.map(feature => {
+                                                let word = '';
+                                                interiorFeatures.map(arr => {
+                                                    if(arr.indexOf(feature) !== -1) 
+                                                    word = arr[0];
+                                                })
+                                                return <li key={feature}>{word}</li>
+                                            })}
                                         </C.Features>
                                     </div>
                                     <div>
                                         <C.TitleFeatures>External Features</C.TitleFeatures>
                                         <C.Features>
-                                            {data.externalFeatures.map(feature => (
-                                                <li key={feature}>{feature}</li>
-                                            ))}
+                                        {data.externalFeatures.map(feature => {
+                                                let word = '';
+                                                externalFeatures.map(arr => {
+                                                    if(arr.indexOf(feature) !== -1) 
+                                                    word = arr[0];
+                                                })
+                                                return <li key={feature}>{word}</li>
+                                            })}
                                         </C.Features>
                                     </div>
                                 </C.FeaturesContainer>
