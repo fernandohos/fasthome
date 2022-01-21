@@ -8,6 +8,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import imageCompression from 'browser-image-compression';
 import { ref, getDownloadURL, uploadBytesResumable } from '@firebase/storage';
 import { useRouter } from 'next/router';
+import toast, { Toaster } from 'react-hot-toast';
 
 type Props = {
     children: ReactNode;
@@ -59,7 +60,7 @@ export function FormikWrapper({ children }: Props) {
             // get latitude and longitude from address
             const res = await fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.NEXT_PUBLIC_ADDRESS_API_KEY}&query=${values.address}`).then(res => res.json());
 
-            resolve({lat: res.data[0].latitude, lng: res.data[0].longitude});
+            resolve({ lat: res.data[0].latitude, lng: res.data[0].longitude });
         })
 
         const promise2 = new Promise((resolve, reject) => {
@@ -89,6 +90,12 @@ export function FormikWrapper({ children }: Props) {
             })
         });
 
+        toast.promise(promise2, {
+            loading: "Uploading photos...",
+            error: (err) => {console.log(err); return "an error ocurred"},
+            success: "Uploaded successfully"
+        })
+
         Promise.all([promise1, promise2]).then(async (promiseValues) => {
             const collectionRef = collection(db, "houses");
             const getAdData = () => {
@@ -98,25 +105,20 @@ export function FormikWrapper({ children }: Props) {
                 data.createdAt = new Date().getTime();
                 data.userId = user?.uid;
                 data.userPhotoUrl = user?.photoURL;
-                data.latlng = promiseValues[1];
+                data.latlng = promiseValues[0];
                 return data;
             }
-            const getAdData2 = () => {
-                const data = JSON.parse(JSON.stringify(values));
-                delete data.files;
-                data.images = imagesUrls;
-                data.createdAt = new Date().getTime();
-                data.userId = user?.uid;
-                data.userPhotoUrl = user?.photoURL;
-                data.sale = 'forRental';
-                data.price = values.price / 100;
-                return data;
-            }
-            await addDoc(collectionRef, getAdData());
-            await addDoc(collectionRef, getAdData2());
+            const res = addDoc(collectionRef, getAdData());
+            toast.promise(res, {
+                loading: "Uploading advertise...",
+                error: (err) => {console.log(err); return "Something wrong happened"},
+                success: "Ad uploaded successfully!"
+            })
             actions.resetForm();
-            router.push("/advertise/confirm");
-            setUploading(false);
+            setTimeout(() => {
+                router.push("/advertise/confirm");
+                setUploading(false);
+            }, 1000);
         })
     }
     return (
@@ -128,6 +130,7 @@ export function FormikWrapper({ children }: Props) {
         >
             {() => (
                 <Form style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                    <Toaster />
                     {children}
                 </Form>
             )}

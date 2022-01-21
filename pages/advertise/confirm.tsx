@@ -4,6 +4,8 @@ import { Header } from '../../app/patterns/Header';
 import * as C from '../../app/styles/confirm';
 import confirmIcon from '../../public/images/confirm-icon.svg';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '../../app/components/Button';
 
 export default function Confirm() {
     return (
@@ -16,6 +18,7 @@ export default function Confirm() {
                 </div>
                 <p>Your ad has been published succesfully.</p>
                 <p>We Thank you.</p>
+                <Link href="/" passHref><Button style={{marginTop: '2rem'}}>Go Home</Button></Link>
             </C.Container>
         </>
     )
