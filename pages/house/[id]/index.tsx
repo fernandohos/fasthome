@@ -113,8 +113,8 @@ export default function House({ data }: Props) {
                                             {data.interiorFeatures.map(feature => {
                                                 let word = '';
                                                 interiorFeatures.map(arr => {
-                                                    if(arr.indexOf(feature) !== -1) 
-                                                    word = arr[0];
+                                                    if (arr.indexOf(feature) !== -1)
+                                                        word = arr[0];
                                                 })
                                                 return <li key={feature}>{word}</li>
                                             })}
@@ -123,11 +123,11 @@ export default function House({ data }: Props) {
                                     <div>
                                         <C.TitleFeatures>External Features</C.TitleFeatures>
                                         <C.Features>
-                                        {data.externalFeatures.map(feature => {
+                                            {data.externalFeatures.map(feature => {
                                                 let word = '';
                                                 externalFeatures.map(arr => {
-                                                    if(arr.indexOf(feature) !== -1) 
-                                                    word = arr[0];
+                                                    if (arr.indexOf(feature) !== -1)
+                                                        word = arr[0];
                                                 })
                                                 return <li key={feature}>{word}</li>
                                             })}
@@ -145,36 +145,40 @@ export default function House({ data }: Props) {
                         </C.Content>
                         <C.Owner>
                             <C.OwnerCard>
-                                <div className="user-image">
-                                    <Image
-                                        layout="fill"
-                                        src={data.userPhotoUrl ?? defaultUserImage}
-                                        alt={data.name}
-                                    />
+                                <div>
+                                    <div className="user-image">
+                                        <Image
+                                            layout="fill"
+                                            src={data.userPhotoUrl ?? defaultUserImage}
+                                            alt={data.name}
+                                        />
+                                    </div>
+                                    <p>{data.name}</p>
                                 </div>
-                                <p>{data.name}</p>
-                                <C.InfoButton
-                                    background="var(--green2)"
-                                    color="#fff"
-                                    onClick={e => setShowPhone(p => !p)}
-                                >
-                                    {showPhone ? (
-                                        <p>{data.mobileNumber}</p>
-                                    ) : (
-                                        <>
-                                            <Image src={phoneIcon} width={20} height={20} alt="phone icon" />
-                                            <p>view phone</p>
-                                        </>
-                                    )}
-                                </C.InfoButton>
-                                <C.InfoButton
-                                    border="var(--dark-blue)"
-                                    color="var(--dark-blue)"
-                                    onClick={e => copyText(data.email)}
-                                >
-                                    <Image src={emailIcon} width={20} height={20} alt="phone icon" />
-                                    <p>copy email</p>
-                                </C.InfoButton>
+                                <div>
+                                    <C.InfoButton
+                                        background="var(--green2)"
+                                        color="#fff"
+                                        onClick={e => setShowPhone(p => !p)}
+                                    >
+                                        {showPhone ? (
+                                            <p>{data.mobileNumber}</p>
+                                        ) : (
+                                            <>
+                                                <Image src={phoneIcon} width={20} height={20} alt="phone icon" />
+                                                <p>view phone</p>
+                                            </>
+                                        )}
+                                    </C.InfoButton>
+                                    <C.InfoButton
+                                        border="var(--dark-blue)"
+                                        color="var(--dark-blue)"
+                                        onClick={e => copyText(data.email)}
+                                    >
+                                        <Image src={emailIcon} width={20} height={20} alt="phone icon" />
+                                        <p>copy email</p>
+                                    </C.InfoButton>
+                                </div>
                             </C.OwnerCard>
                         </C.Owner>
                     </C.Container>

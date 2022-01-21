@@ -3,11 +3,17 @@ import styled from 'styled-components';
 export const Container = styled.div`
     width: 88%;
     margin: auto;
-    display: grid;
-    grid-template-areas: "title nothing" "content aside";
-    grid-template-columns: 82fr 18fr;
-    grid-gap: 2rem;
+    display: flex;
+    flex-direction: column;
     margin-top: 2rem;
+    gap: 2rem;
+
+    @media (min-width: 1241px) {
+        display: grid;
+        grid-template-areas: "title nothing" "content aside";
+        grid-template-columns: 82fr 18fr;
+        grid-gap: 2rem;
+    }
 `;
 
 export const Owner = styled.aside`
@@ -18,6 +24,10 @@ export const Content = styled.main`
     grid-area: content;
     width: 100%;
     max-width: 80vw;
+
+    @media (max-width: 1240px) {
+        max-width: 100vw;
+    }
 
     .explanation {
         font-size: 1.8rem;
@@ -49,6 +59,11 @@ export const Title = styled.div`
         margin: .6rem 0 .6rem -.3rem;
         gap: .6rem;
     }
+
+    @media (max-width: 450px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 `;
 
 export const GenInfoGrid = styled.div`
@@ -56,6 +71,10 @@ export const GenInfoGrid = styled.div`
     display: grid;
     row-gap: .5rem;
     grid-template-columns: repeat(4, 1fr);
+
+    @media (max-width: 450px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     p:nth-child(odd) {
         color: #000a;
@@ -103,6 +122,18 @@ export const OwnerCard = styled.div`
     border: 1px solid #0003;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+
+    > div {
+        width: 100%;
+    }
+
+    @media (max-width: 1240px) and (min-width: 450px) {
+        flex-direction: row;
+        > div {
+            width: 80%;
+        }
+    }
 
     .user-image {
         border: 3px solid var(--yellow);
@@ -111,16 +142,17 @@ export const OwnerCard = styled.div`
         position: relative;
         border-radius: 50%;
         overflow: hidden;
+        margin: auto;
     }
 
-    > p {
+    .user-image ~ p {
         margin-top: 1rem;
         font-weight: 500;
         font-size: 1.7rem;
     }
 `;
 
-export const InfoButton = styled.div<{color?: string, border?: string, background?: string}>`
+export const InfoButton = styled.div<{ color?: string, border?: string, background?: string }>`
     padding: 1rem;
     display: flex;
     align-items: center;
