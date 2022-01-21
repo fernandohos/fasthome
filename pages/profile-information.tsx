@@ -5,6 +5,9 @@ import { Button } from '../app/components/Button';
 import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form } from 'formik';
 import { FormikInput } from '../app/components/FormikInput';
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { getErrorMessage } from '../app/utils/getErrorMessage';
 
 type FormUser = {
     displayName: string | null;
@@ -18,6 +21,7 @@ type FormUser = {
 }
 
 export default function ProfileInformation() {
+    const router = useRouter();
     const { user, updateUser } = useAuth();
     const initialValues = {
         displayName: user?.displayName ?? '',
@@ -32,12 +36,26 @@ export default function ProfileInformation() {
 
     function onSubmit(values: FormUser) {
         if (user) {
-            updateUser(user.uid, values);
+            const res = updateUser(user.uid, values);
+            toast.promise(res, {
+                loading: "Updating profile...",
+                error: ({ code }) => getErrorMessage(code),
+                success: "Successfully updated!"
+            }).then(() => {
+                setTimeout(() => {
+                    router.push(
+                        typeof router.query.redirect === "string" ?
+                            router.query.redirect :
+                            "/"
+                    );
+                }, 1000);
+            })
         }
     }
 
     return (
         <C.Container>
+            <Toaster />
             <Header />
             <C.ProfileInfo>
                 <h1>Membership Information</h1>

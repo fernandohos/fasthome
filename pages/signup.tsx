@@ -7,7 +7,9 @@ import { AuthLayout } from '../app/patterns/AuthLayout';
 import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
+import {getErrorMessage} from '../app/utils/getErrorMessage';
+import toast, { Toaster } from 'react-hot-toast';
 
 type FormType = {
     name: string;
@@ -43,28 +45,45 @@ export default function Signup() {
     const router = useRouter();
     console.log(router.query);
 
-    function onSubmit({name, email, password}: FormValuesType, actions: FormikHelpers<FormValuesType>) {
-        signUp(email, password, name);
-        actions.resetForm;
-        router.push(
-            typeof router.query.redirect === "string" ?
-            router.query.redirect :
-            "/"
-        );
+    function onSubmit({ name, email, password }: FormValuesType, actions: FormikHelpers<FormValuesType>) {
+        const res = signUp(email, password, name);
+        toast.promise(res, {
+            loading: "Signing up...",
+            error: ({ code }) => getErrorMessage(code),
+            success: "Signed up successfully"
+        }).then(() => {
+            actions.resetForm();
+            setTimeout(() => {
+                router.push(
+                    typeof router.query.redirect === "string" ?
+                        router.query.redirect :
+                        "/"
+                );
+            }, 1000)
+        })
     }
 
-    function handleGoogleSignUp() {
-        signUpWithGoogle().then(() => {
-            router.push(
-                typeof router.query.redirect === "string" ?
-                router.query.redirect :
-                "/"
-            );
+    async function handleGoogleSignUp() {
+        const res = signUpWithGoogle();
+
+        toast.promise(res, {
+            loading: "Signing up...",
+            error: ({ code }) => getErrorMessage(code),
+            success: "Signed with Google"
+        }).then(() => {
+            setTimeout(() => {
+                router.push(
+                    typeof router.query.redirect === "string" ?
+                        router.query.redirect :
+                        "/"
+                );
+            }, 1000)
         })
     }
 
     return (
         <AuthLayout>
+            <Toaster />
             <GoogleButton onClick={handleGoogleSignUp} />
             <Formik
                 validationSchema={schema}
@@ -99,7 +118,7 @@ export default function Signup() {
                     />
                     <C.SignupButton type="submit">Sign Up</C.SignupButton>
                     <C.LoginLink>
-                        <span>Alredy a member? <Link href={{pathname: "/login", query: router.query}}>Login now</Link>!</span>
+                        <span>Alredy a member? <Link href={{ pathname: "/login", query: router.query }}>Login now</Link>!</span>
                     </C.LoginLink>
                 </Form>
             </Formik>

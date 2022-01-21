@@ -5,7 +5,8 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    UserCredential
 } from 'firebase/auth';
 import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
@@ -30,10 +31,10 @@ type AuthProviderType = {
 type AuthContextType = {
     user: null | User;
     logOut: () => void;
-    signIn: (email: string, password: string) => Promise<void>;
-    signUp: (email: string, password: string, displayName: string) => Promise<void>;
+    signIn: (email: string, password: string) => Promise<UserCredential>;
+    signUp: (email: string, password: string, displayName: string) => Promise<UserCredential>;
     updateUser: (uid: string, data: UpdateUser) => Promise<void>;
-    signUpWithGoogle: () => Promise<void>;
+    signUpWithGoogle: () => Promise<UserCredential>;
 }
 
 const AuthContext = createContext({} as AuthContextType);
@@ -74,76 +75,64 @@ export function AuthProvider({ children }: AuthProviderType) {
     }, [])
 
     const signIn = async (email: string, password: string) => {
-        try {
-            const res = await signInWithEmailAndPassword(auth, email, password);
-            const { displayName, email: userEmail, photoURL, uid } = res.user;
-            setUser({
-                uid,
-                displayName,
-                email: userEmail,
-                photoURL,
-                province: null,
-                district: null,
-                mobileNumber: null,
-                mobileNumber2: null,
-                telephone: null,
-                address: null,
-            });
-        }
-        catch (error) {
-            throw error
-        }
+        const res = await signInWithEmailAndPassword(auth, email, password);
+        const { displayName, email: userEmail, photoURL, uid } = res.user;
+        setUser({
+            uid,
+            displayName,
+            email: userEmail,
+            photoURL,
+            province: null,
+            district: null,
+            mobileNumber: null,
+            mobileNumber2: null,
+            telephone: null,
+            address: null,
+        });
+        return res;
     }
 
     const signUp = async (email: string, password: string, displayName: string) => {
-        try {
-            const res = await createUserWithEmailAndPassword(auth, email, password);
-            const { email: userEmail, photoURL, uid } = res.user;
-            const newUser = {
-                uid,
-                displayName,
-                email: userEmail,
-                photoURL,
-                province: null,
-                district: null,
-                mobileNumber: null,
-                mobileNumber2: null,
-                telephone: null,
-                address: null,
-            }
-            const ref = doc(db, "users", uid);
-            await setDoc(ref, newUser)
-            setUser(newUser);
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        const { email: userEmail, photoURL, uid } = res.user;
+        const newUser = {
+            uid,
+            displayName,
+            email: userEmail,
+            photoURL,
+            province: null,
+            district: null,
+            mobileNumber: null,
+            mobileNumber2: null,
+            telephone: null,
+            address: null,
         }
-        catch (error) {
-            throw (error);
-        }
+        const ref = doc(db, "users", uid);
+        await setDoc(ref, newUser)
+        setUser(newUser);
+        return res;
     }
 
     const signUpWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
-        try {
-            const res = await signInWithPopup(auth, provider);
-            const { displayName, email: userEmail, photoURL, uid } = res.user;
-            const newUser = {
-                uid,
-                displayName,
-                email: userEmail,
-                photoURL,
-                province: null,
-                district: null,
-                mobileNumber: null,
-                mobileNumber2: null,
-                telephone: null,
-                address: null,
-            }
-            const ref = doc(db, 'users', uid);
-            await setDoc(ref, newUser);
-            setUser(newUser);
+        const res = await signInWithPopup(auth, provider);
+        const { displayName, email: userEmail, photoURL, uid } = res.user;
+        const newUser = {
+            uid,
+            displayName,
+            email: userEmail,
+            photoURL,
+            province: null,
+            district: null,
+            mobileNumber: null,
+            mobileNumber2: null,
+            telephone: null,
+            address: null,
         }
-        catch (err) {
-            throw (err);
-        }
+        const ref = doc(db, 'users', uid);
+        await setDoc(ref, newUser);
+        setUser(newUser);
+        return res;
     }
 
     const updateUser = async (uid: string, data: UpdateUser) => {
@@ -157,13 +146,7 @@ export function AuthProvider({ children }: AuthProviderType) {
                 delete data[key];
             }
         })
-
-        try {
-            const respoea = await updateDoc(ref, data);
-        }
-        catch (err) {
-            throw err;
-        }
+        return await updateDoc(ref, data);
     }
 
     const logOut = async () => {

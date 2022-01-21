@@ -8,6 +8,8 @@ import { Formik, Form, FormikHelpers } from 'formik';
 import { FormikInput } from '../app/components/FormikInput';
 import * as Yup from 'yup';
 import {useRouter} from 'next/router';
+import toast, { Toaster } from 'react-hot-toast';
+import { getErrorMessage } from '../app/utils/getErrorMessage';
 
 type FormType = {
     email: string;
@@ -26,26 +28,50 @@ export default function Login() {
     function onSubmit({ email, password }: FormType, actions: FormikHelpers<FormType>) {
         signIn(email, password);
         actions.resetForm();
-        console.log(router.query)
         router.push(
             typeof router.query.redirect === "string" ? 
             router.query.redirect :
             "/"
         );
+
+        const res = signIn(email, password);
+        toast.promise(res, {
+            loading: "Signing in...",
+            error: ({ code }) => getErrorMessage(code),
+            success: "Signed in successfully"
+        }).then(() => {
+            actions.resetForm();
+            setTimeout(() => {
+                router.push(
+                    typeof router.query.redirect === "string" ?
+                        router.query.redirect :
+                        "/"
+                );
+            }, 1000)
+        })
     }
 
     function handleGoogleLogin() {
-        signUpWithGoogle().then(() => {
-            router.push(
-                typeof router.query.redirect === "string" ?
-                router.query.redirect :
-                "/"
-            );
+        const res = signUpWithGoogle();
+
+        toast.promise(res, {
+            loading: "Signing up...",
+            error: ({ code }) => getErrorMessage(code),
+            success: "Signed with Google"
+        }).then(() => {
+            setTimeout(() => {
+                router.push(
+                    typeof router.query.redirect === "string" ?
+                        router.query.redirect :
+                        "/"
+                );
+            }, 1000)
         })
     }
 
     return (
         <AuthLayout>
+            <Toaster />
             <C.LoginForm>
                 <GoogleButton onClick={handleGoogleLogin} />
                 <C.Separator>
