@@ -52,7 +52,7 @@ function AdvertiseForm() {
             <Head>
                 <title>Fasthome | Advertise form</title>
             </Head>
-            user ? (<C.Container>
+            {user ? (<C.Container>
                 <FormNavBar />
                 <FormCategory />
                 <FormGeneralInformation />
@@ -73,7 +73,7 @@ function AdvertiseForm() {
                         </Link>
                     </div>
                 </C.LoginGroup>
-            </C.Container>)
+            </C.Container>)}
         </>
     )
 }
