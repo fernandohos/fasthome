@@ -6,6 +6,7 @@ import confirmIcon from '../../public/images/confirm-icon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../../app/components/Button';
+import Head from 'next/head';
 
 export default function Confirm() {
     return (
@@ -13,6 +14,9 @@ export default function Confirm() {
             <Header />
             <FormNavBar />
             <C.Container>
+                <Head>
+                    <title>Fasthome | Published ad</title>
+                </Head>
                 <div className="icon-container">
                     <Image src={confirmIcon} layout="fill" alt="confirm icon" />
                 </div>

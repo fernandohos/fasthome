@@ -5,12 +5,15 @@ import * as C from '../../app/styles/contact';
 import { FormikWrapper } from '../../app/patterns/FormikWrapper';
 import { Fieldset } from '../../app/components/Fieldset';
 import { FormikInput } from '../../app/components/FormikInput';
-import Link from 'next/link';
+import Head from 'next/head';
 
 
 function Contact() {
     return (
         <C.Container>
+            <Head>
+                    <title>Fasthome | Advertise contact</title>
+                </Head>
             <FormNavBar />
             <Fieldset title='Contact'>
                 <C.InputContainer>

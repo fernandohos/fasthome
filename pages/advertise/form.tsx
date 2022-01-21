@@ -12,6 +12,7 @@ import { FormNavBar } from '../../app/patterns/FormNavBar';
 import Link from 'next/link';
 import { FormValuesType } from '../../app/types/FormValuesType';
 import { useAuth } from '../../app/hooks/useAuth';
+import Head from 'next/head';
 
 const DynamicMap = dynamic(
     () => import('../../app/patterns/FormLocationInformation'),
@@ -47,17 +48,21 @@ function AdvertiseForm() {
             true : false
     )
     return (
-        user ? (<C.Container>
-            <FormNavBar />
-            <FormCategory />
-            <FormGeneralInformation />
-            <DynamicMap />
-            <Field component={PostingPhotos} />
-            <FormAdvertiseFeatures />
-            <Link href={!hasErrors ? "/advertise/preview" : "/advertise/form"} passHref>
-                <C.Button disabled={hasErrors}>Next</C.Button>
-            </Link>
-        </C.Container>)
+        <>
+            <Head>
+                <title>Fasthome | Advertise form</title>
+            </Head>
+            user ? (<C.Container>
+                <FormNavBar />
+                <FormCategory />
+                <FormGeneralInformation />
+                <DynamicMap />
+                <Field component={PostingPhotos} />
+                <FormAdvertiseFeatures />
+                <Link href={!hasErrors ? "/advertise/preview" : "/advertise/form"} passHref>
+                    <C.Button disabled={hasErrors}>Next</C.Button>
+                </Link>
+            </C.Container>)
             :
             (<C.Container>
                 <C.LoginGroup>
@@ -69,6 +74,7 @@ function AdvertiseForm() {
                     </div>
                 </C.LoginGroup>
             </C.Container>)
+        </>
     )
 }
 

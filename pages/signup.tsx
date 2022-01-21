@@ -8,15 +8,9 @@ import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
-import {getErrorMessage} from '../app/utils/getErrorMessage';
+import { getErrorMessage } from '../app/utils/getErrorMessage';
 import toast, { Toaster } from 'react-hot-toast';
-
-type FormType = {
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-}
+import Head from 'next/head';
 
 const initialValues = {
     name: '',
@@ -83,6 +77,9 @@ export default function Signup() {
 
     return (
         <AuthLayout>
+            <Head>
+                <title>Fasthome | Signup</title>
+            </Head>
             <Toaster />
             <GoogleButton onClick={handleGoogleSignUp} />
             <Formik

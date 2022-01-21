@@ -1,6 +1,5 @@
 import React from 'react';
 import * as C from '../app/styles/app';
-import type { NextPage } from 'next';
 import { Header } from '../app/patterns/Header';
 import { Banner } from '../app/patterns/Banner';
 import { Featured } from '../app/patterns/Featured';
@@ -8,6 +7,7 @@ import { SearchOnMapBanner } from '../app/patterns/SearchOnMapBanner';
 import { FormValuesType } from '../app/types/FormValuesType';
 import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { db } from '../app/services/firebase';
+import Head from 'next/head';
 
 interface HouseType extends FormValuesType {
   id: string;
@@ -22,6 +22,9 @@ type Props = {
 export default function Home({ rentalData, saleData }: Props) {
   return (
     <C.Container>
+      <Head>
+        <title>Fasthome | Home</title>
+      </Head>
       <Header />
       <Banner />
       <main>

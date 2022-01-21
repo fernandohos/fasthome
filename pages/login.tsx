@@ -7,9 +7,10 @@ import Link from 'next/link';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { FormikInput } from '../app/components/FormikInput';
 import * as Yup from 'yup';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 import { getErrorMessage } from '../app/utils/getErrorMessage';
+import Head from 'next/head';
 
 type FormType = {
     email: string;
@@ -29,9 +30,9 @@ export default function Login() {
         signIn(email, password);
         actions.resetForm();
         router.push(
-            typeof router.query.redirect === "string" ? 
-            router.query.redirect :
-            "/"
+            typeof router.query.redirect === "string" ?
+                router.query.redirect :
+                "/"
         );
 
         const res = signIn(email, password);
@@ -71,6 +72,9 @@ export default function Login() {
 
     return (
         <AuthLayout>
+            <Head>
+                <title>Fasthome | Login</title>
+            </Head>
             <Toaster />
             <C.LoginForm>
                 <GoogleButton onClick={handleGoogleLogin} />
@@ -103,7 +107,7 @@ export default function Login() {
 
                             <p className="signup-link">
                                 Still not a member?
-                                <Link href={{pathname: "/signup", query: router.query}} passHref>
+                                <Link href={{ pathname: "/signup", query: router.query }} passHref>
                                     <span className="link">Sign Up Now!</span>
                                 </Link>
                             </p>

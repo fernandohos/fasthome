@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as C from '../app/styles/profileInformation';
 import { Header } from '../app/patterns/Header';
 import { Button } from '../app/components/Button';
@@ -9,6 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { getErrorMessage } from '../app/utils/getErrorMessage';
 import Link from 'next/link';
+import Head from 'next/head';
 
 type FormUser = {
     displayName: string | null;
@@ -56,6 +57,9 @@ export default function ProfileInformation() {
 
     return (
         <C.Container>
+            <Head>
+                    <title>Fasthome | Profile information</title>
+                </Head>
             <Toaster />
             <Header />
             <C.ProfileInfo>

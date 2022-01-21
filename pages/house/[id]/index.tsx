@@ -15,6 +15,7 @@ import emailIcon from '../../../public/images/email-icon.svg';
 import { LatLngLiteral } from 'leaflet';
 import dynamic from 'next/dynamic';
 import { interiorFeatures, externalFeatures } from '../../../app/utils/formCheckboxes';
+import Head from 'next/head';
 
 type PositionNull = {
     lat: null;
@@ -48,6 +49,9 @@ export default function House({ data }: Props) {
 
     return (
         <>
+            <Head>
+                <title>Fasthome | {data?.title ?? "House"}</title>
+            </Head>
             <Header />
             {
                 data ? (

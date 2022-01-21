@@ -10,6 +10,7 @@ import { FormValuesType } from '../../app/types/FormValuesType';
 import mapIcon from '../../public/images/map-icon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import Head from 'next/head';
 
 function Preview() {
     const { values } = useFormikContext<FormValuesType>();
@@ -20,11 +21,14 @@ function Preview() {
 
     return (
         <C.Container>
+            <Head>
+                <title>Fasthome | Advertise preview</title>
+            </Head>
             <FormNavBar />
             {
                 !!values.files && values.files.length > 0 && <Carousel images={values.files} />
             }
-            <main style={{marginTop: values.files.length > 0 ? '-7rem' : ''}}>
+            <main style={{ marginTop: values.files.length > 0 ? '-7rem' : '' }}>
                 <C.ContainerGroup>
                     <C.Title>
                         <h1>{values.title}</h1>
