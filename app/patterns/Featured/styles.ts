@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
     margin-top: 4rem;
     
+    a {
+        width: 30rem;
+    }
+
     .title-container {
         display: flex;
         align-items: center;
@@ -14,6 +18,7 @@ export const Container = styled.div`
         }
 
         a {
+            width: auto;
             border: 1px solid #0005;
             text-decoration: none;
             color: var(--black);
