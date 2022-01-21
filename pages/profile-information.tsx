@@ -8,6 +8,7 @@ import { FormikInput } from '../app/components/FormikInput';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { getErrorMessage } from '../app/utils/getErrorMessage';
+import Link from 'next/link';
 
 type FormUser = {
     displayName: string | null;
@@ -58,63 +59,75 @@ export default function ProfileInformation() {
             <Toaster />
             <Header />
             <C.ProfileInfo>
-                <h1>Membership Information</h1>
-                <Formik
-                    enableReinitialize
-                    initialValues={initialValues}
-                    onSubmit={onSubmit}
-                >
-                    {({ values, errors }) => (
-                        <Form>
-                            <C.InputContainer>
-                                <FormikInput
-                                    name="displayName"
-                                    label="Name"
-                                    type="text"
-                                />
-                                <FormikInput
-                                    name="email"
-                                    label="Email"
-                                    type="email"
-                                />
-                                <FormikInput
-                                    name="province"
-                                    label="Province"
-                                    type="text"
-                                />
-                                <FormikInput
-                                    name="district"
-                                    label="District"
-                                    type="text"
-                                />
-                                <FormikInput
-                                    name="mobileNumber"
-                                    label="Mobile Number"
-                                    type="text"
-                                />
-                                <FormikInput
-                                    name="mobileNumber2"
-                                    label="Mobile Number 2"
-                                    type="text"
-                                />
-                                <FormikInput
-                                    name="telephone"
-                                    label="Telephone"
-                                    type="text"
-                                />
-                            </C.InputContainer>
-                            <FormikInput
-                                name="address"
-                                label="Address"
-                                type="text"
-                                isTextarea
-                            />
-                            <div className="button">
-                                <Button type="submit">Save</Button>
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
+                {
+                    user ? (
+                        <>
+                            <h1>Membership Information</h1>
+                            <Formik
+                                enableReinitialize
+                                initialValues={initialValues}
+                                onSubmit={onSubmit}
+                            >
+                                {({ values, errors }) => (
+                                    <Form>
+                                        <C.InputContainer>
+                                            <FormikInput
+                                                name="displayName"
+                                                label="Name"
+                                                type="text"
+                                            />
+                                            <FormikInput
+                                                name="email"
+                                                label="Email"
+                                                type="email"
+                                            />
+                                            <FormikInput
+                                                name="province"
+                                                label="Province"
+                                                type="text"
+                                            />
+                                            <FormikInput
+                                                name="district"
+                                                label="District"
+                                                type="text"
+                                            />
+                                            <FormikInput
+                                                name="mobileNumber"
+                                                label="Mobile Number"
+                                                type="text"
+                                            />
+                                            <FormikInput
+                                                name="mobileNumber2"
+                                                label="Mobile Number 2"
+                                                type="text"
+                                            />
+                                            <FormikInput
+                                                name="telephone"
+                                                label="Telephone"
+                                                type="text"
+                                            />
+                                        </C.InputContainer>
+                                        <FormikInput
+                                            name="address"
+                                            label="Address"
+                                            type="text"
+                                            isTextarea
+                                        />
+                                        <div className="button">
+                                            <Button type="submit">Save</Button>
+                                        </div>
+                                    </Form>
+                                )}
+                            </Formik>
+                        </>
+                    )
+                        : (<C.NotLogged>
+                            <h1>You have to login to access this page</h1>
+                            <Link href="/login?redirect=/profile-information" passHref>
+                                <Button style={{marginTop: "2rem"}}>Login</Button>
+                            </Link>
+                        </C.NotLogged>)
+                }
             </C.ProfileInfo>
         </C.Container>
     )

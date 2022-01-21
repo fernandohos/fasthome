@@ -61,3 +61,7 @@ export const Textarea = styled.div<{isEmpty: boolean}>`
         user-select: none;
     }
 `;
+
+export const NotLogged = styled.div`
+    text-align: center;
+`;
