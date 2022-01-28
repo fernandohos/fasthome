@@ -72,6 +72,7 @@ function LocationInformation({ form, ...props }: FieldProps) {
             fetch(`http://api.positionstack.com/v1/reverse?access_key=${process.env.NEXT_PUBLIC_ADDRESS_API_KEY}&query=${markerPosition.lat},${markerPosition.lng}`).then(r => r.json())
                 .then(({ data }) => data && data[0].label).then(address => {
                     setFieldValue("address", address);
+                    setFieldValue("latlng", markerPosition);
                 });
         }
 

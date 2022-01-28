@@ -31,4 +31,8 @@ export type FormValuesType = {
     mobileNumber2: string;
     telephone: string;
     createdAt: number;
+    latlng: {
+        lat: number;
+        lng: number;
+    }
 }

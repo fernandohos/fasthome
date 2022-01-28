@@ -48,6 +48,10 @@ export function FormikWrapper({ children }: Props) {
         mobileNumber2: user?.mobileNumber2 ?? '',
         telephone: user?.telephone ?? '',
         createdAt: 0,
+        latlng: {
+            lat: 0,
+            lng: 0,
+        },
     }
 
 
@@ -55,21 +59,16 @@ export function FormikWrapper({ children }: Props) {
         values: FormValuesType,
         actions: FormikHelpers<FormValuesType>) {
         setUploading(true);
+        console.log("SUBMIT LATLNG", values.latlng);
 
-        const promise1 = new Promise(async (resolve, reject) => {
-            // get latitude and longitude from address
-            const res = await fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.NEXT_PUBLIC_ADDRESS_API_KEY}&query=${values.address}`).then(res => res.json());
-
-            resolve({ lat: res.data[0].latitude, lng: res.data[0].longitude });
-        })
-
-        const promise2 = new Promise((resolve, reject) => {
+        const uploadFilesPromise = new Promise((resolve, reject) => {
             values.files.map(file => {
                 const storageRef = ref(storage, `/houses/${file.name}`);
-                // compress file
+                
                 imageCompression(file, {
                     maxSizeMB: .2
-                }).then(compressedFile => {
+                })
+                .then(compressedFile => {
                     const uploadTask = uploadBytesResumable(storageRef, compressedFile);
                     const unsub = uploadTask.on(
                         "state_changed",
@@ -90,13 +89,13 @@ export function FormikWrapper({ children }: Props) {
             })
         });
 
-        toast.promise(promise2, {
+        toast.promise(uploadFilesPromise, {
             loading: "Uploading photos...",
             error: (err) => {console.log(err); return "an error ocurred"},
             success: "Uploaded successfully"
-        })
+        });
 
-        Promise.all([promise1, promise2]).then(async (promiseValues) => {
+        Promise.all([uploadFilesPromise]).then(async (promiseValues) => {
             const collectionRef = collection(db, "houses");
             const getAdData = () => {
                 const data = JSON.parse(JSON.stringify(values));
@@ -105,21 +104,20 @@ export function FormikWrapper({ children }: Props) {
                 data.createdAt = new Date().getTime();
                 data.userId = user?.uid;
                 data.userPhotoUrl = user?.photoURL;
-                data.latlng = promiseValues[0];
                 return data;
-            }
+            };
             const res = addDoc(collectionRef, getAdData());
             toast.promise(res, {
                 loading: "Uploading advertise...",
                 error: (err) => {console.log(err); return "Something wrong happened"},
                 success: "Ad uploaded successfully!"
-            })
+            });
             actions.resetForm();
             setTimeout(() => {
                 router.push("/advertise/confirm");
                 setUploading(false);
             }, 1000);
-        })
+        });
     }
     return (
         <Formik
