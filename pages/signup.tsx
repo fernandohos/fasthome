@@ -37,42 +37,35 @@ const schema = Yup.object().shape({
 export default function Signup() {
     const { signUp, signUpWithGoogle } = useAuth();
     const router = useRouter();
-    console.log(router.query);
 
-    function onSubmit({ name, email, password }: FormValuesType, actions: FormikHelpers<FormValuesType>) {
-        const res = signUp(email, password, name);
-        toast.promise(res, {
-            loading: "Signing up...",
-            error: ({ code }) => getErrorMessage(code),
-            success: "Signed up successfully"
-        }).then(() => {
-            actions.resetForm();
-            setTimeout(() => {
-                router.push(
-                    typeof router.query.redirect === "string" ?
-                        router.query.redirect :
-                        "/"
-                );
-            }, 1000)
-        })
+    async function onSubmit({ name, email, password }: FormValuesType, actions: FormikHelpers<FormValuesType>) {
+        const signToast = toast.loading("Signing up...");
+        const res = await signUp(email, password, name);
+        toast.dismiss(signToast);
+        if (res.error) toast.error(res.error.message);
+        if (res.user) toast.success("Signed up successfully");
+        setTimeout(() => {
+            router.push(
+                typeof router.query.redirect === "string" ?
+                    router.query.redirect :
+                    "/"
+            );
+        }, 1000);
     }
 
     async function handleGoogleSignUp() {
-        const res = signUpWithGoogle();
-
-        toast.promise(res, {
-            loading: "Signing up...",
-            error: ({ code }) => getErrorMessage(code),
-            success: "Signed with Google"
-        }).then(() => {
-            setTimeout(() => {
-                router.push(
-                    typeof router.query.redirect === "string" ?
-                        router.query.redirect :
-                        "/"
-                );
-            }, 1000)
-        })
+        const signToast = toast.loading("Signing up...");
+        const res = await signUpWithGoogle();
+        toast.dismiss(signToast);
+        if (res.error) toast.error(res.error.message);
+        if (res.user) toast.success("Signed with Google successfully");
+        setTimeout(() => {
+            router.push(
+                typeof router.query.redirect === "string" ?
+                    router.query.redirect :
+                    "/"
+            );
+        }, 1000);
     }
 
     return (
