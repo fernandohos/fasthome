@@ -36,6 +36,12 @@ type UpdateUserData = {
     address?: string | null;
 }
 
+type SignUpWithGoogleType = () => Promise<{
+    user: User | null;
+    session: Session | null;
+    error: ApiError | null;
+}>
+
 type UpdateUserType = (data: UpdateUserData) => Promise<{
     user: User | null;
     error: ApiError | null;
@@ -51,7 +57,7 @@ type AuthContextType = {
     signIn: SignInType;
     signUp: SignUpType;
     updateUser: UpdateUserType;
-    signUpWithGoogle: () => Promise<UserCredential>;
+    signUpWithGoogle: SignUpWithGoogleType;
 }
 
 const AuthContext = createContext({} as AuthContextType);
@@ -123,25 +129,11 @@ export function AuthProvider({ children }: AuthProviderType) {
     }
 
     const signUpWithGoogle = async () => {
-        const provider = new GoogleAuthProvider();
-        const res = await signInWithPopup(auth, provider);
-        const { displayName, email: userEmail, photoURL, uid } = res.user;
-        const newUser = {
-            uid,
-            displayName,
-            email: userEmail,
-            photoURL,
-            province: null,
-            district: null,
-            mobileNumber: null,
-            mobileNumber2: null,
-            telephone: null,
-            address: null,
-        }
-        const ref = doc(db, 'users', uid);
-        await setDoc(ref, newUser);
-        // setUser(newUser);
-        return res;
+        const { user: signedUser, session, error } = await supabase.auth.signIn({
+            provider: 'google',
+        })
+        setUser(filterUserInfo(signedUser));
+        return { user: filterUserInfo(signedUser), session, error };
     }
 
     const updateUser = async (data: UpdateUserData) => {
