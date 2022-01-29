@@ -12,6 +12,14 @@ import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
 import { useState } from 'react';
 import { User } from '../types/User';
+import { supabase } from '../services/supabase';
+import { ApiError, Session } from '@supabase/supabase-js';
+
+type SignUpType = (email: string, password: string, displayName: string) => Promise<{
+    user: User | null;
+    session: Session | null;
+    error: ApiError | null;
+}>
 
 type UpdateUser = {
     displayName?: string | null;
@@ -32,7 +40,7 @@ type AuthContextType = {
     user: null | User;
     logOut: () => void;
     signIn: (email: string, password: string) => Promise<UserCredential>;
-    signUp: (email: string, password: string, displayName: string) => Promise<UserCredential>;
+    signUp: SignUpType;
     updateUser: (uid: string, data: UpdateUser) => Promise<void>;
     signUpWithGoogle: () => Promise<UserCredential>;
 }
@@ -92,25 +100,46 @@ export function AuthProvider({ children }: AuthProviderType) {
         return res;
     }
 
-    const signUp = async (email: string, password: string, displayName: string) => {
-        const res = await createUserWithEmailAndPassword(auth, email, password);
-        const { email: userEmail, photoURL, uid } = res.user;
-        const newUser = {
-            uid,
-            displayName,
-            email: userEmail,
-            photoURL,
-            province: null,
-            district: null,
-            mobileNumber: null,
-            mobileNumber2: null,
-            telephone: null,
-            address: null,
+    const signUp: SignUpType = async (email, password, displayName) => {
+        const { user: signedUser, session, error } = await supabase.auth.signUp({
+            email,
+            password
+        }, {
+            data: {
+                display_name: displayName,
+                photo_url: null,
+                province: null,
+                district: null,
+                mobile_number: null,
+                mobile_number_2: null,
+                telephone: null,
+                address: null,
+            }
+        });
+        function getUserInfo(): User | null {
+            if (signedUser) {
+                const { id, created_at, email = null, user_metadata } = signedUser;
+                const { mobile_number_2, photo_url, province, telephone, mobile_number, display_name, address, district } = user_metadata;
+                return {
+                    id,
+                    created_at,
+                    email,
+                    mobile_number_2,
+                    photo_url,
+                    province,
+                    telephone,
+                    mobile_number,
+                    display_name,
+                    address,
+                    district
+                }
+            }
+            return null;
         }
-        const ref = doc(db, "users", uid);
-        await setDoc(ref, newUser)
-        setUser(newUser);
-        return res;
+        if (signedUser) {
+            setUser(getUserInfo());
+        }
+        return { user: getUserInfo(), session, error };
     }
 
     const signUpWithGoogle = async () => {
