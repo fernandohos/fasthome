@@ -14,12 +14,19 @@ import { useState } from 'react';
 import { User } from '../types/User';
 import { supabase } from '../services/supabase';
 import { ApiError, Session } from '@supabase/supabase-js';
+import { filterUserInfo } from '../utils/filterUserInfo';
 
 type SignUpType = (email: string, password: string, displayName: string) => Promise<{
     user: User | null;
     session: Session | null;
     error: ApiError | null;
 }>
+
+type SignInType = (email: string, password: string) => Promise<{
+    user: User | null;
+    session: Session | null;
+    error: ApiError | null;
+}>;
 
 type UpdateUser = {
     displayName?: string | null;
@@ -83,21 +90,12 @@ export function AuthProvider({ children }: AuthProviderType) {
     }, [])
 
     const signIn = async (email: string, password: string) => {
-        const res = await signInWithEmailAndPassword(auth, email, password);
-        const { displayName, email: userEmail, photoURL, uid } = res.user;
-        setUser({
-            uid,
-            displayName,
-            email: userEmail,
-            photoURL,
-            province: null,
-            district: null,
-            mobileNumber: null,
-            mobileNumber2: null,
-            telephone: null,
-            address: null,
-        });
-        return res;
+        const { user: signedUser, session, error } = await supabase.auth.signIn({
+            email,
+            password,
+        })
+        setUser(filterUserInfo(signedUser));
+        return { user: filterUserInfo(signedUser), session, error }
     }
 
     const signUp: SignUpType = async (email, password, displayName) => {
@@ -179,7 +177,7 @@ export function AuthProvider({ children }: AuthProviderType) {
     }
 
     const logOut = async () => {
-        signOut(auth);
+        supabase.auth.signOut();
         setUser(null);
     }
 
