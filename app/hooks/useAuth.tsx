@@ -1,10 +1,7 @@
 import { ReactNode, useEffect, useContext, createContext } from 'react';
 import {
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
-    signOut,
     onAuthStateChanged,
     UserCredential
 } from 'firebase/auth';
@@ -28,16 +25,21 @@ type SignInType = (email: string, password: string) => Promise<{
     error: ApiError | null;
 }>;
 
-type UpdateUser = {
-    displayName?: string | null;
+type UpdateUserData = {
+    display_name?: string | null;
     email?: string | null;
     province?: string | null;
     district?: string | null;
-    mobileNumber?: string | null;
-    mobileNumber2?: string | null;
+    mobile_number?: string | null;
+    mobile_number_2?: string | null;
     telephone?: string | null;
     address?: string | null;
 }
+
+type UpdateUserType = (data: UpdateUserData) => Promise<{
+    user: User | null;
+    error: ApiError | null;
+}>
 
 type AuthProviderType = {
     children: ReactNode;
@@ -46,9 +48,9 @@ type AuthProviderType = {
 type AuthContextType = {
     user: null | User;
     logOut: () => void;
-    signIn: (email: string, password: string) => Promise<UserCredential>;
+    signIn: SignInType;
     signUp: SignUpType;
-    updateUser: (uid: string, data: UpdateUser) => Promise<void>;
+    updateUser: UpdateUserType;
     signUpWithGoogle: () => Promise<UserCredential>;
 }
 
@@ -71,23 +73,23 @@ export function AuthProvider({ children }: AuthProviderType) {
                 if (data) {
                     const { uid, displayName, email, photoURL, province, district, mobileNumber, mobileNumber2, telephone, address } = data;
 
-                    setUser({
-                        uid,
-                        displayName,
-                        email,
-                        photoURL,
-                        province,
-                        district,
-                        mobileNumber,
-                        mobileNumber2,
-                        telephone,
-                        address
-                    });
+                    //     setUser({
+                    //         // id,
+                    //         // displayName,
+                    //         email,
+                    //         // photoURL,
+                    //         province,
+                    //         district,
+                    //         mobileNumber,
+                    //         mobileNumber2,
+                    //         telephone,
+                    //         address
+                    //     });
                 }
             }
         })
         return unsub;
-    }, [])
+    }, []);
 
     const signIn = async (email: string, password: string) => {
         const { user: signedUser, session, error } = await supabase.auth.signIn({
@@ -114,30 +116,10 @@ export function AuthProvider({ children }: AuthProviderType) {
                 address: null,
             }
         });
-        function getUserInfo(): User | null {
-            if (signedUser) {
-                const { id, created_at, email = null, user_metadata } = signedUser;
-                const { mobile_number_2, photo_url, province, telephone, mobile_number, display_name, address, district } = user_metadata;
-                return {
-                    id,
-                    created_at,
-                    email,
-                    mobile_number_2,
-                    photo_url,
-                    province,
-                    telephone,
-                    mobile_number,
-                    display_name,
-                    address,
-                    district
-                }
-            }
-            return null;
-        }
         if (signedUser) {
-            setUser(getUserInfo());
+            setUser(filterUserInfo(signedUser));
         }
-        return { user: getUserInfo(), session, error };
+        return { user: filterUserInfo(signedUser), session, error };
     }
 
     const signUpWithGoogle = async () => {
@@ -158,22 +140,23 @@ export function AuthProvider({ children }: AuthProviderType) {
         }
         const ref = doc(db, 'users', uid);
         await setDoc(ref, newUser);
-        setUser(newUser);
+        // setUser(newUser);
         return res;
     }
 
-    const updateUser = async (uid: string, data: UpdateUser) => {
-        const ref = doc(db, "users", uid);
+    const updateUser = async (data: UpdateUserData) => {
+        const { email, ...restData } = data;
 
-        const obj = { ...data };
+        const { user: signedUser, error } = await supabase.auth.update({
+            email: email ?? undefined,
+            data: { ...restData },
+        });
 
-        Object.keys(data).filter(k => {
-            const key = k as keyof UpdateUser;
-            if (obj[key] === '' || obj[key] === null || obj[key] === undefined) {
-                delete data[key];
-            }
-        })
-        return await updateDoc(ref, data);
+        if (signedUser) {
+            setUser(filterUserInfo(signedUser));
+        }
+
+        return { user: filterUserInfo(signedUser), error };
     }
 
     const logOut = async () => {

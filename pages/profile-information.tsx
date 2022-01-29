@@ -12,12 +12,12 @@ import Link from 'next/link';
 import Head from 'next/head';
 
 type FormUser = {
-    displayName: string | null;
+    display_name: string | null;
     email: string | null;
     province: string | null;
     district: string | null;
-    mobileNumber: string | null;
-    mobileNumber2: string | null;
+    mobile_number: string | null;
+    mobile_number_2: string | null;
     telephone: string | null;
     address: string | null;
 }
@@ -26,19 +26,19 @@ export default function ProfileInformation() {
     const router = useRouter();
     const { user, updateUser } = useAuth();
     const initialValues = {
-        displayName: user?.displayName ?? '',
+        display_name: user?.display_name ?? '',
         email: user?.email ?? '',
         province: user?.province ?? '',
         district: user?.district ?? '',
-        mobileNumber: user?.mobileNumber ?? '',
-        mobileNumber2: user?.mobileNumber2 ?? '',
+        mobile_number: user?.mobile_number ?? '',
+        mobile_number_2: user?.mobile_number_2 ?? '',
         telephone: user?.telephone ?? '',
         address: user?.address ?? ''
     }
 
     function onSubmit(values: FormUser) {
         if (user) {
-            const res = updateUser(user.uid, values);
+            const res = updateUser(values);
             toast.promise(res, {
                 loading: "Updating profile...",
                 error: ({ code }) => getErrorMessage(code),
@@ -58,8 +58,8 @@ export default function ProfileInformation() {
     return (
         <C.Container>
             <Head>
-                    <title>Fasthome | Profile information</title>
-                </Head>
+                <title>Fasthome | Profile information</title>
+            </Head>
             <Toaster />
             <Header />
             <C.ProfileInfo>
@@ -76,7 +76,7 @@ export default function ProfileInformation() {
                                     <Form>
                                         <C.InputContainer>
                                             <FormikInput
-                                                name="displayName"
+                                                name="display_name"
                                                 label="Name"
                                                 type="text"
                                             />
@@ -96,12 +96,12 @@ export default function ProfileInformation() {
                                                 type="text"
                                             />
                                             <FormikInput
-                                                name="mobileNumber"
+                                                name="mobile_number"
                                                 label="Mobile Number"
                                                 type="text"
                                             />
                                             <FormikInput
-                                                name="mobileNumber2"
+                                                name="mobile_number_2"
                                                 label="Mobile Number 2"
                                                 type="text"
                                             />
@@ -128,7 +128,9 @@ export default function ProfileInformation() {
                         : (<C.NotLogged>
                             <h1>You have to login to access this page</h1>
                             <Link href="/login?redirect=/profile-information" passHref>
-                                <Button style={{marginTop: "2rem"}}>Login</Button>
+                                <a>
+                                    <Button style={{ marginTop: "2rem" }}>Login</Button>
+                                </a>
                             </Link>
                         </C.NotLogged>)
                 }
