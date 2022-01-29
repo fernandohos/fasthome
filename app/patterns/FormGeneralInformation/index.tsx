@@ -31,49 +31,49 @@ export default function FormGeneralInformation() {
             <C.InputContainer>
                 <FormikInput
                     label="Number Of Room"
-                    name="numberOfRoom"
+                    name="number_of_room"
                     type="number"
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikInput
                     label="Gross M²"
-                    name="grossM2"
+                    name="gross_m2"
                     type="number"
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikInput
                     label="Net M²"
-                    name="netM2"
+                    name="net_m2"
                     type="number"
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikSelect
                     label="Warming Type"
-                    name="warmingType"
+                    name="warming_type"
                     options={formOptions.warmingType}
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikInput
                     label="Building Age"
-                    name="buildingAge"
+                    name="building_age"
                     type="number"
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikInput
                     label="Floor Location"
-                    name="floorLocation"
+                    name="floor_location"
                     type="number"
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikSelect
                     label="Avaliable For Loan"
-                    name="avaliableForLoan"
+                    name="avaliable_for_loan"
                     options={formOptions.avaliableForLoan}
                 />
             </C.InputContainer>
@@ -115,7 +115,7 @@ export default function FormGeneralInformation() {
             <C.InputContainer>
                 <FormikInput
                     label="Rental Income"
-                    name="rentalIncome"
+                    name="rental_ncome"
                     type="number"
                 />
             </C.InputContainer>

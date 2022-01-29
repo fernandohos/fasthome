@@ -25,29 +25,29 @@ export function FormikWrapper({ children }: Props) {
         title: '',
         explanation: '',
         price: 0,
-        numberOfRoom: 0,
-        grossM2: 0,
-        netM2: 0,
-        warmingType: '',
-        buildingAge: 0,
-        floorLocation: 0,
-        avaliableForLoan: '',
+        number_of_room: 0,
+        gross_m2: 0,
+        net_m2: 0,
+        warming_type: '',
+        building_age: 0,
+        floor_location: 0,
+        avaliable_for_loan: '',
         furnished: '',
         status: '',
         dues: 0,
         swap: '',
         front: '',
-        rentalIncome: 0,
+        rental_income: 0,
         address: '',
         files: [],
-        interiorFeatures: [],
-        externalFeatures: [],
-        name: user?.displayName ?? '',
+        interior_features: [],
+        external_features: [],
+        name: user?.display_name ?? '',
         email: user?.email ?? '',
-        mobileNumber: user?.mobileNumber ?? '',
-        mobileNumber2: user?.mobileNumber2 ?? '',
+        mobile_number: user?.mobile_number ?? '',
+        mobile_number_2: user?.mobile_number_2 ?? '',
         telephone: user?.telephone ?? '',
-        createdAt: 0,
+        created_at: 0,
         latlng: {
             lat: 0,
             lng: 0,
@@ -62,6 +62,7 @@ export function FormikWrapper({ children }: Props) {
         console.log("SUBMIT LATLNG", values.latlng);
 
         const uploadFilesPromise = new Promise((resolve, reject) => {
+            if(!values.files) resolve([]);
             values.files.map(file => {
                 const storageRef = ref(storage, `/houses/${file.name}`);
                 
@@ -102,8 +103,8 @@ export function FormikWrapper({ children }: Props) {
                 delete data.files;
                 data.images = imagesUrls;
                 data.createdAt = new Date().getTime();
-                data.userId = user?.uid;
-                data.userPhotoUrl = user?.photoURL;
+                data.userId = user?.id;
+                data.userPhotoUrl = user?.photo_url;
                 return data;
             };
             const res = addDoc(collectionRef, getAdData());

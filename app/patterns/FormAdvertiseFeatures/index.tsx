@@ -8,12 +8,12 @@ export default function FormAdvertiseFeatures() {
         <Fieldset title="Advertise Features">
             <FormikCheckbox 
                 label="Interior Features"
-                name="interiorFeatures"
+                name="interior_features"
                 options={interiorFeatures}
             />
             <FormikCheckbox 
                 label="External Features"
-                name="externalFeatures"
+                name="external_features"
                 options={externalFeatures}
             />
         </Fieldset>
