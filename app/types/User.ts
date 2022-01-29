@@ -1,12 +1,13 @@
 export type User = {
-    uid: string;
-    displayName: string | null;
+    id: string;
+    display_name: string;
+    created_at: string;
     email: string | null;
-    photoURL: string | null;
-    province: string | null,
-    district: string | null,
-    mobileNumber: string | null,
-    mobileNumber2: string | null,
-    telephone: string | null,
     address: string | null,
+    district: string | null,
+    mobile_number: string | null,
+    mobile_number_2: string | null,
+    photo_url: string | null;
+    province: string | null,
+    telephone: string | null,
 }
