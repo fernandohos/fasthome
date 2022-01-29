@@ -1,13 +1,4 @@
-import { ReactNode, useEffect, useContext, createContext } from 'react';
-import {
-    GoogleAuthProvider,
-    signInWithPopup,
-    onAuthStateChanged,
-    UserCredential
-} from 'firebase/auth';
-import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { auth, db } from '../services/firebase';
-import { useState } from 'react';
+import { useState, ReactNode, useEffect, useContext, createContext } from 'react';
 import { User } from '../types/User';
 import { supabase } from '../services/supabase';
 import { ApiError, Session } from '@supabase/supabase-js';
@@ -68,33 +59,17 @@ export function AuthProvider({ children }: AuthProviderType) {
     const [user, setUser] = useState<null | User>(null);
 
     useEffect(() => {
-        const unsub = onAuthStateChanged(auth, async currentUser => {
-            if (currentUser?.uid) {
-                const ref = doc(db, "users", currentUser.uid);
-
-                const userDoc = await getDoc(ref);
-
-                const data = userDoc.data();
-
-                if (data) {
-                    const { uid, displayName, email, photoURL, province, district, mobileNumber, mobileNumber2, telephone, address } = data;
-
-                    //     setUser({
-                    //         // id,
-                    //         // displayName,
-                    //         email,
-                    //         // photoURL,
-                    //         province,
-                    //         district,
-                    //         mobileNumber,
-                    //         mobileNumber2,
-                    //         telephone,
-                    //         address
-                    //     });
-                }
+        const unsub = supabase.auth.onAuthStateChange((event, session) => {
+            switch (event) {
+                case 'SIGNED_IN':
+                case 'USER_UPDATED':
+                    return setUser(filterUserInfo(session?.user ?? null));
+                case 'USER_DELETED':
+                case 'SIGNED_OUT':
+                    return setUser(null);
             }
         })
-        return unsub;
+        return unsub.data?.unsubscribe;
     }, []);
 
     const signIn = async (email: string, password: string) => {
