@@ -8,29 +8,29 @@ export type FormValuesType = {
     title: string,
     explanation: string,
     price: number,
-    numberOfRoom: number,
-    grossM2: number,
-    netM2: number,
-    warmingType: string,
-    buildingAge: number,
-    floorLocation: number,
-    avaliableForLoan: string,
+    number_of_room: number,
+    gross_m2: number,
+    net_m2: number,
+    warming_type: string,
+    building_age: number,
+    floor_location: number,
+    avaliable_for_loan: string,
     furnished: string,
     status: string,
     dues: number,
     swap: string,
     front: string,
-    rentalIncome: number,
+    rental_income: number,
     address: string;
     files: FileType[];
-    externalFeatures: string[],
-    interiorFeatures: string[],
+    external_features: string[],
+    interior_features: string[],
     name: string;
     email: string;
-    mobileNumber: string;
-    mobileNumber2: string;
+    mobile_number: string;
+    mobile_number_2: string;
     telephone: string;
-    createdAt: number;
+    created_at: number;
     latlng: {
         lat: number;
         lng: number;

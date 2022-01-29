@@ -4,8 +4,8 @@ export type CardHouseType = {
     title: string;
     price: number;
     address: string;
-    createdAt: number;
+    created_at: number;
     bedrooms: number;
     floor: number;
-    squareMeters: number;
+    square_meters: number;
 }
