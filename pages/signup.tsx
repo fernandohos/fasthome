@@ -44,6 +44,7 @@ export default function Signup() {
         toast.dismiss(signToast);
         if (res.error) toast.error(res.error.message);
         if (res.user) toast.success("Signed up successfully");
+        if(!res.error)
         setTimeout(() => {
             router.push(
                 typeof router.query.redirect === "string" ?
@@ -59,6 +60,7 @@ export default function Signup() {
         toast.dismiss(signToast);
         if (res.error) toast.error(res.error.message);
         if (res.user) toast.success("Signed with Google successfully");
+        if(!res.error)
         setTimeout(() => {
             router.push(
                 typeof router.query.redirect === "string" ?
