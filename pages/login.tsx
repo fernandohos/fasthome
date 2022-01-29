@@ -26,48 +26,44 @@ export default function Login() {
         password: Yup.string().required()
     })
 
-    function onSubmit({ email, password }: FormType, actions: FormikHelpers<FormType>) {
-        signIn(email, password);
+    async function onSubmit({ email, password }: FormType, actions: FormikHelpers<FormType>) {
+        const signToast = toast.loading("Signing in...");
+        const res = await signIn(email, password);
+        toast.dismiss(signToast);
+        if (res.error) toast.error(res.error.message);
+        if (res.user) toast.success("Signed in successfully");
+        setTimeout(() => {
+            router.push(
+                typeof router.query.redirect === "string" ?
+                    router.query.redirect :
+                    "/"
+            );
+        }, 1000);
         actions.resetForm();
-        router.push(
-            typeof router.query.redirect === "string" ?
-                router.query.redirect :
-                "/"
-        );
-
-        const res = signIn(email, password);
-        toast.promise(res, {
-            loading: "Signing in...",
-            error: ({ code }) => getErrorMessage(code),
-            success: "Signed in successfully"
-        }).then(() => {
-            actions.resetForm();
-            setTimeout(() => {
-                router.push(
-                    typeof router.query.redirect === "string" ?
-                        router.query.redirect :
-                        "/"
-                );
-            }, 1000)
-        })
+        if(!res.error)
+        setTimeout(() => {
+            router.push(
+                typeof router.query.redirect === "string" ?
+                    router.query.redirect :
+                    "/"
+            );
+        }, 1000);
     }
 
-    function handleGoogleLogin() {
-        const res = signUpWithGoogle();
-
-        toast.promise(res, {
-            loading: "Signing up...",
-            error: ({ code }) => getErrorMessage(code),
-            success: "Signed with Google"
-        }).then(() => {
-            setTimeout(() => {
-                router.push(
-                    typeof router.query.redirect === "string" ?
-                        router.query.redirect :
-                        "/"
-                );
-            }, 1000)
-        })
+    async function handleGoogleLogin() {
+        const signToast = toast.loading("Signing with google...");
+        const res = await signUpWithGoogle();
+        toast.dismiss(signToast);
+        if (res.error) toast.error(res.error.message);
+        if (res.user) toast.success("Signed with Google");
+        if(!res.error)
+        setTimeout(() => {
+            router.push(
+                typeof router.query.redirect === "string" ?
+                    router.query.redirect :
+                    "/"
+            );
+        }, 1000);
     }
 
     return (
