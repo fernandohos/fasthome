@@ -22,7 +22,7 @@ export default function Confirm() {
                 </div>
                 <p>Your ad has been published succesfully.</p>
                 <p>We Thank you.</p>
-                <Link href="/" passHref><Button style={{marginTop: '2rem'}}>Go Home</Button></Link>
+                <Link href="/" passHref><a><Button style={{marginTop: '2rem'}}>Go Home</Button></a></Link>
             </C.Container>
         </>
     )
