@@ -62,31 +62,33 @@ export function FormikWrapper({ children }: Props) {
         console.log("SUBMIT LATLNG", values.latlng);
 
         const uploadFilesPromise = new Promise((resolve, reject) => {
-            if(!values.files) resolve([]);
+            if (!values.files) resolve([]);
+            // LOOPING FOR UPLOAD EACH IMAGE
             values.files.map(file => {
-                const storageRef = ref(storage, `/houses/${file.name}`);
-                
+                // COMPRESS IMAGE
                 imageCompression(file, {
                     maxSizeMB: .2
+                }).then(async compressedFile => {
+                    // UPLOAD COMPRESSED FILE TO SUPABASE
+                    const urlResponse = await supabase
+                        .storage
+                        .from('houses')
+                        .upload(
+                            // CREATE A UNIQUE NAME WITH THE FILE NAME AND A RANDOM HASH
+                            compressedFile.name.split('.')[0] + Math.random().toString(36).slice(2, 6), compressedFile)
+                        .then(({ data, error }) => {
+                            // GET UPLOADED IMAGE URL
+                            if (data?.Key) {
+                                const { publicURL, error: urlError } = supabase
+                                    .storage
+                                    .from('houses')
+                                    .getPublicUrl(data?.Key.split('/')[1]);
+                                return { publicURL, error: urlError };
+                            }
+                        })
+                    if (!urlResponse?.error && urlResponse?.publicURL) imagesUrls.push(urlResponse.publicURL);
                 })
-                .then(compressedFile => {
-                    const uploadTask = uploadBytesResumable(storageRef, compressedFile);
-                    const unsub = uploadTask.on(
-                        "state_changed",
-                        (snapshot: any) => {
-                            const pgrs = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-                        },
-                        (error) => console.log(error),
-                        () => {
-                            getDownloadURL(uploadTask.snapshot.ref).then(url => {
-                                imagesUrls.push(url);
-                                if (imagesUrls.length === values.files.length) {
-                                    resolve(imagesUrls);
-                                }
-                            });
-                        }
-                    )
-                })
+                if (imagesUrls.length === values.files.length) resolve(imagesUrls);
             })
         });
 
