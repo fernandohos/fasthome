@@ -59,6 +59,7 @@ export function AuthProvider({ children }: AuthProviderType) {
     const [user, setUser] = useState<null | User>(null);
 
     useEffect(() => {
+        setUser(filterUserInfo(supabase.auth.user()));
         const unsub = supabase.auth.onAuthStateChange((event, session) => {
             switch (event) {
                 case 'SIGNED_IN':
