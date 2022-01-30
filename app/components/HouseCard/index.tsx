@@ -26,7 +26,7 @@ export function HouseCard(house: CardHouseType) {
                     }</p>
                     <p className="info-name">{house.title}</p>
                     <p className="info-location">{house.address}</p>
-                    <p className="info-date">{new Date(house.createdAt).toLocaleDateString('en-US', {
+                    <p className="info-date">{new Date(house.created_at).toLocaleDateString('en-US', {
                         month: 'long', day: 'numeric', year: 'numeric'
                     })}</p>
                     <C.HouseInfo>
@@ -41,7 +41,7 @@ export function HouseCard(house: CardHouseType) {
                         <div className="info-icon">
                             <Image src={squareMetersIcon} alt="square meters icon" layout="fill" />
                         </div>
-                        <p>{house.squareMeters}m²</p>
+                        <p>{house.square_meters}m²</p>
                     </C.HouseInfo>
                 </div>
             </C.Card>

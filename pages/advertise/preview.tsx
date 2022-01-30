@@ -50,19 +50,19 @@ function Preview() {
                             <p>Housing Shape</p>
                             <p>{values.housing}</p>
                             <p>Room</p>
-                            <p>{values.numberOfRoom}</p>
+                            <p>{values.number_of_room}</p>
                             <p>Gross / Net M² </p>
-                            <p>{values.grossM2}/{values.netM2}</p>
+                            <p>{values.gross_m2}/{values.net_m2}</p>
                             <p>Warming Type</p>
-                            <p>{values.warmingType}</p>
+                            <p>{values.warming_type}</p>
                             <p>Building Age</p>
-                            <p>{values.buildingAge}</p>
+                            <p>{values.building_age}</p>
                         </C.InformationGrid>
                         <C.InformationGrid>
                             <p>Floor Location</p>
-                            <p>{values.floorLocation}</p>
+                            <p>{values.floor_location}</p>
                             <p>Available for Loan</p>
-                            <p>{values.avaliableForLoan}</p>
+                            <p>{values.avaliable_for_loan}</p>
                             <p>Furnished</p>
                             <p>{values.furnished}</p>
                             <p>Dues</p>
@@ -72,7 +72,7 @@ function Preview() {
                             <p>Front</p>
                             <p>{values.front}</p>
                             <p>Rental Income</p>
-                            <p>{currencyFormatter.format(values.rentalIncome)}</p>
+                            <p>{currencyFormatter.format(values.rental_income)}</p>
                         </C.InformationGrid>
                     </C.GridContainer>
                 </C.ContainerGroup>
@@ -80,21 +80,21 @@ function Preview() {
                     <C.SecondTitle>Explanation</C.SecondTitle>
                     <p>{values.explanation}</p>
                 </C.ContainerGroup>
-                {(values.externalFeatures.length > 0 || values.interiorFeatures.length > 0) && <C.ContainerGroup>
+                {(values.external_features.length > 0 || values.interior_features.length > 0) && <C.ContainerGroup>
                     <C.GridContainer>
-                        {values.interiorFeatures.length > 0 && <div>
+                        {values.interior_features.length > 0 && <div>
                             <C.SecondTitle>Interior Features</C.SecondTitle>
                             <C.FeaturesList>
                                 {interiorFeatures.map((feature, i) => (
-                                    values.interiorFeatures.indexOf(feature[1]) > - 1 ? <li key={feature[1]}>{feature[0]}</li> : null
+                                    values.interior_features.indexOf(feature[1]) > - 1 ? <li key={feature[1]}>{feature[0]}</li> : null
                                 ))}
                             </C.FeaturesList>
                         </div>}
-                        {values.externalFeatures.length > 0 && <div>
+                        {values.external_features.length > 0 && <div>
                             <C.SecondTitle>External Features</C.SecondTitle>
                             <C.FeaturesList>
                                 {externalFeatures.map((feature, i) => (
-                                    values.externalFeatures.indexOf(feature[1]) > -1 ? <li key={feature[1]}>{feature[0]}</li> : null
+                                    values.external_features.indexOf(feature[1]) > -1 ? <li key={feature[1]}>{feature[0]}</li> : null
                                 ))}
                             </C.FeaturesList>
                         </div>}

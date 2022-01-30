@@ -28,21 +28,21 @@ function AdvertiseForm() {
             errors.title ||
             errors.explanation ||
             errors.price ||
-            errors.numberOfRoom ||
-            errors.grossM2 ||
-            errors.netM2 ||
-            errors.warmingType ||
-            errors.buildingAge ||
-            errors.floorLocation ||
-            errors.avaliableForLoan ||
+            errors.mobile_number ||
+            errors.gross_m2 ||
+            errors.net_m2 ||
+            errors.warming_type ||
+            errors.building_age ||
+            errors.floor_location ||
+            errors.avaliable_for_loan ||
             errors.furnished ||
             errors.status ||
             errors.dues ||
             errors.swap ||
-            errors.rentalIncome ||
+            errors.rental_income ||
             errors.address ||
-            errors.externalFeatures ||
-            errors.interiorFeatures ||
+            errors.external_features ||
+            errors.interior_features ||
             errors.files
             ?
             true : false
