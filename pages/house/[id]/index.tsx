@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { FormValuesType } from '../../../app/types/FormValuesType';
 import mapIcon from '../../../public/images/map-icon.svg';
 import { Header } from '../../../app/patterns/Header';
-import { db } from '../../../app/services/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { supabase } from '../../../app/services/supabase';
 import * as C from '../../../app/styles/house';
 import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
@@ -16,6 +15,7 @@ import { LatLngLiteral } from 'leaflet';
 import dynamic from 'next/dynamic';
 import { interiorFeatures, externalFeatures } from '../../../app/utils/formCheckboxes';
 import Head from 'next/head';
+import { formOptions } from '../../../app/utils/formOptions';
 
 type PositionNull = {
     lat: null;
@@ -41,10 +41,17 @@ const DynamicMap = dynamic(
 
 export default function House({ data }: Props) {
     const [showPhone, setShowPhone] = useState(false);
-
     function copyText(text: string) {
         if (navigator.clipboard)
             navigator.clipboard.writeText(text);
+    }
+
+    function getStringOption(array: string[][], option: string) {
+        let op = '';
+        array.map(arr => {
+            if (arr.indexOf(option) > -1) op = arr[0];
+        })
+        return op
     }
 
     return (
@@ -83,27 +90,27 @@ export default function House({ data }: Props) {
                             <Fieldset title='General Information'>
                                 <C.GenInfoGrid>
                                     <p>Published Date</p>
-                                    <p>{data.createdAt}</p>
+                                    <p>{new Date(data.created_at).toLocaleDateString()}</p>
                                     <p>Floor Location</p>
-                                    <p>{data.floorLocation}</p>
+                                    <p>{data.floor_location}</p>
                                     <p>Advertise Status</p>
-                                    <p>{data.sale}</p>
+                                    <p>{getStringOption(formOptions.sale, data.sale)}</p>
                                     <p>Furnished</p>
-                                    <p>{data.furnished}</p>
+                                    <p>{getStringOption(formOptions.furnished, data.furnished)}</p>
                                     <p>Housing Shape</p>
-                                    <p>{data.housing}</p>
+                                    <p>{getStringOption(formOptions.housing, data.housing)}</p>
                                     <p>Dues</p>
                                     <p>{data.dues}</p>
                                     <p>Room</p>
-                                    <p>{data.numberOfRoom}</p>
+                                    <p>{data.number_of_room}</p>
                                     <p>Front</p>
-                                    <p>{data.front}</p>
+                                    <p>{getStringOption(formOptions.front, data.front)}</p>
                                     <p>Gross / Net M²</p>
-                                    <p>{data.grossM2} / {data.netM2}</p>
+                                    <p>{data.gross_m2} / {data.net_m2}</p>
                                     <p>Warming Type</p>
-                                    <p>{data.warmingType}</p>
+                                    <p>{getStringOption(formOptions.warmingType, data.warming_type)}</p>
                                     <p>Building Age</p>
-                                    <p>{data.buildingAge}</p>
+                                    <p>{data.building_age}</p>
                                 </C.GenInfoGrid>
                             </Fieldset>
                             <Fieldset title="Explanation">
@@ -114,7 +121,7 @@ export default function House({ data }: Props) {
                                     <div>
                                         <C.TitleFeatures>Interior Features</C.TitleFeatures>
                                         <C.Features>
-                                            {data.interiorFeatures.map(feature => {
+                                            {data.interior_features.map(feature => {
                                                 let word = '';
                                                 interiorFeatures.map(arr => {
                                                     if (arr.indexOf(feature) !== -1)
@@ -127,7 +134,7 @@ export default function House({ data }: Props) {
                                     <div>
                                         <C.TitleFeatures>External Features</C.TitleFeatures>
                                         <C.Features>
-                                            {data.externalFeatures.map(feature => {
+                                            {data.external_features.map(feature => {
                                                 let word = '';
                                                 externalFeatures.map(arr => {
                                                     if (arr.indexOf(feature) !== -1)
@@ -166,7 +173,7 @@ export default function House({ data }: Props) {
                                         onClick={e => setShowPhone(p => !p)}
                                     >
                                         {showPhone ? (
-                                            <p>{data.mobileNumber}</p>
+                                            <p>{data.mobile_number}</p>
                                         ) : (
                                             <>
                                                 <Image src={phoneIcon} width={20} height={20} alt="phone icon" />
@@ -203,8 +210,13 @@ export function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext<{ id: string }>) {
-    const ref = doc(db, `/houses/${params?.id ?? ''}`);
+    const { data, error } = await supabase.from("houses")
+        .select()
+        .eq("id", params?.id ?? '1')
+        .limit(1)
+        .single();
+
     return {
-        props: { data: await getDoc(ref).then((docSnap) => docSnap.data()) }
+        props: { data }
     }
 }
