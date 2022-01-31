@@ -34,14 +34,14 @@ function Contact() {
                     <C.InputContainer>
                         <FormikInput
                             label='Mobile Number'
-                            name='mobileNumber'
+                            name='mobile_number'
                             type='text'
                         />
                     </C.InputContainer>
                     <C.InputContainer>
                         <FormikInput
                             label='Mobile Number 2'
-                            name='mobileNumber2'
+                            name='mobile_number_2'
                             type='text'
                         />
                     </C.InputContainer>
