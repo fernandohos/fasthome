@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 import bedroomsIcon from '../../../public/images/bedrooms-icon.svg';
 import stairsIcon from '../../../public/images/stairs-icon.svg';
+import defaultHouseImage from '../../../public/images/default-house-image.svg';
 import squareMetersIcon from '../../../public/images/square-meters.svg';
 
 export function HouseCard(house: CardHouseType) {
@@ -15,7 +16,7 @@ export function HouseCard(house: CardHouseType) {
         <Link href={`/house/${house.id}`} passHref>
             <C.Card >
                 <div className="image-container">
-                    <Image src={house.image} alt={house.title} layout="fill" />
+                    <Image src={house.image ?? defaultHouseImage} alt={house.title} layout="fill" />
                 </div>
                 <div className="card-info">
                     <p className="info-price">{
