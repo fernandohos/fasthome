@@ -5,9 +5,8 @@ import { Banner } from '../app/patterns/Banner';
 import { Featured } from '../app/patterns/Featured';
 import { SearchOnMapBanner } from '../app/patterns/SearchOnMapBanner';
 import { FormValuesType } from '../app/types/FormValuesType';
-import { collection, getDocs, limit, query, where } from 'firebase/firestore';
-import { db } from '../app/services/firebase';
 import Head from 'next/head';
+import { supabase } from '../app/services/supabase';
 
 interface HouseType extends FormValuesType {
   id: string;
@@ -19,7 +18,7 @@ type Props = {
   saleData: HouseType[];
 }
 
-export default function Home({ rentalData, saleData }: Props) {
+function Home({ rentalData, saleData }: Props) {
   return (
     <C.Container>
       <Head>
@@ -28,7 +27,7 @@ export default function Home({ rentalData, saleData }: Props) {
       <Header />
       <Banner />
       <main>
-        <Featured {...{
+        {saleData && <Featured {...{
           title: 'Featured Sales',
           linkTo: '/for-sale',
           data: saleData.map(saleHouse => ({
@@ -37,12 +36,12 @@ export default function Home({ rentalData, saleData }: Props) {
             title: saleHouse.title,
             price: saleHouse.price,
             address: saleHouse.address,
-            createdAt: saleHouse.createdAt,
-            bedrooms: saleHouse.numberOfRoom,
-            floor: saleHouse.floorLocation,
-            squareMeters: saleHouse.grossM2
+            created_at: saleHouse.created_at,
+            bedrooms: saleHouse.number_of_room,
+            floor: saleHouse.floor_location,
+            square_meters: saleHouse.gross_m2
           }))
-        }} />
+        }} />}
         <Featured {...{
           title: 'Featured Rental',
           linkTo: '/for-rental',
@@ -52,10 +51,10 @@ export default function Home({ rentalData, saleData }: Props) {
             title: rentalHouse.title,
             price: rentalHouse.price,
             address: rentalHouse.address,
-            createdAt: rentalHouse.createdAt,
-            bedrooms: rentalHouse.numberOfRoom,
-            floor: rentalHouse.floorLocation,
-            squareMeters: rentalHouse.grossM2
+            created_at: rentalHouse.created_at,
+            bedrooms: rentalHouse.number_of_room,
+            floor: rentalHouse.floor_location,
+            square_meters: rentalHouse.gross_m2
           }))
         }} />
         <SearchOnMapBanner />
@@ -65,28 +64,17 @@ export default function Home({ rentalData, saleData }: Props) {
 }
 
 export async function getServerSideProps() {
-  const ref = collection(db, "houses");
-  const saleQuery = query(ref, where("sale", "==", "forSale"), limit(4));
-  const rentalQuery = query(ref, where("sale", "==", "forRental"), limit(4));
-  const saleSnapshot = await getDocs(saleQuery);
-  const rentalSnapshot = await getDocs(rentalQuery);
+  const { data: saleData } = await supabase.from("houses")
+    .select()
+    .limit(4)
+    .eq("sale", "forSale");
 
-  const saleData: HouseType[] = [];
-  const rentalData: HouseType[] = [];
+  const { data: rentalData } = await supabase.from("houses")
+    .select()
+    .limit(4)
+    .eq("sale", "forRental");
 
-  saleSnapshot.forEach((doc) => {
-    const docData = doc.data() as HouseType;
-    docData.id = doc.id;
-    saleData.push(docData);
-  })
-
-  rentalSnapshot.forEach((doc) => {
-    const docData = doc.data() as HouseType;
-    docData.id = doc.id;
-    rentalData.push(docData);
-  })
-
-  return {
-    props: { saleData, rentalData }
-  }
+  return { props: { saleData, rentalData } };
 }
+
+export default Home;
