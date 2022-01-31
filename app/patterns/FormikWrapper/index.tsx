@@ -3,10 +3,8 @@ import { Formik, Form, FormikHelpers } from 'formik';
 import { schema } from '../../utils/formValitationSchema';
 import { FormValuesType } from '../../types/FormValuesType';
 import { useAuth } from '../../hooks/useAuth';
-import { storage, db } from '../../services/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { supabase } from '../../services/supabase';
 import imageCompression from 'browser-image-compression';
-import { ref, getDownloadURL, uploadBytesResumable } from '@firebase/storage';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -54,12 +52,10 @@ export function FormikWrapper({ children }: Props) {
         },
     }
 
-
     async function onSubmit(
         values: FormValuesType,
         actions: FormikHelpers<FormValuesType>) {
         setUploading(true);
-        console.log("SUBMIT LATLNG", values.latlng);
 
         const uploadFilesPromise = new Promise((resolve, reject) => {
             if (!values.files) resolve([]);
@@ -70,7 +66,7 @@ export function FormikWrapper({ children }: Props) {
                     maxSizeMB: .2
                 }).then(async compressedFile => {
                     // UPLOAD COMPRESSED FILE TO SUPABASE
-                    const urlResponse = await supabase
+                    await supabase
                         .storage
                         .from('houses')
                         .upload(
@@ -78,48 +74,48 @@ export function FormikWrapper({ children }: Props) {
                             compressedFile.name.split('.')[0] + Math.random().toString(36).slice(2, 6), compressedFile)
                         .then(({ data, error }) => {
                             // GET UPLOADED IMAGE URL
-                            if (data?.Key) {
-                                const { publicURL, error: urlError } = supabase
-                                    .storage
-                                    .from('houses')
-                                    .getPublicUrl(data?.Key.split('/')[1]);
-                                return { publicURL, error: urlError };
+                            const { publicURL, error: urlError } = supabase
+                                .storage
+                                .from('houses')
+                                .getPublicUrl(data?.Key.split('/')[1] ?? '');
+                            return { publicURL, error: urlError };
+                        })
+                        .then(({ publicURL, error }) => {
+                            if (publicURL) {
+                                imagesUrls.push(publicURL);
                             }
                         })
-                    if (!urlResponse?.error && urlResponse?.publicURL) imagesUrls.push(urlResponse.publicURL);
+                }).then(() => {
+                    if (imagesUrls.length === values.files.length) resolve(imagesUrls);
                 })
-                if (imagesUrls.length === values.files.length) resolve(imagesUrls);
+                return imagesUrls;
             })
         });
 
         toast.promise(uploadFilesPromise, {
             loading: "Uploading photos...",
-            error: (err) => {console.log(err); return "an error ocurred"},
+            error: (err) => { console.log(err); return "an error ocurred" },
             success: "Uploaded successfully"
         });
 
-        Promise.all([uploadFilesPromise]).then(async (promiseValues) => {
-            const collectionRef = collection(db, "houses");
+        Promise.all([uploadFilesPromise]).then(async promiseValues => {
             const getAdData = () => {
                 const data = JSON.parse(JSON.stringify(values));
                 delete data.files;
                 data.images = imagesUrls;
-                data.createdAt = new Date().getTime();
-                data.userId = user?.id;
-                data.userPhotoUrl = user?.photo_url;
+                data.created_at = new Date().toISOString();
                 return data;
             };
-            const res = addDoc(collectionRef, getAdData());
-            toast.promise(res, {
-                loading: "Uploading advertise...",
-                error: (err) => {console.log(err); return "Something wrong happened"},
-                success: "Ad uploaded successfully!"
-            });
-            actions.resetForm();
-            setTimeout(() => {
-                router.push("/advertise/confirm");
-                setUploading(false);
-            }, 1000);
+            const { data, error } = await supabase
+                .from("houses")
+                .insert({ ...getAdData() });
+
+                if(!error) {
+                    setTimeout(() => {
+                        router.push("/advertise/confirm");
+                        setUploading(false);
+                    }, 1000);
+                }
         });
     }
     return (
