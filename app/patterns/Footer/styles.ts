@@ -7,6 +7,20 @@ export const Container = styled.footer`
     margin-top: 4rem;
     grid-column-gap: 5rem;
     padding: 5rem 6%;
+
+    @media (max-width: 540px) {
+        grid-column-gap: 2rem;
+    }
+
+    @media (max-width: 440px) {    
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: 3rem;
+    }
+
+    @media (max-width: 325px) {    
+        grid-template-columns: 1fr;
+        grid-row-gap: 3rem;
+    }
 `;
 
 export const FooterList = styled.div`
