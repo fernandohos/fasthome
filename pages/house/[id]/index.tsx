@@ -25,9 +25,7 @@ type PositionNull = {
 
 interface HouseType extends FormValuesType {
     images: string[];
-    userId: string;
-    userPhotoUrl: string;
-    position: LatLngLiteral | PositionNull;
+    photo_url: string;
     latlng: LatLngLiteral;
 }
 
@@ -161,7 +159,7 @@ export default function House({ data }: Props) {
                                     <div className="user-image">
                                         <Image
                                             layout="fill"
-                                            src={data.userPhotoUrl ?? defaultUserImage}
+                                            src={data.photo_url ?? defaultUserImage}
                                             alt={data.name}
                                         />
                                     </div>
