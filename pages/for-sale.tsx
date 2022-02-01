@@ -7,6 +7,7 @@ import { SmartSorting } from '../app/components/SmartSorting';
 import { supabase } from '../app/services/supabase';
 import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
+import { Footer } from '../app/patterns/Footer';
 
 interface HouseType extends FormValuesType {
     id: string;
@@ -91,6 +92,7 @@ export default function ForSale({ data }: Props) {
                 })
                 )} />
             </C.Container>
+            <Footer />
         </div>
     )
 }

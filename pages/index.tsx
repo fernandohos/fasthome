@@ -7,6 +7,7 @@ import { SearchOnMapBanner } from '../app/patterns/SearchOnMapBanner';
 import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
 import { supabase } from '../app/services/supabase';
+import { Footer } from '../app/patterns/Footer';
 
 interface HouseType extends FormValuesType {
   id: string;
@@ -59,6 +60,7 @@ function Home({ rentalData, saleData }: Props) {
         }} />
         <SearchOnMapBanner />
       </main>
+      <Footer />
     </C.Container>
   )
 }

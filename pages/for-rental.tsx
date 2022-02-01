@@ -9,6 +9,7 @@ import { db } from '../app/services/firebase';
 import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
 import { supabase } from '../app/services/supabase';
+import { Footer } from '../app/patterns/Footer';
 
 interface HouseType extends FormValuesType {
     id: string;
@@ -91,6 +92,7 @@ export default function ForSale({ data }: Props) {
                 })
                 )} />
             </C.Container>
+            <Footer />
         </div>
     )
 }

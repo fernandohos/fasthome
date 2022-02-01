@@ -16,6 +16,7 @@ import dynamic from 'next/dynamic';
 import { interiorFeatures, externalFeatures } from '../../../app/utils/formCheckboxes';
 import Head from 'next/head';
 import { formOptions } from '../../../app/utils/formOptions';
+import { Footer } from '../../../app/patterns/Footer';
 
 type PositionNull = {
     lat: null;
@@ -198,6 +199,7 @@ export default function House({ data }: Props) {
                     <p>not found</p>
                 )
             }
+            <Footer />
         </>
     )
 }
