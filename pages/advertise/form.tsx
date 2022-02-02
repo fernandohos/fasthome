@@ -68,7 +68,7 @@ function AdvertiseForm() {
                 <C.LoginGroup>
                     <div>
                         <h1> You need an account to create an ad</h1>
-                        <Link href="/signup" passHref>
+                        <Link href="/signup?redirect=/advertise/form" passHref>
                             <C.Button>Sign Up Now!</C.Button>
                         </Link>
                     </div>
