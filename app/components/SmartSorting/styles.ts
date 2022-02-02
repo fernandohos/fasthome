@@ -6,6 +6,11 @@ export const Container = styled.div`
     align-items: center;
     gap: 1rem;
 
+    @media (max-width: 585px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     > p {
         font-size: 1.5rem;
         color: #0006;
