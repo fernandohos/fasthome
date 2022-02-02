@@ -30,8 +30,13 @@ export const ProfileInfo = styled.div`
 export const InputContainer = styled.div`
     margin-top: 2rem;
     display: grid;
-    grid-template-columns: 30rem 30rem;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 2rem;
+
+    @media (max-width: 500px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 export const Textarea = styled.div<{isEmpty: boolean}>`
