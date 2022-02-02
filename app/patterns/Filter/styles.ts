@@ -10,10 +10,22 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     gap: 2rem;
-
-
+    
     > div {
         width: 20rem;
+    }
+
+    @media (max-width: 654px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        > div {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 340px) {
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .filter-icon-container {
@@ -22,6 +34,10 @@ export const Container = styled.div`
         height: 3rem;
         justify-self: flex-end;
         cursor: pointer;
+
+        @media (max-width: 654px) {
+            display: none;
+        }
     }
 `;
 
