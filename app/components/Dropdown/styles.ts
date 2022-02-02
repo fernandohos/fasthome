@@ -10,6 +10,7 @@ export const Container = styled.div<{isOpen: boolean}>`
         display: flex;
         align-items: center;
         justify-content: space-between;
+        cursor: pointer;
 
         > p {
             max-width: 90%;

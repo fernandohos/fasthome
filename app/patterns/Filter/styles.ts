@@ -148,6 +148,7 @@ export const RadioInput = styled.div`
 export const HousingDropdown = styled.div`
     > p {
         padding: .7rem;
+        cursor: pointer;
 
         &:hover {
             background: #8881;

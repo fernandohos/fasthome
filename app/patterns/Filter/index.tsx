@@ -87,8 +87,8 @@ export function Filter({ setHousing, setPrice, setSize, setNumberOfRoom }: Props
                             {
                                 Array(7).fill('a').map((a, i) => (
                                     <C.RadioInput key={i}>
-                                        <input id={`n${i + 1}`} checked={inputNumberOfRoom === i + 1} type="radio" name="nor" />
-                                        <label onClick={() => setInputNumberOfRoom(i + 1)} htmlFor={`n${i + 1}`}>
+                                        <input onChange={() => setInputNumberOfRoom(i + 1)} id={`n${i + 1}`} checked={inputNumberOfRoom === i + 1} type="radio" name="nor" />
+                                        <label htmlFor={`n${i + 1}`}>
                                             {i + 1}{i + 1 === 7 && '+'}
                                         </label>
                                     </C.RadioInput>

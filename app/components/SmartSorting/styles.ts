@@ -31,6 +31,7 @@ export const SortingDropdown = styled.div`
         border: 1px solid #0003;
         border-radius: .5rem;
         gap: 2rem;
+        cursor: pointer;
         background: var(--white);
         
         .sorting-icon {
@@ -54,6 +55,7 @@ export const SortingDropdown = styled.div`
         > p {
             padding: .7rem;
             transition: all ease .2s;
+            cursor: pointer;
 
             &:hover {
                 background: #3331;
