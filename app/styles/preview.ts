@@ -8,6 +8,10 @@ export const Container = styled.main`
         width: 80%;
         margin: auto;
         position: relative;
+
+        @media(max-width: 450px) {
+            width: 90%;
+        }
     }
 `;
 
@@ -24,6 +28,12 @@ export const Title = styled.div`
     width: 100%;
     justify-content: space-between;
     align-items: center;
+
+    @media(max-width: 574px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
 
     & > p {
         font-size: 2rem;
@@ -58,6 +68,11 @@ export const SecondTitle = styled.h2`
 export const GridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+
+    @media(max-width: 680px) {
+        grid-template-columns: 1fr;
+    }
+
 `;
 
 export const InformationGrid = styled.div`
