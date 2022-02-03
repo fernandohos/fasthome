@@ -3,13 +3,20 @@ import * as C from '../app/styles/profileInformation';
 import { Header } from '../app/patterns/Header';
 import { Button } from '../app/components/Button';
 import { useAuth } from '../app/hooks/useAuth';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { FormikInput } from '../app/components/FormikInput';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { getErrorMessage } from '../app/utils/getErrorMessage';
 import Link from 'next/link';
 import Head from 'next/head';
+import imageCompression from 'browser-image-compression';
+import { PictureUpload } from '../app/components/PictureUpload';
+import { supabase } from '../app/services/supabase';
+
+interface FileType extends File {
+    preview: string;
+}
 
 type FormUser = {
     display_name: string | null;
@@ -20,6 +27,8 @@ type FormUser = {
     mobile_number_2: string | null;
     telephone: string | null;
     address: string | null;
+    photo?: FileType | null;
+    photo_url?: string | null;
 }
 
 export default function ProfileInformation() {
@@ -33,25 +42,57 @@ export default function ProfileInformation() {
         mobile_number: user?.mobile_number ?? '',
         mobile_number_2: user?.mobile_number_2 ?? '',
         telephone: user?.telephone ?? '',
-        address: user?.address ?? ''
+        address: user?.address ?? '',
+        photo: null,
     }
 
     function onSubmit(values: FormUser) {
+        let photo_url = '';
         if (user) {
-            const res = updateUser(values);
-            toast.promise(res, {
-                loading: "Updating profile...",
-                error: ({ code }) => getErrorMessage(code),
-                success: "Successfully updated!"
-            }).then(() => {
-                setTimeout(() => {
-                    router.push(
-                        typeof router.query.redirect === "string" ?
-                            router.query.redirect :
-                            "/"
-                    );
-                }, 1000);
-            })
+            if (values.photo) {
+                imageCompression(values.photo, {
+                    maxSizeMB: .1
+                }).then(async compressedFile => {
+                    // UPLOAD COMPRESSED FILE TO SUPABASE
+                    await supabase
+                        .storage
+                        .from('avatars')
+                        .upload(
+                            // CREATE A UNIQUE NAME WITH THE FILE NAME AND A RANDOM HASH
+                            user.display_name + Math.random().toString(36).slice(2, 6), compressedFile)
+                        .then(({ data, error }) => {
+                            // GET UPLOADED IMAGE URL
+                            const { publicURL, error: urlError } = supabase
+                                .storage
+                                .from('avatars')
+                                .getPublicUrl(data?.Key.split('/')[1] ?? '');
+                            return { publicURL, error: urlError };
+                        })
+                        .then(({ publicURL, error }) => {
+                            if (publicURL) {
+                                photo_url = publicURL;
+                            }
+                        })
+                }).then(() => {
+                    const newUser = {...values};
+                    delete newUser.photo;
+                    newUser.photo_url = photo_url;
+                    const res = updateUser(newUser);
+                    toast.promise(res, {
+                        loading: "Updating profile...",
+                        error: ({ code }) => getErrorMessage(code),
+                        success: "Successfully updated!"
+                    }).then(() => {
+                        setTimeout(() => {
+                            router.push(
+                                typeof router.query.redirect === "string" ?
+                                    router.query.redirect :
+                                    "/"
+                            );
+                        }, 1000);
+                    })
+                })
+            }
         }
     }
 
@@ -111,6 +152,7 @@ export default function ProfileInformation() {
                                                 type="text"
                                             />
                                         </C.InputContainer>
+                                        <Field component={PictureUpload} />
                                         <FormikInput
                                             name="address"
                                             label="Address"
