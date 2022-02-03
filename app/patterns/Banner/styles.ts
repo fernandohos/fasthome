@@ -22,7 +22,7 @@ export const Banner = styled.div`
 
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
     width: 70%;
     max-width: 50rem;
     height: 4rem;
