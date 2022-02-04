@@ -145,13 +145,13 @@ export default function House({ data }: Props) {
                                     </div>
                                 </C.FeaturesContainer>
                             </Fieldset>
-                            <Fieldset title="Location Information">
-                                {
-                                    data.latlng ? (
+                            {
+                                data.latlng ? (
+                                    <Fieldset title="Location Information">
                                         <DynamicMap position={data.latlng} />
-                                    ) : null
-                                }
-                            </Fieldset>
+                                    </Fieldset>
+                                ) : null
+                            }
                         </C.Content>
                         <C.Owner>
                             <C.OwnerCard>
