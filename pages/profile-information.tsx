@@ -92,6 +92,25 @@ export default function ProfileInformation() {
                         }, 1000);
                     })
                 })
+            } 
+            else {
+                    const newUser = {...values};
+                    delete newUser.photo;
+                    const res = updateUser(newUser);
+                    toast.promise(res, {
+                        loading: "Updating profile...",
+                        error: ({ code }) => getErrorMessage(code),
+                        success: "Successfully updated!"
+                    }).then(() => {
+                        setTimeout(() => {
+                            router.push(
+                                typeof router.query.redirect === "string" ?
+                                    router.query.redirect :
+                                    "/"
+                            );
+                        }, 1000);
+                    })
+
             }
         }
     }
