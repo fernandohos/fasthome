@@ -9,7 +9,7 @@
 
   ***
 
-<h3 align="center">Original Design by: <a href="https://www.figma.com/@erendmrv">Eren Demir</h3>
+<h3 align="center">Original Design by: <a href="https://www.figma.com/@erendmrv">Eren Demir</a></h3>
 
   ***
 
