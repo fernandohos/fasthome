@@ -12,13 +12,15 @@ import { Field, FieldProps } from 'formik';
 // get data
 //http://ip-api.com/json/24.48.0.1
 
-export default function FieldLocationInformation() {
+function FieldLocationInformation() {
     return (
         <Field
-            component={LocationInformation}
+            component={React.memo(LocationInformation)}
         />
     )
 }
+
+export default React.memo(FieldLocationInformation);
 
 type PositionNull = {
     lat: null;
@@ -59,20 +61,24 @@ function LocationInformation({ form, ...props }: FieldProps) {
             setPosition(new LatLng(coords.latitude, coords.longitude));
         }
 
-        if (navigator.geolocation && position.lat === null) {
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(getPosition, getPositionFromIp);
         }
-        if (!navigator.geolocation && position.lat === null) {
+        if (!navigator.geolocation) {
             getPositionFromIp();
         }
-    }, [position]);
+    }, []);
 
     React.useEffect(() => {
         if (markerPosition.lng !== null && markerPosition.lat !== null) {
-            fetch(`http://api.positionstack.com/v1/reverse?access_key=${process.env.NEXT_PUBLIC_ADDRESS_API_KEY}&query=${markerPosition.lat},${markerPosition.lng}`).then(r => r.json())
-                .then(({ data }) => data && data[0].label).then(address => {
-                    setFieldValue("address", address);
-                    setFieldValue("latlng", markerPosition);
+            fetch(`http://www.mapquestapi.com/geocoding/v1/reverse?key=${process.env.NEXT_PUBLIC_MAPQUEST_KEY}&location=${markerPosition.lat},${markerPosition.lng}`).then(r => r.json())
+                .then((a) => { console.log(a); return a })
+                .then(({ results }) => results[0].locations[0])
+                .then(location => {
+                    if (location) {
+                        setFieldValue("address", `${location.street}, ${location.adminArea5}${location.adminArea1 && `, ${location.adminArea1}`}`);
+                        setFieldValue("latlng", markerPosition);
+                    }
                 });
         }
 
