@@ -12,6 +12,24 @@ export const Container = styled.div<{ isEmpty: boolean, error: boolean}>`
         padding: 1rem;
     }
 
+    .password-icon-container {
+        cursor: pointer;
+        position: absolute;
+        right: 1rem;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 2rem;
+        height: 2rem;
+        opacity: .7;
+    }
+
+    .password-icon {
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+    }
+
     > label {
         transition: all .2s ease;
         position: absolute;
