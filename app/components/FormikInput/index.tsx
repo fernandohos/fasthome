@@ -23,11 +23,6 @@ export function FormikInput({
 
     const [inputProps, meta] = useField(name);
     const [showPassword, setShowPassword] = useState(false);
-
-    React.useEffect(() => {
-        console.log(showPassword);
-    }, [showPassword])
-
     const Component = type === 'password' ? Field : FastField;
 
     return (
