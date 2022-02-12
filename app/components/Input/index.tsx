@@ -13,28 +13,15 @@ type Action<P> = {
     payload: string;
 }
 
-type Props<T> = {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
-    value: string;
-    dispatch: Dispatch<Action<T>>;
-    type: T;
-    input: InputHTMLAttributes<HTMLInputElement>;
 }
 
-export function Input<T>({ type, value, label, dispatch, input }: Props<T>) {
+export function Input<T>({ label, ...input }: Props) {
     return (
-        <C.Container isEmpty={!value}>
-            <input 
+        <C.Container isEmpty={!input.value}>
+            <input
                 {...input}
-                id={label} 
-                onChange={e => (
-                    dispatch({
-                        type,
-                        payload: e.target.value
-                    })
-                )}
-                value={value}
-            
             />
             <label htmlFor={label}>{label}</label>
         </C.Container>

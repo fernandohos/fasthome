@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div<{isPasswordEqual?: boolean, isEmpty: boolean}>`
     position: relative;
-    margin-bottom: 2rem;
+    margin: 2rem auto;
 
     input {
         border: 2px solid ${({isPasswordEqual = true}) => isPasswordEqual ? '#0008' : 'var(--red2)'};
