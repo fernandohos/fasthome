@@ -24,7 +24,7 @@ function Home({ rentalData, saleData }: Props) {
   const router = useRouter();
 
   React.useEffect(() => {
-    if (router.asPath.includes('access_token')) {
+    if (router.asPath.includes('access_token') && router.asPath.includes('type=recovery')) {
       router.push('new-password#' + router.asPath.split('#')[1]);
     }
   }, [router]);
