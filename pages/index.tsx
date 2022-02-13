@@ -8,6 +8,7 @@ import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
 import { supabase } from '../app/services/supabase';
 import { Footer } from '../app/patterns/Footer';
+import { useRouter } from 'next/router';
 
 interface HouseType extends FormValuesType {
   id: string;
@@ -20,6 +21,14 @@ type Props = {
 }
 
 function Home({ rentalData, saleData }: Props) {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (router.asPath.includes('access_token')) {
+      router.push('new-password#' + router.asPath.split('#')[1]);
+    }
+  }, [router]);
+
   return (
     <C.Container>
       <Head>

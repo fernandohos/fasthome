@@ -7,23 +7,27 @@ import { Header } from '../app/patterns/Header';
 import { Footer } from '../app/patterns/Footer';
 import { Input } from '../app/components/Input';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { Toaster, toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 export default function ResetPassword() {
-    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const router = useRouter();
 
     async function sendResetPasswordRequest() {
-        const loadingToast = toast.loading('Sending Reset Password Request...');
-        const { data, error } = await supabase.auth.api
-            .resetPasswordForEmail(email);
+        const loadingToast = toast.loading('Changing Password...');
+        const accessToken = router.asPath.split('#')[1].split('&')[0].split('=')[1];
+
+        const { error, data } = await supabase.auth.api
+            .updateUser(accessToken, { password })
+
         toast.dismiss(loadingToast);
+
         if (error) {
             toast.error(error.message);
         }
         else if (data) {
-            toast.success('Request sended successfully!');
+            toast.success('Password changed successfully');
             setTimeout(() => router.push('/'), 1000);
         }
     }
@@ -39,10 +43,10 @@ export default function ResetPassword() {
                 <Fieldset title="Send reset password request">
                     <C.InputContainer>
                         <Input
-                            label="Email"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            type="email"
+                            label="New Password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            type="password"
                         />
                     </C.InputContainer>
                     <C.ButtonContainer>
