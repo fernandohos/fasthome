@@ -56,7 +56,10 @@ export function FormikWrapper({ children }: Props) {
         values: FormValuesType,
         actions: FormikHelpers<FormValuesType>) {
         setUploading(true);
-
+        if(!user) {
+            toast.error('You need to be logged in to create an ad');
+            return;
+        }
         const uploadFilesPromise = new Promise((resolve, reject) => {
             if (!values.files) resolve([]);
             // LOOPING FOR UPLOAD EACH IMAGE
@@ -104,18 +107,22 @@ export function FormikWrapper({ children }: Props) {
                 delete data.files;
                 data.images = imagesUrls;
                 data.created_at = new Date().toISOString();
+                data.user_id = user.id;
                 return data;
             };
             const { data, error } = await supabase
                 .from("houses")
                 .insert({ ...getAdData() });
 
-                if(!error) {
-                    setTimeout(() => {
-                        router.push("/advertise/confirm");
-                        setUploading(false);
-                    }, 1000);
-                }
+            if (error) {
+                toast.error(error.message);
+            }
+            else {
+                setTimeout(() => {
+                    router.push("/advertise/confirm");
+                    setUploading(false);
+                }, 1000);
+            }
         });
     }
     return (
