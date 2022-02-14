@@ -11,6 +11,7 @@ export const Card = styled.a`
 
     .image-container {
         width: 100%;
+        height: auto;
         position: relative;
         aspect-ratio: 16/9;
     }
