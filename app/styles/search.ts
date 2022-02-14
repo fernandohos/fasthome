@@ -21,3 +21,25 @@ export const InputWrapper = styled.div`
     justify-content: center;
     margin: 2rem;
 `;
+
+export const ResultNotFound = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border-radius: 1rem;
+    opacity: .7;
+
+    > p {
+        font-size: 2rem;
+        font-weight: 500;
+        margin-top: 2rem;
+    }
+`;
+
+export const NoResultsImage = styled.div`
+    position: relative;
+    width: 14rem;
+    height: 14rem;
+`;

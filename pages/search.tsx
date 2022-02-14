@@ -28,10 +28,10 @@ export default function ForSale({ data, query }: Props) {
 
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if(!search) return;
+        if (!search) return;
         const { data, error } = await supabase.from("houses")
-        .select()
-        .ilike('title', "%" + search + "%");
+            .select()
+            .ilike('title', "%" + search + "%");
         setResultsTerm(search);
         data && setHouses(data);
     }
@@ -54,18 +54,28 @@ export default function ForSale({ data, query }: Props) {
                         </button>
                     </InputContainer>
                 </C.InputWrapper>
-                <HousesGrid houses={houses.map(house => ({
-                    id: house.id,
-                    image: house.images[0],
-                    title: house.title,
-                    price: house.price,
-                    address: house.address,
-                    created_at: house.created_at,
-                    bedrooms: house.number_of_room,
-                    floor: house.floor_location,
-                    square_meters: house.gross_m2
-                })
-                )} />
+                {
+                    houses.length ? (
+                        <HousesGrid houses={houses.map(house => ({
+                            id: house.id,
+                            image: house.images[0],
+                            title: house.title,
+                            price: house.price,
+                            address: house.address,
+                            created_at: house.created_at,
+                            bedrooms: house.number_of_room,
+                            floor: house.floor_location,
+                            square_meters: house.gross_m2
+                        })
+                        )} />
+                    ) :
+                        <C.ResultNotFound>
+                            <C.NoResultsImage>
+                            <Image src={searchIcon} layout="fill" alt="no results image" />
+                            </C.NoResultsImage>
+                            <p>No Results Found!</p>
+                        </C.ResultNotFound>
+                }
             </C.Container>
             <Footer />
         </div>
