@@ -4,8 +4,6 @@ import { Header } from '../app/patterns/Header';
 import { Filter } from '../app/patterns/Filter';
 import { HousesGrid } from '../app/components/HousesGrid';
 import { SmartSorting } from '../app/components/SmartSorting';
-import { collection, getDocs, limit, query, where } from 'firebase/firestore';
-import { db } from '../app/services/firebase';
 import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
 import { supabase } from '../app/services/supabase';
