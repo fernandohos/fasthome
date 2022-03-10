@@ -57,6 +57,7 @@ export default function House({ data }: Props) {
         <>
             <Head>
                 <title>Fasthome | {data?.title ?? "House"}</title>
+                <meta name="description" content={data?.explanation} />
             </Head>
             <Header />
             {
