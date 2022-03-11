@@ -13,6 +13,9 @@ import Link from 'next/link';
 import { FormValuesType } from '../../app/types/FormValuesType';
 import { useAuth } from '../../app/hooks/useAuth';
 import Head from 'next/head';
+import formConfig from '../../app/utils/formConfig.json';
+import { FieldGroup } from '../../app/patterns/FieldGroup';
+import { NextStepFormButton } from '../../app/components/NextStepFormButton';
 
 const DynamicMap = dynamic(
     () => import('../../app/patterns/FormLocationInformation'),
@@ -21,59 +24,45 @@ const DynamicMap = dynamic(
 
 function AdvertiseForm() {
     const { user } = useAuth();
-    const { errors } = useFormikContext<FormValuesType>();
-    const hasErrors = (
-        errors.housing ||
-            errors.sale ||
-            errors.title ||
-            errors.explanation ||
-            errors.price ||
-            errors.mobile_number ||
-            errors.gross_m2 ||
-            errors.net_m2 ||
-            errors.warming_type ||
-            errors.building_age ||
-            errors.floor_location ||
-            errors.avaliable_for_loan ||
-            errors.furnished ||
-            errors.status ||
-            errors.dues ||
-            errors.swap ||
-            errors.rental_income ||
-            errors.address ||
-            errors.external_features ||
-            errors.interior_features ||
-            errors.files
-            ?
-            true : false
-    )
+
     return (
         <>
             <Head>
                 <title>Fasthome | Advertise form</title>
             </Head>
+            <FormNavBar />
             {user ? (<C.Container>
-                <FormNavBar />
-                <FormCategory />
-                <FormGeneralInformation />
+                {
+                    formConfig.form.fieldgroups.filter(group => group !== "Contact").map(group => {
+                        return (
+                            <FieldGroup
+                                key={group}
+                                groupName={group}
+                                fields={formConfig.form.fields.filter(field => field.group === group)}
+                            />
+                        )
+                    })
+                }
                 <DynamicMap />
                 <Field component={PostingPhotos} />
-                <FormAdvertiseFeatures />
-                <Link href={!hasErrors ? "/advertise/preview" : "/advertise/form"} passHref>
-                    <C.Button disabled={hasErrors}>Next</C.Button>
-                </Link>
-            </C.Container>)
-            :
-            (<C.Container>
-                <C.LoginGroup>
-                    <div>
-                        <h1> You need an account to create an ad</h1>
-                        <Link href="/signup?redirect=/advertise/form" passHref>
-                            <C.Button>Sign Up Now!</C.Button>
-                        </Link>
-                    </div>
-                </C.LoginGroup>
-            </C.Container>)}
+                {/* 
+                    <FormCategory />
+                    <FormGeneralInformation />
+                    <FormAdvertiseFeatures />
+                */}
+                <NextStepFormButton />
+            </C.Container>
+            ) : (
+                <C.Container>
+                    <C.LoginGroup>
+                        <div>
+                            <h1> You need an account to create an ad</h1>
+                            <Link href="/signup?redirect=/advertise/form" passHref>
+                                <C.Button>Sign Up Now!</C.Button>
+                            </Link>
+                        </div>
+                    </C.LoginGroup>
+                </C.Container>)}
         </>
     )
 }
