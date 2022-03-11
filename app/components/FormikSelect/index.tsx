@@ -6,7 +6,7 @@ type Props = {
     children?: ReactNode;
     label: string;
     name: string;
-    options: [string, string][] | string[][];
+    options: { label: string, value: string }[];
     required?: boolean;
 }
 
@@ -19,8 +19,8 @@ export function FormikSelect({ label, name, required = false, options }: Props) 
                     <option></option>
                     {
                         options.map((option, i) => (
-                            <option key={i} value={option[1]}>
-                                {option[0]}
+                            <option key={option.value} value={option.value}>
+                                {option.label}
                             </option>
                         ))
                     }

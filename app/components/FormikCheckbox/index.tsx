@@ -5,7 +5,10 @@ import * as C from './styles';
 type Props = {
     label: string;
     name: string;
-    options: [key: string, value: string][] | string[][];
+    options: {
+        label: string;
+        value: string;
+    }[];
 }
 
 export function FormikCheckbox({ label, name, options }: Props) {
@@ -15,10 +18,10 @@ export function FormikCheckbox({ label, name, options }: Props) {
             <C.CheckboxContainer>
                 {
                     options.map(option => (
-                        <div className="checkbox" key={option[1]}>
-                            <Field type="checkbox" name={name} id={option[1]} value={option[1]} />
-                            <label className="input" htmlFor={option[1]}><div /></label>
-                            <label htmlFor={option[1]}>{option[0]}</label>
+                        <div className="checkbox" key={option.value}>
+                            <Field type="checkbox" name={name} id={option.value} value={option.value} />
+                            <label className="input" htmlFor={option.value}><div /></label>
+                            <label htmlFor={option.value}>{option.label}</label>
                         </div>
                     ))
                 }
