@@ -130,6 +130,8 @@ export function FormikWrapper({ children }: Props) {
             enableReinitialize
             initialValues={initialValues}
             onSubmit={onSubmit}
+            validateOnChange={false}
+            validateOnBlur={true}
             validationSchema={schema}
         >
             {() => (
