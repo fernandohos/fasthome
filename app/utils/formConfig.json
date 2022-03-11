@@ -1,0 +1,501 @@
+{
+    "form": {
+        "name": "advertise",
+        "fieldgroups": [
+            "Category",
+            "General Information",
+            "Advertise Features",
+            "Contact"
+        ],
+        "fields": [
+            {
+                "name": "housing",
+                "label": "Housing",
+                "group": "Category",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "Apartment",
+                        "value": "apartment"
+                    },
+                    {
+                        "label": "Building",
+                        "value": "building"
+                    },
+                    {
+                        "label": "Summery",
+                        "value": "summery"
+                    },
+                    {
+                        "label": "Mansion",
+                        "value": "mansion"
+                    },
+                    {
+                        "label": "Waterside",
+                        "value": "waterside"
+                    },
+                    {
+                        "label": "Villa",
+                        "value": "villa"
+                    }
+                ]
+            },
+            {
+                "name": "sale",
+                "label": "Sale",
+                "group": "Category",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "For Sale",
+                        "value": "forSale"
+                    },
+                    {
+                        "label": "For Rental",
+                        "value": "forRental"
+                    }
+                ]
+            },
+            {
+                "name": "title",
+                "label": "Title",
+                "group": "General Information",
+                "type": "text"
+            },
+            {
+                "name": "explanation",
+                "label": "Explanation",
+                "group": "General Information",
+                "type": "textarea"
+            },
+            {
+                "name": "price",
+                "label": "Price",
+                "group": "General Information",
+                "type": "number"
+            },
+            {
+                "name": "number_of_room",
+                "label": "Number Of Room",
+                "group": "General Information",
+                "type": "number"
+            },
+            {
+                "name": "gross_m2",
+                "label": "Gross M²",
+                "group": "General Information",
+                "type": "number"
+            },
+            {
+                "name": "net_m2",
+                "label": "Net M²",
+                "group": "General Information",
+                "type": "number"
+            },
+            {
+                "name": "warming_type",
+                "label": "Warming Type",
+                "group": "General Information",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "No Heating",
+                        "value": "noHeating"
+                    },
+                    {
+                        "label": "Natural Gas",
+                        "value": "naturalGas"
+                    },
+                    {
+                        "label": "Solar Energy",
+                        "value": "solarEnergy"
+                    },
+                    {
+                        "label": "Geothermal",
+                        "value": "geothermal"
+                    },
+                    {
+                        "label": "Air Conditioned",
+                        "value": "airConditioned"
+                    },
+                    {
+                        "label": "With Stove",
+                        "value": "withStove"
+                    }
+                ]
+            },
+            {
+                "name": "building_age",
+                "label": "Building Age",
+                "group": "General Information",
+                "type": "number"
+            },
+            {
+                "name": "floor_location",
+                "label": "Floor Location",
+                "group": "General Information",
+                "type": "number"
+            },
+            {
+                "name": "avaliable_for_loan",
+                "label": "Avaliable For Loan",
+                "group": "General Information",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "All Of",
+                        "value": "allOf"
+                    },
+                    {
+                        "label": "Avaliable",
+                        "value": "avaliable"
+                    },
+                    {
+                        "label": "Not Avaliable",
+                        "value": "notAvaliable"
+                    },
+                    {
+                        "label": "Unknown",
+                        "value": "unknown"
+                    }
+                ]
+            },
+            {
+                "name": "furnished",
+                "label": "Furnished",
+                "group": "General Information",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "Furnished",
+                        "value": "furnished"
+                    },
+                    {
+                        "label": "Not Furnished",
+                        "value": "notFurnished"
+                    }
+                ]
+            },
+            {
+                "name": "status",
+                "label": "Status",
+                "group": "General Information",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "Zero",
+                        "value": "zero"
+                    },
+                    {
+                        "label": "Second Hand",
+                        "value": "secondHand"
+                    },
+                    {
+                        "label": "The Under Construction",
+                        "value": "theUnderConstruction"
+                    }
+                ]
+            },
+            {
+                "name": "dues",
+                "label": "Dues",
+                "group": "General Information",
+                "type": "number"
+            },
+            {
+                "name": "swap",
+                "label": "Swap",
+                "group": "General Information",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "All of",
+                        "value": "allOf"
+                    },
+                    {
+                        "label": "Yes",
+                        "value": "yes"
+                    },
+                    {
+                        "label": "No",
+                        "value": "no"
+                    }
+                ]
+            },
+            {
+                "name": "front",
+                "label": "Front",
+                "group": "General Information",
+                "type": "select",
+                "options": [
+                    {
+                        "label": "North",
+                        "value": "north"
+                    },
+                    {
+                        "label": "South",
+                        "value": "south"
+                    },
+                    {
+                        "label": "East",
+                        "value": "east"
+                    },
+                    {
+                        "label": "West",
+                        "value": "west"
+                    }
+                ]
+            },
+            {
+                "name": "rental_income",
+                "label": "Rental Income",
+                "group": "General Information",
+                "type": "number"
+            },
+            {
+                "name": "address",
+                "label": "Address",
+                "group": "Location Information",
+                "type": "text"
+            },
+            {
+                "name": "name",
+                "label": "Name",
+                "group": "Contact",
+                "type": "text"
+            },
+            {
+                "name": "email",
+                "label": "Email",
+                "group": "Contact",
+                "type": "text"
+            },
+            {
+                "name": "mobile_number",
+                "label": "Mobile Number",
+                "group": "Contact",
+                "type": "text"
+            },
+            {
+                "name": "mobile_number2",
+                "label": "Mobile Number 2",
+                "group": "Contact",
+                "type": "text"
+            },
+            {
+                "name": "telephone",
+                "label": "Telephone",
+                "group": "Contact",
+                "type": "text"
+            },
+            {
+                "name": "interior_features",
+                "label": "Interior Features",
+                "group": "Advertise Features",
+                "type": "checkbox",
+                "options": [
+                    {
+                        "label": "ADSL",
+                        "value": "adsl"
+                    },
+                    {
+                        "label": "Alarm",
+                        "value": "alarm"
+                    },
+                    {
+                        "label": "Balcony",
+                        "value": "balcony"
+                    },
+                    {
+                        "label": "Build-in Kitchen",
+                        "value": "buildinKitchen"
+                    },
+                    {
+                        "label": "Barbecue",
+                        "value": "barbecue"
+                    },
+                    {
+                        "label": "Funished",
+                        "value": "funished"
+                    },
+                    {
+                        "label": "Air Conditioning",
+                        "value": "airConditioning"
+                    },
+                    {
+                        "label": "Wallpaper",
+                        "value": "wallpaper"
+                    },
+                    {
+                        "label": "Laundry Room",
+                        "value": "laundryRoom"
+                    },
+                    {
+                        "label": "Dressing Room",
+                        "value": "dressingRoom"
+                    },
+                    {
+                        "label": "Video Intercom",
+                        "value": "videoIntercom"
+                    },
+                    {
+                        "label": "Jacuzzi",
+                        "value": "jacuzzi"
+                    },
+                    {
+                        "label": "Shower",
+                        "value": "shower"
+                    },
+                    {
+                        "label": "TV Satellite",
+                        "value": "tvSatellite"
+                    },
+                    {
+                        "label": "Laminate",
+                        "value": "laminate"
+                    },
+                    {
+                        "label": "Panel Door",
+                        "value": "panelDoor"
+                    },
+                    {
+                        "label": "Mable Floor",
+                        "value": "mableFloor"
+                    },
+                    {
+                        "label": "Blinds",
+                        "value": "blinds"
+                    },
+                    {
+                        "label": "Sauna",
+                        "value": "sauna"
+                    },
+                    {
+                        "label": "Parent Bathroom",
+                        "value": "parentBathroom"
+                    },
+                    {
+                        "label": "Parquet",
+                        "value": "parquet"
+                    },
+                    {
+                        "label": "Satin Plaster",
+                        "value": "satinPlaster"
+                    },
+                    {
+                        "label": "Satin Color",
+                        "value": "satinColor"
+                    },
+                    {
+                        "label": "Ceramic Floor",
+                        "value": "ceramicFloor"
+                    },
+                    {
+                        "label": "Spotlight",
+                        "value": "spotlight"
+                    },
+                    {
+                        "label": "Fireplace",
+                        "value": "fireplace"
+                    },
+                    {
+                        "label": "Terrace",
+                        "value": "terrace"
+                    },
+                    {
+                        "label": "Cloakroom",
+                        "value": "cloakroom"
+                    },
+                    {
+                        "label": "Underfloor Heating",
+                        "value": "underfloorHeating"
+                    },
+                    {
+                        "label": "Double Glazing",
+                        "value": "doubleGlazing"
+                    }
+                ]
+            },
+            {
+                "name": "external_features",
+                "label": "External Features",
+                "group": "Advertise Features",
+                "type": "checkbox",
+                "options": [
+                    {
+                        "label": "Elevator",
+                        "value": "elevator"
+                    },
+                    {
+                        "label": "Gardened",
+                        "value": "gardened"
+                    },
+                    {
+                        "label": "Fitness",
+                        "value": "fitness"
+                    },
+                    {
+                        "label": "Security",
+                        "value": "security"
+                    },
+                    {
+                        "label": "Thermal Insulation",
+                        "value": "thermalInsulation"
+                    },
+                    {
+                        "label": "Generator",
+                        "value": "generator"
+                    },
+                    {
+                        "label": "Doorman",
+                        "value": "doorman"
+                    },
+                    {
+                        "label": "Car Park",
+                        "value": "carPark"
+                    },
+                    {
+                        "label": "Playground",
+                        "value": "playground"
+                    },
+                    {
+                        "label": "PVC",
+                        "value": "pvc"
+                    },
+                    {
+                        "label": "Siding",
+                        "value": "siding"
+                    },
+                    {
+                        "label": "Water Tank",
+                        "value": "waterTank"
+                    },
+                    {
+                        "label": "Tennis Court",
+                        "value": "tennisCourt"
+                    },
+                    {
+                        "label": "Fire Escape",
+                        "value": "fireEscape"
+                    },
+                    {
+                        "label": "Swimming Pool",
+                        "value": "swimmingPool"
+                    },
+                    {
+                        "label": "Football Field",
+                        "value": "footballField"
+                    },
+                    {
+                        "label": "Basketball Field",
+                        "value": "basketballField"
+                    },
+                    {
+                        "label": "Market",
+                        "value": "market"
+                    }
+                ]
+            }
+        ]
+    }
+}
