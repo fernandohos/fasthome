@@ -13,9 +13,9 @@ import phoneIcon from '@images/phone-icon.svg';
 import emailIcon from '@images/email-icon.svg';
 import { LatLngLiteral } from 'leaflet';
 import dynamic from 'next/dynamic';
-import { interiorFeatures, externalFeatures } from '../../../app/utils/formCheckboxes';
+import { interiorFeatures, externalFeatures } from '@utils/formCheckboxes';
 import Head from 'next/head';
-import { formOptions } from '../../../app/utils/formOptions';
+import { formOptions } from '@utils/formOptions';
 import { Footer } from '@patterns/Footer';
 
 type PositionNull = {

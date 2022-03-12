@@ -5,7 +5,7 @@ import { FormikWrapper } from '@patterns/FormikWrapper';
 import { FormNavBar } from '@patterns/FormNavBar';
 import { Header } from '@patterns/Header';
 import { Carousel } from '../../a@components/Carousel';
-import { interiorFeatures, externalFeatures } from '../../app/utils/formCheckboxes';
+import { interiorFeatures, externalFeatures } from '@utils/formCheckboxes';
 import { FormValuesType } from '@types/FormValuesType';
 import mapIcon from '@images/map-icon.svg';
 import Image from 'next/image';

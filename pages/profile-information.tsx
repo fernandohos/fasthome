@@ -7,7 +7,7 @@ import { Formik, Form, Field } from 'formik';
 import { FormikInput } from '@components/FormikInput';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { getErrorMessage } from '../app/utils/getErrorMessage';
+import { getErrorMessage } from '@utils/getErrorMessage';
 import Link from 'next/link';
 import Head from 'next/head';
 import imageCompression from 'browser-image-compression';

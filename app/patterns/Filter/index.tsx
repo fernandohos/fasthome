@@ -3,7 +3,7 @@ import * as C from './styles';
 import { Dropdown } from '@components/Dropdown';
 import Image from 'next/image';
 import filterIcon from '@images/filter-icon.svg';
-import { formOptions } from '../../utils/formOptions';
+import { formOptions } from '@utils/formOptions';
 
 type Props = {
     setHousing: React.Dispatch<React.SetStateAction<string>>;

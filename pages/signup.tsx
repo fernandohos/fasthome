@@ -8,7 +8,7 @@ import { useAuth } from '@hooks/useAuth';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
-import { getErrorMessage } from '../app/utils/getErrorMessage';
+import { getErrorMessage } from '@utils/getErrorMessage';
 import toast, { Toaster } from 'react-hot-toast';
 import Head from 'next/head';
 

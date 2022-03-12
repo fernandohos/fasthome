@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { FormValuesType } from '@types/FormValuesType';
 import { useAuth } from '@hooks/useAuth';
 import Head from 'next/head';
-import formConfig from '../../app/utils/formConfig.json';
+import formConfig from '@utils/formConfig.json';
 import { FieldGroup } from '@patterns/FieldGroup';
 import { NextStepFormButton } from '@components/NextStepFormButton';
 

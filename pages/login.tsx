@@ -9,7 +9,7 @@ import { FormikInput } from '@components/FormikInput';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
-import { getErrorMessage } from '../app/utils/getErrorMessage';
+import { getErrorMessage } from '@utils/getErrorMessage';
 import Head from 'next/head';
 
 type FormType = {
