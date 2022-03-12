@@ -2,7 +2,7 @@ import React from 'react';
 import * as C from '../app/styles/login';
 import { AuthLayout } from '@patterns/AuthLayout';
 import { GoogleButton } from '@components/GoogleButton';
-import { useAuth } from '../app/hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import Link from 'next/link';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { FormikInput } from '@components/FormikInput';

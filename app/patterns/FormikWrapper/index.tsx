@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { schema } from '../../utils/formValitationSchema';
 import { FormValuesType } from '../../types/FormValuesType';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import { supabase } from '../../services/supabase';
 import imageCompression from 'browser-image-compression';
 import { useRouter } from 'next/router';

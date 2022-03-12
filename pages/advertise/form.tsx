@@ -11,7 +11,7 @@ import { FormikWrapper } from '@patterns/FormikWrapper';
 import { FormNavBar } from '@patterns/FormNavBar';
 import Link from 'next/link';
 import { FormValuesType } from '../../app/types/FormValuesType';
-import { useAuth } from '../../app/hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import Head from 'next/head';
 import formConfig from '../../app/utils/formConfig.json';
 import { FieldGroup } from '@patterns/FieldGroup';

@@ -6,7 +6,7 @@ import loginIcon from '@images/login-icon.svg';
 import signupIcon from '@images/signup-icon.svg';
 import infoIcon from '@images/info-icon.svg';
 import logOutIcon from '@images/logout-icon.svg';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 
 type Props = {
     initial: { opacity: number, x: number };

@@ -7,7 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import defaultProfileImage from '@images/default-user-image.svg';
 import { MobileMenu } from '@components/MobileMenu';
 import { ProfileTab } from '@components/ProfileTab';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import Link from 'next/link';
 
 export function Header() {

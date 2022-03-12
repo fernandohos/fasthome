@@ -2,7 +2,7 @@ import React from 'react';
 import * as C from '../app/styles/profileInformation';
 import { Header } from '@patterns/Header';
 import { Button } from '@components/Button';
-import { useAuth } from '../app/hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import { Formik, Form, Field } from 'formik';
 import { FormikInput } from '@components/FormikInput';
 import toast, { Toaster } from 'react-hot-toast';
