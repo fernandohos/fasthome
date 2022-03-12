@@ -5,7 +5,7 @@ import * as C from '../../app/styles/form';
 import { Header } from '../../app/patterns/Header';
 import { FormCategory } from '../../app/patterns/FormCategory';
 import FormGeneralInformation from '../../app/patterns/FormGeneralInformation';
-import { PostingPhotos } from '../../app/components/PostingPhotos';
+import { PostingPhotos } from '@components/PostingPhotos';
 import FormAdvertiseFeatures from '../../app/patterns/FormAdvertiseFeatures';
 import { FormikWrapper } from '../../app/patterns/FormikWrapper';
 import { FormNavBar } from '../../app/patterns/FormNavBar';
@@ -15,7 +15,7 @@ import { useAuth } from '../../app/hooks/useAuth';
 import Head from 'next/head';
 import formConfig from '../../app/utils/formConfig.json';
 import { FieldGroup } from '../../app/patterns/FieldGroup';
-import { NextStepFormButton } from '../../app/components/NextStepFormButton';
+import { NextStepFormButton } from '@components/NextStepFormButton';
 
 const DynamicMap = dynamic(
     () => import('../../app/patterns/FormLocationInformation'),

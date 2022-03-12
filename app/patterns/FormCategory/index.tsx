@@ -1,6 +1,6 @@
 import React from 'react';
-import { Fieldset } from '../../components/Fieldset';
-import { FormikSelect } from '../../components/FormikSelect';
+import { Fieldset } from '@components/Fieldset';
+import { FormikSelect } from '@components/FormikSelect';
 import { formOptions } from '../../utils/formOptions';
 import * as C from '../../styles/form';
 

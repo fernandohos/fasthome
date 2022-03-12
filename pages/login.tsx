@@ -1,11 +1,11 @@
 import React from 'react';
 import * as C from '../app/styles/login';
 import { AuthLayout } from '../app/patterns/AuthLayout';
-import { GoogleButton } from '../app/components/GoogleButton';
+import { GoogleButton } from '@components/GoogleButton';
 import { useAuth } from '../app/hooks/useAuth';
 import Link from 'next/link';
 import { Formik, Form, FormikHelpers } from 'formik';
-import { FormikInput } from '../app/components/FormikInput';
+import { FormikInput } from '@components/FormikInput';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Fieldset } from '../../components/Fieldset';
+import { Fieldset } from '@components/Fieldset';
 import * as C from './styles';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import { LatLng, LatLngLiteral } from 'leaflet';
-import { FormikInput } from '../../components/FormikInput';
+import { FormikInput } from '@components/FormikInput';
 import { Field, FieldProps } from 'formik';
 
 // get ip

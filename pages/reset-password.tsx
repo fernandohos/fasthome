@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Fieldset } from '../app/components/Fieldset';
+import { Fieldset } from '@components/Fieldset';
 import { supabase } from '../app/services/supabase';
-import { Button } from '../app/components/Button';
+import { Button } from '@components/Button';
 import * as C from '../app/styles/resetPassword';
 import { Header } from '../app/patterns/Header';
 import { Footer } from '../app/patterns/Footer';
-import { Input } from '../app/components/Input';
+import { Input } from '@components/Input';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Toaster, toast } from 'react-hot-toast';

@@ -1,8 +1,8 @@
 import React from 'react';
 import * as C from '../app/styles/signup';
 import Link from 'next/link';
-import { GoogleButton } from '../app/components/GoogleButton';
-import { FormikInput } from '../app/components/FormikInput';
+import { GoogleButton } from '@components/GoogleButton';
+import { FormikInput } from '@components/FormikInput';
 import { AuthLayout } from '../app/patterns/AuthLayout';
 import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form, FormikHelpers } from 'formik';

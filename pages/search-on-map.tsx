@@ -15,7 +15,7 @@ type PositionNull = {
 }
 
 const DynamicMap = dynamic(
-    () => import('../app/components/SearchMap'),
+    () => import('@components/SearchMap'),
     { ssr: false }
 )
 

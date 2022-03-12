@@ -1,17 +1,17 @@
 import React from 'react';
 import * as C from '../app/styles/profileInformation';
 import { Header } from '../app/patterns/Header';
-import { Button } from '../app/components/Button';
+import { Button } from '@components/Button';
 import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form, Field } from 'formik';
-import { FormikInput } from '../app/components/FormikInput';
+import { FormikInput } from '@components/FormikInput';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { getErrorMessage } from '../app/utils/getErrorMessage';
 import Link from 'next/link';
 import Head from 'next/head';
 import imageCompression from 'browser-image-compression';
-import { PictureUpload } from '../app/components/PictureUpload';
+import { PictureUpload } from '@components/PictureUpload';
 import { supabase } from '../app/services/supabase';
 
 interface FileType extends File {

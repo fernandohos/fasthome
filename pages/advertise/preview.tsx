@@ -4,7 +4,7 @@ import * as C from '../../app/styles/preview';
 import { FormikWrapper } from '../../app/patterns/FormikWrapper';
 import { FormNavBar } from '../../app/patterns/FormNavBar';
 import { Header } from '../../app/patterns/Header';
-import { Carousel } from '../../a../../app/components/Carousel';
+import { Carousel } from '../../a@components/Carousel';
 import { interiorFeatures, externalFeatures } from '../../app/utils/formCheckboxes';
 import { FormValuesType } from '../../app/types/FormValuesType';
 import mapIcon from '@images/map-icon.svg';

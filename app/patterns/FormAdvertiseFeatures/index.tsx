@@ -1,6 +1,6 @@
 import React from 'react'
-import { Fieldset } from '../../components/Fieldset'
-import { FormikCheckbox } from '../../components/FormikCheckbox'
+import { Fieldset } from '@components/Fieldset'
+import { FormikCheckbox } from '@components/FormikCheckbox'
 import { interiorFeatures, externalFeatures } from '../../utils/formCheckboxes'
 
 export default function FormAdvertiseFeatures() {

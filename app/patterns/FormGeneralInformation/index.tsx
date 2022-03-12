@@ -1,8 +1,8 @@
 import React from 'react';
 import * as C from '../../styles/form';
-import { Fieldset } from '../../components/Fieldset';
-import { FormikInput } from '../../components/FormikInput';
-import { FormikSelect } from '../../components/FormikSelect';
+import { Fieldset } from '@components/Fieldset';
+import { FormikInput } from '@components/FormikInput';
+import { FormikSelect } from '@components/FormikSelect';
 import { formOptions } from '../../utils/formOptions';
 
 export default function FormGeneralInformation() {

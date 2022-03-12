@@ -5,7 +5,7 @@ import * as C from '../../app/styles/confirm';
 import confirmIcon from '@images/confirm-icon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '../../app/components/Button';
+import { Button } from '@components/Button';
 import Head from 'next/head';
 
 export default function Confirm() {

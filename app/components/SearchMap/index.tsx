@@ -4,7 +4,7 @@ import { LatLngLiteral } from 'leaflet';
 import * as C from './styles';
 import { FormValuesType } from '../../types/FormValuesType';
 import { divIcon } from 'leaflet';
-import { HouseCard } from '../../components/HouseCard';
+import { HouseCard } from '@components/HouseCard';
 
 interface HouseType extends FormValuesType {
     id: string;

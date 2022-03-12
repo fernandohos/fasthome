@@ -3,8 +3,8 @@ import { Header } from '../../app/patterns/Header';
 import { FormNavBar } from '../../app/patterns/FormNavBar';
 import * as C from '../../app/styles/contact';
 import { FormikWrapper } from '../../app/patterns/FormikWrapper';
-import { Fieldset } from '../../app/components/Fieldset';
-import { FormikInput } from '../../app/components/FormikInput';
+import { Fieldset } from '@components/Fieldset';
+import { FormikInput } from '@components/FormikInput';
 import Head from 'next/head';
 
 

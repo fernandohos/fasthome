@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as C from '../app/styles/search';
 import { Header } from '../app/patterns/Header';
 import { InputContainer } from '../app/patterns/Banner/styles';
-import { HousesGrid } from '../app/components/HousesGrid';
+import { HousesGrid } from '@components/HousesGrid';
 import { supabase } from '../app/services/supabase';
 import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';

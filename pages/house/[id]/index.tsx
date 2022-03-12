@@ -6,8 +6,8 @@ import { supabase } from '../../../app/services/supabase';
 import * as C from '../../../app/styles/house';
 import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
-import { Carousel } from '../../../app/components/Carousel';
-import { Fieldset } from '../../../app/components/Fieldset';
+import { Carousel } from '@components/Carousel';
+import { Fieldset } from '@components/Fieldset';
 import defaultUserImage from '@images/default-user-image.svg';
 import phoneIcon from '@images/phone-icon.svg';
 import emailIcon from '@images/email-icon.svg';
@@ -34,7 +34,7 @@ type Props = {
 }
 
 const DynamicMap = dynamic(
-    () => import('../../../app/components/AdMap'),
+    () => import('@components/AdMap'),
     { ssr: false }
 )
 

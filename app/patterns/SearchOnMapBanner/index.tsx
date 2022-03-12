@@ -1,7 +1,7 @@
 import React from 'react';
 import * as C from './styles';
 import Image from 'next/image';
-import { Button } from '../../components/Button';
+import { Button } from '@components/Button';
 import { ButtonStyleType } from '../../types/ButtonStyleType';
 
 export function SearchOnMapBanner() {
