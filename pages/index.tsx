@@ -1,13 +1,13 @@
 import React from 'react';
 import * as C from '../app/styles/app';
-import { Header } from '../app/patterns/Header';
-import { Banner } from '../app/patterns/Banner';
-import { Featured } from '../app/patterns/Featured';
-import { SearchOnMapBanner } from '../app/patterns/SearchOnMapBanner';
+import { Header } from '@patterns/Header';
+import { Banner } from '@patterns/Banner';
+import { Featured } from '@patterns/Featured';
+import { SearchOnMapBanner } from '@patterns/SearchOnMapBanner';
 import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
 import { supabase } from '../app/services/supabase';
-import { Footer } from '../app/patterns/Footer';
+import { Footer } from '@patterns/Footer';
 import { useRouter } from 'next/router';
 
 interface HouseType extends FormValuesType {

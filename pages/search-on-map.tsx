@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as C from '../app/styles/searchOnMap';
-import { Header } from '../app/patterns/Header';
-import { Footer } from '../app/patterns/Footer';
-import { Filter } from '../app/patterns/Filter';
+import { Header } from '@patterns/Header';
+import { Footer } from '@patterns/Footer';
+import { Filter } from '@patterns/Filter';
 import Head from 'next/head';
 import { LatLngLiteral } from 'leaflet';
 import dynamic from 'next/dynamic';

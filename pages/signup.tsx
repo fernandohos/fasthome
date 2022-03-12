@@ -3,7 +3,7 @@ import * as C from '../app/styles/signup';
 import Link from 'next/link';
 import { GoogleButton } from '@components/GoogleButton';
 import { FormikInput } from '@components/FormikInput';
-import { AuthLayout } from '../app/patterns/AuthLayout';
+import { AuthLayout } from '@patterns/AuthLayout';
 import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';

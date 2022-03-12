@@ -1,6 +1,6 @@
 import React from 'react';
 import * as C from '../app/styles/login';
-import { AuthLayout } from '../app/patterns/AuthLayout';
+import { AuthLayout } from '@patterns/AuthLayout';
 import { GoogleButton } from '@components/GoogleButton';
 import { useAuth } from '../app/hooks/useAuth';
 import Link from 'next/link';

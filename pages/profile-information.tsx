@@ -1,6 +1,6 @@
 import React from 'react';
 import * as C from '../app/styles/profileInformation';
-import { Header } from '../app/patterns/Header';
+import { Header } from '@patterns/Header';
 import { Button } from '@components/Button';
 import { useAuth } from '../app/hooks/useAuth';
 import { Formik, Form, Field } from 'formik';

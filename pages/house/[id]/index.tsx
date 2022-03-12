@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormValuesType } from '../../../app/types/FormValuesType';
 import mapIcon from '@images/map-icon.svg';
-import { Header } from '../../../app/patterns/Header';
+import { Header } from '@patterns/Header';
 import { supabase } from '../../../app/services/supabase';
 import * as C from '../../../app/styles/house';
 import { GetStaticPropsContext } from 'next';
@@ -16,7 +16,7 @@ import dynamic from 'next/dynamic';
 import { interiorFeatures, externalFeatures } from '../../../app/utils/formCheckboxes';
 import Head from 'next/head';
 import { formOptions } from '../../../app/utils/formOptions';
-import { Footer } from '../../../app/patterns/Footer';
+import { Footer } from '@patterns/Footer';
 
 type PositionNull = {
     lat: null;

@@ -1,9 +1,9 @@
 import { useFormikContext } from 'formik';
 import React, { ReactElement } from 'react';
 import * as C from '../../app/styles/preview';
-import { FormikWrapper } from '../../app/patterns/FormikWrapper';
-import { FormNavBar } from '../../app/patterns/FormNavBar';
-import { Header } from '../../app/patterns/Header';
+import { FormikWrapper } from '@patterns/FormikWrapper';
+import { FormNavBar } from '@patterns/FormNavBar';
+import { Header } from '@patterns/Header';
 import { Carousel } from '../../a@components/Carousel';
 import { interiorFeatures, externalFeatures } from '../../app/utils/formCheckboxes';
 import { FormValuesType } from '../../app/types/FormValuesType';

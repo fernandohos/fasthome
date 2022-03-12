@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import * as C from '../app/styles/forSale';
-import { Header } from '../app/patterns/Header';
-import { Filter } from '../app/patterns/Filter';
+import { Header } from '@patterns/Header';
+import { Filter } from '@patterns/Filter';
 import { HousesGrid } from '@components/HousesGrid';
 import { SmartSorting } from '@components/SmartSorting';
 import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
 import { supabase } from '../app/services/supabase';
-import { Footer } from '../app/patterns/Footer';
+import { Footer } from '@patterns/Footer';
 
 interface HouseType extends FormValuesType {
     id: string;

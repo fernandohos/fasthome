@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import * as C from '../app/styles/search';
-import { Header } from '../app/patterns/Header';
-import { InputContainer } from '../app/patterns/Banner/styles';
+import { Header } from '@patterns/Header';
+import { InputContainer } from '@patterns/Banner/styles';
 import { HousesGrid } from '@components/HousesGrid';
 import { supabase } from '../app/services/supabase';
 import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
-import { Footer } from '../app/patterns/Footer';
+import { Footer } from '@patterns/Footer';
 import { GetServerSideProps } from 'next';
 import searchIcon from '@images/search-icon.svg';
 import Image from 'next/image';
