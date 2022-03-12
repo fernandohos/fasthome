@@ -8,7 +8,7 @@ import { FormValuesType } from '../app/types/FormValuesType';
 import Head from 'next/head';
 import { Footer } from '../app/patterns/Footer';
 import { GetServerSideProps } from 'next';
-import searchIcon from '../public/images/search-icon.svg';
+import searchIcon from '@images/search-icon.svg';
 import Image from 'next/image';
 
 interface HouseType extends FormValuesType {

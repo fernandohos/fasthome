@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as C from './styles';
-import searchIcon from '../../../public/images/search-icon.svg';
+import searchIcon from '@images/search-icon.svg';
 import Image from 'next/image';
 
 export function Banner() {

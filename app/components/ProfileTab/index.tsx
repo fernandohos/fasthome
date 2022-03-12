@@ -2,10 +2,10 @@ import React from 'react';
 import * as C from './styles';
 import Image from 'next/image';
 import Link from 'next/link';
-import loginIcon from '../../../public/images/login-icon.svg';
-import signupIcon from '../../../public/images/signup-icon.svg';
-import infoIcon from '../../../public/images/info-icon.svg';
-import logOutIcon from '../../../public/images/logout-icon.svg';
+import loginIcon from '@images/login-icon.svg';
+import signupIcon from '@images/signup-icon.svg';
+import infoIcon from '@images/info-icon.svg';
+import logOutIcon from '@images/logout-icon.svg';
 import { useAuth } from '../../hooks/useAuth';
 
 type Props = {

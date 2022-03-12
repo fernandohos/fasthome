@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as C from './styles';
 import { Dropdown } from '../../components/Dropdown';
 import Image from 'next/image';
-import filterIcon from '../../../public/images/filter-icon.svg';
+import filterIcon from '@images/filter-icon.svg';
 import { formOptions } from '../../utils/formOptions';
 
 type Props = {

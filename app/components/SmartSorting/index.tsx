@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as C from './styles';
 import Image from 'next/image';
-import sortingIcon from '../../../public/images/sorting-icon.svg';
+import sortingIcon from '@images/sorting-icon.svg';
 import { AnimatePresence, motion } from 'framer-motion';
 
 type Props = {

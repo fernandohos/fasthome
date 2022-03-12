@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as C from './styles';
 import Image from 'next/image';
-import imageIcon from '../../../public/images/image-icon.svg';
+import imageIcon from '@images/image-icon.svg';
 import { useDropzone } from 'react-dropzone';
 import { FieldProps } from 'formik';
 

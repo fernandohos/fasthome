@@ -3,12 +3,12 @@ import * as C from './styles';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AnimatePresence } from 'framer-motion';
-import defaultProfileImage from '../../../public/images/default-user-image.svg';
-import arrowIcon from '../../../public/images/arrow.svg';
-import loginIcon from '../../../public/images/login-icon.svg';
-import signupIcon from '../../../public/images/signup-icon.svg';
-import infoIcon from '../../../public/images/info-icon.svg';
-import signOut from '../../../public/images/logout-icon.svg';
+import defaultProfileImage from '@images/default-user-image.svg';
+import arrowIcon from '@images/arrow.svg';
+import loginIcon from '@images/login-icon.svg';
+import signupIcon from '@images/signup-icon.svg';
+import infoIcon from '@images/info-icon.svg';
+import signOut from '@images/logout-icon.svg';
 import { useAuth } from '../../hooks/useAuth';
 
 export function MobileMenu() {

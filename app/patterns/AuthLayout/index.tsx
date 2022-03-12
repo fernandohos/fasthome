@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react';
 import * as C from './styles';
 
-import Icon1 from '../../../public/images/signup-icon1.svg';
-import Icon2 from '../../../public/images/signup-icon2.svg';
-import Icon3 from '../../../public/images/signup-icon3.svg';
-import Icon4 from '../../../public/images/signup-icon4.svg';
-import Logo from '../../../public/images/Logo2.svg';
+import Icon1 from '@images/signup-icon1.svg';
+import Icon2 from '@images/signup-icon2.svg';
+import Icon3 from '@images/signup-icon3.svg';
+import Icon4 from '@images/signup-icon4.svg';
+import Logo from '@images/Logo2.svg';
 
 import { useRouter } from 'next/router';
 import Image from 'next/image';

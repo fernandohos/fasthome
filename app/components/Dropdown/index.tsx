@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import * as C from './styles';
-import arrowIcon from '../../../public/images/arrow.svg';
+import arrowIcon from '@images/arrow.svg';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 

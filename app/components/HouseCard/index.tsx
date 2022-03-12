@@ -6,10 +6,10 @@ import { CardHouseType } from '../../types/CardHouseType';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import bedroomsIcon from '../../../public/images/bedrooms-icon.svg';
-import stairsIcon from '../../../public/images/stairs-icon.svg';
-import defaultHouseImage from '../../../public/images/default-house-image.svg';
-import squareMetersIcon from '../../../public/images/square-meters.svg';
+import bedroomsIcon from '@images/bedrooms-icon.svg';
+import stairsIcon from '@images/stairs-icon.svg';
+import defaultHouseImage from '@images/default-house-image.svg';
+import squareMetersIcon from '@images/square-meters.svg';
 
 export function HouseCard(house: CardHouseType) {
     return (

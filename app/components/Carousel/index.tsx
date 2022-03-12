@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import * as C from './styles';
 import Image from 'next/image';
 import useDraggableScroll from 'use-draggable-scroll';
-import arrowImage from '../../../public/images/arrow.svg';
+import arrowImage from '@images/arrow.svg';
 
 type Props = {
     images: {

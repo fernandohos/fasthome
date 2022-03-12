@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import Image from 'next/image';
-import GoogleLogo from '../../../public/images/google-logo.svg';
+import GoogleLogo from '@images/google-logo.svg';
 import * as C from './styles';
 
 export function GoogleButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {

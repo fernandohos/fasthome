@@ -1,4 +1,4 @@
-import logo from '../public/images/Logo.svg';
+import logo from '@images/Logo.svg';
 import Image from 'next/image';
 import * as C from '../app/styles/404';
 import Head from 'next/head';

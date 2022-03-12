@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Fieldset } from '../Fieldset';
 import * as C from './styles';
 import Image from 'next/image';
-import imageIcon from '../../../public/images/image-icon.svg';
-import cameraIcon from '../../../public/images/camera-icon.svg';
-import plusIcon from '../../../public/images/plus-icon.svg';
+import imageIcon from '@images/image-icon.svg';
+import cameraIcon from '@images/camera-icon.svg';
+import plusIcon from '@images/plus-icon.svg';
 import { useDropzone } from 'react-dropzone';
 import { FieldProps } from 'formik';
 

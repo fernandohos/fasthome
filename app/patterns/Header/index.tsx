@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 import Image from 'next/image';
-import logo from '../../../public/images/Logo.svg';
+import logo from '@images/Logo.svg';
 import { Nav } from '../../components/Nav';
 import { AnimatePresence } from 'framer-motion';
-import defaultProfileImage from '../../../public/images/default-user-image.svg';
+import defaultProfileImage from '@images/default-user-image.svg';
 import { MobileMenu } from '../../components/MobileMenu';
 import { ProfileTab } from '../../components/ProfileTab';
 import { useAuth } from '../../hooks/useAuth';

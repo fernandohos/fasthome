@@ -7,7 +7,7 @@ import { Header } from '../../app/patterns/Header';
 import { Carousel } from '../../a../../app/components/Carousel';
 import { interiorFeatures, externalFeatures } from '../../app/utils/formCheckboxes';
 import { FormValuesType } from '../../app/types/FormValuesType';
-import mapIcon from '../../public/images/map-icon.svg';
+import mapIcon from '@images/map-icon.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';

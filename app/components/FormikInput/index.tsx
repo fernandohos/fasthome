@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { FastField, useField, ErrorMessage, Field } from 'formik';
 import * as C from './styles';
 import Image from 'next/image';
-import visibilyIcon from '../../../public/images/visibility.svg';
-import visibilyOffIcon from '../../../public/images/visibility-off.svg';
+import visibilyIcon from '@images/visibility.svg';
+import visibilyOffIcon from '@images/visibility-off.svg';
 
 type Props = {
     label: string;
