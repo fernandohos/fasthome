@@ -4,7 +4,7 @@ import { Header } from '@patterns/Header';
 import { Banner } from '@patterns/Banner';
 import { Featured } from '@patterns/Featured';
 import { SearchOnMapBanner } from '@patterns/SearchOnMapBanner';
-import { FormValuesType } from '../app/types/FormValuesType';
+import { FormValuesType } from '@types/FormValuesType';
 import Head from 'next/head';
 import { supabase } from '../app/services/supabase';
 import { Footer } from '@patterns/Footer';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Marker, Popup, TileLayer } from 'react-leaflet';
 import { LatLngLiteral } from 'leaflet';
 import * as C from './styles';
-import { FormValuesType } from '../../types/FormValuesType';
+import { FormValuesType } from '@types/FormValuesType';
 import { divIcon } from 'leaflet';
 import { HouseCard } from '@components/HouseCard';
 

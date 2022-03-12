@@ -1,6 +1,6 @@
 import React, { ReactNode, ButtonHTMLAttributes } from 'react';
 import * as C from './styles';
-import {ButtonStyleType} from '../../types/ButtonStyleType';
+import {ButtonStyleType} from '@types/ButtonStyleType';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import * as C from './styles';
-import { CardHouseType } from '../../types/CardHouseType';
+import { CardHouseType } from '@types/CardHouseType';
 import Link from 'next/link';
 import { HouseCard } from '@components/HouseCard';
 import useDraggableScroll from 'use-draggable-scroll';
