@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormValuesType } from '@types/FormValuesType';
 import mapIcon from '@images/map-icon.svg';
 import { Header } from '@patterns/Header';
-import { supabase } from '../../../app/services/supabase';
+import { supabase } from '@services/supabase';
 import * as C from '@styles/house';
 import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';

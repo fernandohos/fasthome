@@ -7,7 +7,7 @@ import Head from 'next/head';
 import { LatLngLiteral } from 'leaflet';
 import dynamic from 'next/dynamic';
 import { FormValuesType } from '@types/FormValuesType';
-import { supabase } from '../app/services/supabase';
+import { supabase } from '@services/supabase';
 
 type PositionNull = {
     lat: null;

@@ -4,7 +4,7 @@ import { Header } from '@patterns/Header';
 import { Filter } from '@patterns/Filter';
 import { HousesGrid } from '@components/HousesGrid';
 import { SmartSorting } from '@components/SmartSorting';
-import { supabase } from '../app/services/supabase';
+import { supabase } from '@services/supabase';
 import { FormValuesType } from '@types/FormValuesType';
 import Head from 'next/head';
 import { Footer } from '@patterns/Footer';

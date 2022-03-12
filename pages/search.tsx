@@ -3,7 +3,7 @@ import * as C from '@styles/search';
 import { Header } from '@patterns/Header';
 import { InputContainer } from '@patterns/Banner/styles';
 import { HousesGrid } from '@components/HousesGrid';
-import { supabase } from '../app/services/supabase';
+import { supabase } from '@services/supabase';
 import { FormValuesType } from '@types/FormValuesType';
 import Head from 'next/head';
 import { Footer } from '@patterns/Footer';

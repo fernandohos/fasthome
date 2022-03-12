@@ -6,7 +6,7 @@ import { Featured } from '@patterns/Featured';
 import { SearchOnMapBanner } from '@patterns/SearchOnMapBanner';
 import { FormValuesType } from '@types/FormValuesType';
 import Head from 'next/head';
-import { supabase } from '../app/services/supabase';
+import { supabase } from '@services/supabase';
 import { Footer } from '@patterns/Footer';
 import { useRouter } from 'next/router';
 

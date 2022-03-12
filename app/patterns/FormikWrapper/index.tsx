@@ -3,7 +3,7 @@ import { Formik, Form, FormikHelpers } from 'formik';
 import { schema } from '@utils/formValitationSchema';
 import { FormValuesType } from '@types/FormValuesType';
 import { useAuth } from '@hooks/useAuth';
-import { supabase } from '../../services/supabase';
+import { supabase } from '@services/supabase';
 import imageCompression from 'browser-image-compression';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';

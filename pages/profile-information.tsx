@@ -12,7 +12,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import imageCompression from 'browser-image-compression';
 import { PictureUpload } from '@components/PictureUpload';
-import { supabase } from '../app/services/supabase';
+import { supabase } from '@services/supabase';
 
 interface FileType extends File {
     preview: string;

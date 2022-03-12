@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Fieldset } from '@components/Fieldset';
-import { supabase } from '../app/services/supabase';
+import { supabase } from '@services/supabase';
 import { Button } from '@components/Button';
 import * as C from '@styles/resetPassword';
 import { Header } from '@patterns/Header';
