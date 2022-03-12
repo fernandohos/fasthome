@@ -1,5 +1,5 @@
 import React from 'react';
-import * as C from '../app/styles/signup';
+import * as C from '@styles/signup';
 import Link from 'next/link';
 import { GoogleButton } from '@components/GoogleButton';
 import { FormikInput } from '@components/FormikInput';

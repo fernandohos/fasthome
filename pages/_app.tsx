@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from 'react';
 import type { AppProps } from 'next/app';
-import { GlobalStyle } from '../app/styles/global';
+import { GlobalStyle } from '@styles/global';
 import type { NextPage } from 'next';
 import { AuthProvider } from '@hooks/useAuth';
 

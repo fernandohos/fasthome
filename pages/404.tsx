@@ -1,6 +1,6 @@
 import logo from '@images/Logo.svg';
 import Image from 'next/image';
-import * as C from '../app/styles/404';
+import * as C from '@styles/404';
 import Head from 'next/head';
 
 export default function Custom404() {

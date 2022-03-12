@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormNavBar } from '@patterns/FormNavBar';
 import { Header } from '@patterns/Header';
-import * as C from '../../app/styles/confirm';
+import * as C from '@styles/confirm';
 import confirmIcon from '@images/confirm-icon.svg';
 import Image from 'next/image';
 import Link from 'next/link';

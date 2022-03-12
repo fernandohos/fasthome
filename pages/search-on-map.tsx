@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import * as C from '../app/styles/searchOnMap';
+import * as C from '@styles/searchOnMap';
 import { Header } from '@patterns/Header';
 import { Footer } from '@patterns/Footer';
 import { Filter } from '@patterns/Filter';

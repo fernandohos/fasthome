@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as C from '../app/styles/forSale';
+import * as C from '@styles/forSale';
 import { Header } from '@patterns/Header';
 import { Filter } from '@patterns/Filter';
 import { HousesGrid } from '@components/HousesGrid';

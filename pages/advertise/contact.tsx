@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Header } from '@patterns/Header';
 import { FormNavBar } from '@patterns/FormNavBar';
-import * as C from '../../app/styles/contact';
+import * as C from '@styles/contact';
 import { FormikWrapper } from '@patterns/FormikWrapper';
 import { Fieldset } from '@components/Fieldset';
 import { FormikInput } from '@components/FormikInput';

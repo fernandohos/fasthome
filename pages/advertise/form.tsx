@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { Field, useFormikContext } from 'formik';
 import dynamic from 'next/dynamic';
-import * as C from '../../app/styles/form';
+import * as C from '@styles/form';
 import { Header } from '@patterns/Header';
 import { FormCategory } from '@patterns/FormCategory';
 import FormGeneralInformation from '@patterns/FormGeneralInformation';

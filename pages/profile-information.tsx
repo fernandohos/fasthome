@@ -1,5 +1,5 @@
 import React from 'react';
-import * as C from '../app/styles/profileInformation';
+import * as C from '@styles/profileInformation';
 import { Header } from '@patterns/Header';
 import { Button } from '@components/Button';
 import { useAuth } from '@hooks/useAuth';

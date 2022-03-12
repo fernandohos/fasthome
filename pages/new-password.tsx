@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Fieldset } from '@components/Fieldset';
 import { supabase } from '../app/services/supabase';
 import { Button } from '@components/Button';
-import * as C from '../app/styles/resetPassword';
+import * as C from '@styles/resetPassword';
 import { Header } from '@patterns/Header';
 import { Footer } from '@patterns/Footer';
 import { Input } from '@components/Input';

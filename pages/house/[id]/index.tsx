@@ -3,7 +3,7 @@ import { FormValuesType } from '../../../app/types/FormValuesType';
 import mapIcon from '@images/map-icon.svg';
 import { Header } from '@patterns/Header';
 import { supabase } from '../../../app/services/supabase';
-import * as C from '../../../app/styles/house';
+import * as C from '@styles/house';
 import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import { Carousel } from '@components/Carousel';

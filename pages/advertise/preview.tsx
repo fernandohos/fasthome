@@ -1,6 +1,6 @@
 import { useFormikContext } from 'formik';
 import React, { ReactElement } from 'react';
-import * as C from '../../app/styles/preview';
+import * as C from '@styles/preview';
 import { FormikWrapper } from '@patterns/FormikWrapper';
 import { FormNavBar } from '@patterns/FormNavBar';
 import { Header } from '@patterns/Header';

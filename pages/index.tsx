@@ -1,5 +1,5 @@
 import React from 'react';
-import * as C from '../app/styles/app';
+import * as C from '@styles/app';
 import { Header } from '@patterns/Header';
 import { Banner } from '@patterns/Banner';
 import { Featured } from '@patterns/Featured';
