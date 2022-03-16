@@ -3,9 +3,19 @@ import * as C from '@styles/form';
 import { Fieldset } from '@components/Fieldset';
 import { FormikInput } from '@components/FormikInput';
 import { FormikSelect } from '@components/FormikSelect';
-import { formOptions } from '@utils/formOptions';
+import formConfig from '@utils/formConfig.json';
+
+type OptionsType = {
+    label: string;
+    value: string;
+}[]
 
 export default function FormGeneralInformation() {
+
+    function getOptions(name: string) {
+        return formConfig.form.fields.find(obj => obj.name === name)?.options as OptionsType;
+    }
+
     return (
         <Fieldset title="General Information">
             <C.InputContainer width="50rem">
@@ -53,7 +63,7 @@ export default function FormGeneralInformation() {
                 <FormikSelect
                     label="Warming Type"
                     name="warming_type"
-                    options={formOptions.warmingType}
+                    options={getOptions('warming_type')}
                 />
             </C.InputContainer>
             <C.InputContainer>
@@ -74,21 +84,21 @@ export default function FormGeneralInformation() {
                 <FormikSelect
                     label="Avaliable For Loan"
                     name="avaliable_for_loan"
-                    options={formOptions.avaliableForLoan}
+                    options={getOptions('avaliable_for_loan')}
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikSelect
                     label="Furnished"
                     name="furnished"
-                    options={formOptions.furnished}
+                    options={getOptions('furnished')}
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikSelect
                     label="Status"
                     name="status"
-                    options={formOptions.status}
+                    options={getOptions('status')}
                 />
             </C.InputContainer>
             <C.InputContainer>
@@ -102,14 +112,14 @@ export default function FormGeneralInformation() {
                 <FormikSelect
                     label="Swap"
                     name="swap"
-                    options={formOptions.swap}
+                    options={getOptions('swap')}
                 />
             </C.InputContainer>
             <C.InputContainer>
                 <FormikSelect
                     label="Front"
                     name="front"
-                    options={formOptions.front}
+                    options={getOptions('front')}
                 />
             </C.InputContainer>
             <C.InputContainer>
