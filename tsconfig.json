@@ -21,7 +21,7 @@
       "@patterns/*": ["app/patterns/*"],
       "@hooks/*": ["app/hooks/*"],
       "@styles/*": ["app/styles/*"],
-      "@types/*": ["app/types/*"],
+      "@customTypes/*": ["app/types/*"],
       "@utils/*": ["app/utils/*"],
       "@services/*": ["app/services/*"],
     }

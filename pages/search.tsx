@@ -4,7 +4,7 @@ import { Header } from '@patterns/Header';
 import { InputContainer } from '@patterns/Banner/styles';
 import { HousesGrid } from '@components/HousesGrid';
 import { supabase } from '@services/supabase';
-import { FormValuesType } from '@types/FormValuesType';
+import { FormValuesType } from '@customTypes/FormValuesType';
 import Head from 'next/head';
 import { Footer } from '@patterns/Footer';
 import { GetServerSideProps } from 'next';

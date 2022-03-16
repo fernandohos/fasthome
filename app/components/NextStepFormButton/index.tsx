@@ -2,7 +2,7 @@ import React from 'react';
 import * as C from './styles';
 import Link from 'next/link';
 import { useFormikContext } from 'formik';
-import { FormValuesType } from '@types/FormValuesType';
+import { FormValuesType } from '@customTypes/FormValuesType';
 
 export function NextStepFormButton() {
     const { errors } = useFormikContext<FormValuesType>();

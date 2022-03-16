@@ -1,5 +1,5 @@
 import { useState, ReactNode, useEffect, useContext, createContext } from 'react';
-import { User } from '@types/User';
+import { User } from '@customTypes/User';
 import { supabase } from '@services/supabase';
 import { ApiError, Session } from '@supabase/supabase-js';
 import { filterUserInfo } from '@utils/filterUserInfo';

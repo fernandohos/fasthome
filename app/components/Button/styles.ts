@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { ButtonStyleType } from '@types/ButtonStyleType';
+import { ButtonStyleType } from '@customTypes/ButtonStyleType';
 
 
 const filledButton = css`

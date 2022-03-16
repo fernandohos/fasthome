@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormValuesType } from '@types/FormValuesType';
+import { FormValuesType } from '@customTypes/FormValuesType';
 import mapIcon from '@images/map-icon.svg';
 import { Header } from '@patterns/Header';
 import { supabase } from '@services/supabase';

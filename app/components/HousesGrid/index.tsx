@@ -1,6 +1,6 @@
 import React from 'react';
 import * as C from './styles';
-import { CardHouseType } from '@types/CardHouseType';
+import { CardHouseType } from '@customTypes/CardHouseType';
 import { HouseCard } from '../HouseCard';
 
 type Props = {

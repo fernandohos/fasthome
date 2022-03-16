@@ -10,7 +10,7 @@ import FormAdvertiseFeatures from '@patterns/FormAdvertiseFeatures';
 import { FormikWrapper } from '@patterns/FormikWrapper';
 import { FormNavBar } from '@patterns/FormNavBar';
 import Link from 'next/link';
-import { FormValuesType } from '@types/FormValuesType';
+import { FormValuesType } from '@customTypes/FormValuesType';
 import { useAuth } from '@hooks/useAuth';
 import Head from 'next/head';
 import formConfig from '@utils/formConfig.json';

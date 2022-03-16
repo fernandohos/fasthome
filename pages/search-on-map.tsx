@@ -6,7 +6,7 @@ import { Filter } from '@patterns/Filter';
 import Head from 'next/head';
 import { LatLngLiteral } from 'leaflet';
 import dynamic from 'next/dynamic';
-import { FormValuesType } from '@types/FormValuesType';
+import { FormValuesType } from '@customTypes/FormValuesType';
 import { supabase } from '@services/supabase';
 
 type PositionNull = {
