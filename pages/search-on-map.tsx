@@ -41,11 +41,11 @@ export default function SearchOnMap({ data }: Props) {
         async function getPositionFromIp(err?: { code: number, message: string }) {
             const { ip }: { ip: string } = await fetch('https://api.ipify.org/?format=json').then(r => r.json());
 
-            const { lat, lon }: {
-                lat: number,
-                lon: number
-            } = await fetch('http://ip-api.com/json/' + ip).then(r => r.json());
-            setPosition({ lat, lng: lon });
+            const { latitude, longitude }: {
+                latitude: number,
+                longitude: number
+            } = await fetch(`https://ipapi.co/${ip}/json`).then(r => r.json());
+            setPosition({ lat: latitude, lng: longitude });
         }
 
         function getPosition({ coords }: GeolocationPosition) {

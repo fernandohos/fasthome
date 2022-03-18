@@ -10,7 +10,8 @@ import { Field, FieldProps } from 'formik';
 //https://api.ipify.org/?format=json
 
 // get data
-//http://ip-api.com/json/24.48.0.1
+//http://ip-api.com/json/24.48.0.1 (deprecated)
+//https://ipapi.co/24.48.0.1/json/
 
 function FieldLocationInformation() {
     return (
@@ -49,12 +50,12 @@ function LocationInformation({ form, ...props }: FieldProps) {
         async function getPositionFromIp(err?: { code: number, message: string }) {
             const { ip }: { ip: string } = await fetch('https://api.ipify.org/?format=json').then(r => r.json());
 
-            const { lat, lon }: {
-                lat: number,
-                lon: number
-            } = await fetch('http://ip-api.com/json/' + ip).then(r => r.json());
+            const { latitude, longitude }: {
+                latitude: number,
+                longitude: number
+            } = await fetch(`https://ipapi.co/${ip}/json`).then(r => r.json());
 
-            setPosition(new LatLng(lat, lon));
+            setPosition(new LatLng(latitude, longitude));
         }
 
         function getPosition({ coords }: GeolocationPosition) {
@@ -71,7 +72,7 @@ function LocationInformation({ form, ...props }: FieldProps) {
 
     React.useEffect(() => {
         if (markerPosition.lng !== null && markerPosition.lat !== null) {
-            fetch(`http://www.mapquestapi.com/geocoding/v1/reverse?key=${process.env.NEXT_PUBLIC_MAPQUEST_KEY}&location=${markerPosition.lat},${markerPosition.lng}`).then(r => r.json())
+            fetch(`https://www.mapquestapi.com/geocoding/v1/reverse?key=${process.env.NEXT_PUBLIC_MAPQUEST_KEY}&location=${markerPosition.lat},${markerPosition.lng}`).then(r => r.json())
                 .then((a) => { console.log(a); return a })
                 .then(({ results }) => results[0].locations[0])
                 .then(location => {
