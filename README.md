@@ -37,3 +37,17 @@
   </a>
   
 </div>
+
+<h2>Techs</h2>
+
+<ul>
+  <li>Typescript</li>
+  <li>Next JS</li>
+  <li>React JS</li>
+  <li>Supabase</li>
+  <li>Formik</li>
+  <li>Yup</li>
+  <li>Framer Motion</li>
+  <li>Leaflet</li>
+  <li>Styled Components</li>
+</ul>
