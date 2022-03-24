@@ -51,3 +51,25 @@
   <li>Leaflet</li>
   <li>Styled Components</li>
 </ul>
+
+<h2>Features</h2>
+
+<ul>
+  <li>Search</li>
+  <li>Responsive</li>
+  <li>Cards Slider</li>
+  <li>Animations</li>
+  <li>Google Login</li>
+  <li>Email/Password Login</li>
+  <li>Filter and Sort Houses</li>
+  <li>Images Carousel</li>
+  <li>Maps</li>
+  <li>404 page</li>
+  <li>Forms</li>
+  <li>Image Dropzone</li>
+  <li>Image Compression</li>
+  <li>Reset Password</li>
+  <li>Custom Hooks</li>
+  <li>react-hot-toasts</li>
+  <li>Search on Map</li>
+</ul>
