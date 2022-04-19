@@ -21,6 +21,13 @@ export function Nav() {
                     </Link>
                 </li>
                 <li>
+                    <Link href="/search-on-map">
+                        <a>
+                            Search on Map
+                        </a>
+                    </Link>
+                </li>
+                {/* <li>
                     <Link href="/daily-rental">
                         <a>
                             Daily Rental
@@ -33,7 +40,7 @@ export function Nav() {
                             Projects
                         </a>
                     </Link>
-                </li>
+                </li> */}
             </ul>
         </C.Nav>
     )
