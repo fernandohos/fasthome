@@ -1,8 +1,3 @@
-<div align="center" size="20px">
-  <h1>Building</h1>
-  <h1>🚧🚧⚠🏗⚠🚧🚧</h1>
-</div>
-
 <div align="center">
   <img src="https://github.com/fernandohos/fasthome/blob/main/.github/fasthome-banner.png" alt="fasthome banner" />
 </div>
