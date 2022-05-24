@@ -24,7 +24,7 @@ export function SearchOnMapBanner() {
                 <Button onClick={goSearchOnMap} buttonStyleType={ButtonStyleType.FILLED}>Search On Map</Button>
             </div>
             <div className="image-container">
-                <Image src='/images/searching-on-map.png' alt="searching on map" layout="fill" />
+                <Image src='/images/searching-on-map.webp' alt="searching on map" layout="fill" />
             </div>
         </C.Container>
     )

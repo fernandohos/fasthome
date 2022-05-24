@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Banner = styled.div`
     width: 100%;
-    background-image: url('/images/banner.png');
+    background-image: url('/images/banner.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
