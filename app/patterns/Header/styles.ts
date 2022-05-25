@@ -8,6 +8,18 @@ export const Container = styled.header`
     justify-content: space-between;
     align-items: center;
 
+    .desktop-menu-wrapper {
+        @media (max-width: 780px) {
+            display: none;
+        }
+    }
+
+    .mobile-menu-wrapper {
+        @media (min-width: 780px) {
+            display: none;
+        }
+    }
+
     .logo-nav {
         display: flex;
     }

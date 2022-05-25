@@ -11,18 +11,8 @@ import { useAuth } from '@hooks/useAuth';
 import Link from 'next/link';
 
 export function Header() {
-    const [windowWidth, setWindowWidth] = useState<number>(0);
     const [showProfileTab, setShowProfileTab] = useState(false);
     const { user } = useAuth();
-
-    useEffect(() => {
-
-        setWindowWidth(window.innerWidth);
-        window.addEventListener('resize', () => {
-            setWindowWidth(window.innerWidth);
-        })
-
-    }, []);
 
     return (
         <C.Container>
@@ -32,41 +22,35 @@ export function Header() {
                         <Image src={logo} alt="logo" layout="fill" />
                     </div>
                 </Link>
-
-                {
-                    windowWidth >= 780 && <Nav />
-                }
+                <div className="desktop-menu-wrapper"><Nav /></div>
 
             </div>
             <div className="advertise-user-profile">
                 <Link href="/advertise/form" passHref><C.Button>Advertise</C.Button></Link>
+                <div className="desktop-menu-wrapper">
+                    <C.ProfileTabContainer>
+                        <div className="user-image-container" onClick={e => setShowProfileTab(v => !v)}>
+                            <Image src={user?.photo_url ?? defaultProfileImage} layout="fill" alt="user profile image" />
+                        </div>
+                        <AnimatePresence>
+                            {
+                                showProfileTab && (
+                                    <ProfileTab
+                                        initial={{ opacity: 0, x: 10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: 10 }}
+                                        transition={{
+                                            default: { duration: .2 },
+                                        }} />
+                                )
+                            }
+                        </AnimatePresence>
 
-                {
-                    windowWidth >= 780 && (
-                        <C.ProfileTabContainer>
-                            <div className="user-image-container" onClick={e => setShowProfileTab(v => !v)}>
-                                <Image src={user?.photo_url ?? defaultProfileImage} layout="fill" alt="user profile image" />
-                            </div>
-                            <AnimatePresence>
-                                {
-                                    showProfileTab && (
-                                        <ProfileTab
-                                            initial={{ opacity: 0, x: 10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: 10 }}
-                                            transition={{
-                                                default: { duration: .2 },
-                                            }} />
-                                    )
-                                }
-                            </AnimatePresence>
-
-                        </C.ProfileTabContainer>
-                    )
-                }
-                {
-                    windowWidth < 780 && <MobileMenu />
-                }
+                    </C.ProfileTabContainer>
+                </div>
+                <div className="mobile-menu-wrapper">
+                    <MobileMenu />
+                </div>
 
             </div>
         </C.Container>
