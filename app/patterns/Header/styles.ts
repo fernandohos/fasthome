@@ -9,6 +9,9 @@ export const Container = styled.header`
     align-items: center;
 
     .desktop-menu-wrapper {
+        display: flex;
+        align-items: center;
+        
         @media (max-width: 780px) {
             display: none;
         }
