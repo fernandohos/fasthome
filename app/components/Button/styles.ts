@@ -18,6 +18,11 @@ export const Button = styled.button<{ buttonStyleType?: ButtonStyleType }>`
     padding: .5rem 1.2rem;
     border-radius: .5rem;
     cursor: pointer;
+    transition: all ease .2s;
+
+    &:hover {
+        filter: brightness(90%);
+    }
 
     ${props => {
         switch (props.buttonStyleType) {

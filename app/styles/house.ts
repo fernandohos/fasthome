@@ -166,6 +166,11 @@ export const InfoButton = styled.div<{ color?: string, border?: string, backgrou
     margin-top: 1rem;
     width: 100%;
     text-transform: uppercase;
+    transition: all ease .2s;
+
+    &:hover {
+        filter: brightness(90%);
+    }
 
     p {
         flex: 1;

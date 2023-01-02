@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Link from 'next/link';
 
 export const Container = styled.header`
     background: var(--white);
@@ -47,6 +46,12 @@ export const Container = styled.header`
             background: #ddd;
             margin-left: 2rem;
             cursor: pointer;
+
+            transition: all ease .2s;
+
+            &:hover {
+                filter: brightness(90%);
+            }
         }
     }
 `;
@@ -66,4 +71,9 @@ export const Button = styled.a`
     border-radius: .5rem;
     margin: auto;
     cursor: pointer;
+    transition: all ease .2s;
+
+    &:hover {
+        filter: brightness(90%);
+    }
 `;

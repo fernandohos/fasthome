@@ -184,6 +184,7 @@ export default function House({ data }: Props) {
                                     <C.InfoButton
                                         border="var(--dark-blue)"
                                         color="var(--dark-blue)"
+                                        background="var(--white)"
                                         onClick={e => copyText(data.email)}
                                     >
                                         <Image src={emailIcon} width={20} height={20} alt="phone icon" />
