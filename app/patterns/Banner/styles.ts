@@ -11,13 +11,13 @@ export const Banner = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 3rem;
 
     h1 {
         color: var(--white);
         font-size: 4.4rem;
         font-weight: 400;
         text-align: center;
-        margin-top: 3rem;
     }
 
 `;
