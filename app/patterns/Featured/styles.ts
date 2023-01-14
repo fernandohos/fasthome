@@ -4,7 +4,7 @@ export const Container = styled.div`
     margin-top: 4rem;
     
     a {
-        width: 30rem;
+        width: 100%;
     }
 
     .title-container {
@@ -37,12 +37,14 @@ export const Container = styled.div`
 
     .cards-container {
         margin-top: 2rem;
-        width: max-content;
         display: flex;
-        gap: 5rem;
+        justify-content: space-between;
+        width: 100%;
         
         @media (max-width: 970px) {
-            gap: 3rem;
+            a:nth-last-child(1) {
+                display: none;
+            }
         }
     }
 `;
