@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.main`
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-gap: 5rem;
+        /* grid-gap: 5rem; */
         
         @media (max-width: 1100px) {
             grid-template-columns: repeat(3, 1fr);
