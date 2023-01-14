@@ -23,6 +23,12 @@ export const Container = styled.div`
             text-decoration: none;
             color: var(--black);
             padding: .3rem 1.5rem;
+            background: var(--white);
+            transition: all ease .2s;
+
+            &:hover {
+                filter: brightness(80%);
+            }
         }
     }
 
