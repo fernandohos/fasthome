@@ -8,6 +8,13 @@ export const Card = styled.a`
     width: 100%;
     text-decoration: none;
     color: var(--black);
+    transform: scale(.9);
+    transition: all ease .2s;
+
+    &:hover {
+        transform: scale(1);
+
+    }
 
     .image-container {
         width: 100%;
