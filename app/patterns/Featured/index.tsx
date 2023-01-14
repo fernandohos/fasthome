@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import * as C from './styles';
 import { CardHouseType } from '@customTypes/CardHouseType';
 import Link from 'next/link';
 import { HouseCard } from '@components/HouseCard';
-import useDraggableScroll from 'use-draggable-scroll';
 
 type Props = {
     title: string;
@@ -12,8 +11,6 @@ type Props = {
 }
 
 export function Featured({ title, data, linkTo }: Props) {
-    const ref = useRef(null);
-    const { onMouseDown } = useDraggableScroll(ref, { direction: 'horizontal' });
     return (
         <C.Container>
             <div className="title-container">
@@ -24,7 +21,7 @@ export function Featured({ title, data, linkTo }: Props) {
                     </a>
                 </Link>
             </div>
-            <div className="cards-wrapper" ref={ref} onMouseDown={onMouseDown}>
+            <div className="cards-wrapper">
                 <div className="cards-container">
                     {
                         data.map(house => {
