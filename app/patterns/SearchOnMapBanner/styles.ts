@@ -31,7 +31,7 @@ export const Container = styled.div`
     }
 
 @media (max-width: 888px) {
-    background-image: url('/images/searching-on-map.png');
+    background-image: url('/images/searching-on-map.webp');
     background-repeat:  no-repeat;
     background-size: cover;
     background-position: center top;
