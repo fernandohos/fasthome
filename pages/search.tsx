@@ -10,6 +10,7 @@ import { Footer } from '@patterns/Footer';
 import { GetServerSideProps } from 'next';
 import searchIcon from '@images/search-icon.svg';
 import Image from 'next/image';
+import { SearchInput } from '@components/SearchInput';
 
 interface HouseType extends FormValuesType {
     id: string;
@@ -45,14 +46,7 @@ export default function ForSale({ data, query }: Props) {
                 </Head>
                 <C.Title>Results for: <span>{resultsTerm}</span></C.Title>
                 <C.InputWrapper>
-                    <InputContainer onSubmit={onSubmit}>
-                        <input placeholder="search..." type="text" value={search} onChange={e => setSearch(e.target.value)} />
-                        <button type="submit" className="icon-container">
-                            <div className="icon">
-                                <Image src={searchIcon} alt="search icon" layout="fill" />
-                            </div>
-                        </button>
-                    </InputContainer>
+                    <SearchInput />
                 </C.InputWrapper>
                 {
                     houses.length ? (
