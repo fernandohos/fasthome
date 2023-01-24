@@ -25,7 +25,7 @@
   <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel badge" />
 
   ##
-  <a href="https://fasthome.vercel.app">
+  <a href="https://fasthome.ml">
     <img src="https://therealsujitk-vercel-badge.vercel.app/?app=fasthome&style=for-the-badge" alt="deployment vercel status" />
     <br />
     Demo on Vercel
