@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const Container = styled(motion.div)`
+export const Container = styled(motion.ul)`
     width: 20rem;
     border-radius: .5rem;
     overflow: hidden;
@@ -13,12 +13,17 @@ export const Container = styled(motion.div)`
     z-index: 5;
 `;
 
-export const Tab = styled.div`
+export const Tab = styled.a`
     padding: 1rem;
     display: flex;
     align-items: center;
     transition: background-color .2s ease;
     cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-decoration: none;
+    color: var(--gray);
     
     &:hover {
         background: #eee;

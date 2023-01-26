@@ -26,36 +26,44 @@ export function ProfileTab({ initial, animate, exit, transition }: Props) {
             exit={exit}
             transition={transition}
         >
-            {!user && <Link href="/login" passHref>
-                <C.Tab>
-                    <div className="detail-tab-image">
-                        <Image src={loginIcon} layout="fill" alt="login icon" />
-                    </div>
-                    Login
-                </C.Tab>
-            </Link>}
-            {!user && <Link href="/signup" passHref>
+            {!user && <li>
+                <Link href="/login" passHref>
+                    <C.Tab>
+                        <div className="detail-tab-image">
+                            <Image src={loginIcon} layout="fill" alt="login icon" />
+                        </div>
+                        Login
+                    </C.Tab>
+                </Link>
+            </li>}
+
+            {!user && <li> <Link href="/signup" passHref>
                 <C.Tab>
                     <div className="detail-tab-image">
                         <Image src={signupIcon} layout="fill" alt="login icon" />
                     </div>
                     Signup
                 </C.Tab>
-            </Link>}
-            {user && <Link href="/profile-information" passHref>
+            </Link>
+            </li>}
+
+            {user && <li> <Link href="/profile-information" passHref>
                 <C.Tab>
                     <div className="detail-tab-image">
                         <Image src={infoIcon} layout="fill" alt="login icon" />
                     </div>
                     Profile information
                 </C.Tab>
-            </Link>}
-            {user && <C.Tab onClick={logOut}>
+            </Link>
+            </li>}
+
+            {user && <li> <C.Tab as="button" onClick={logOut}>
                 <div className="detail-tab-image">
                     <Image src={logOutIcon} layout="fill" alt="logout icon" />
                 </div>
                 Sign out
-            </C.Tab>}
+            </C.Tab>
+            </li>}
         </C.Container>
     )
 }
