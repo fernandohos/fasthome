@@ -31,6 +31,8 @@ export const Container = styled.header`
         height: 4rem;
         width: 12rem;
         cursor: pointer;
+        background: none;
+        border: none;
     }
 
     .advertise-user-profile {
@@ -46,6 +48,7 @@ export const Container = styled.header`
             background: #ddd;
             margin-left: 2rem;
             cursor: pointer;
+            border: none;
 
             transition: all ease .2s;
 

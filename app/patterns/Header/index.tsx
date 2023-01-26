@@ -18,9 +18,9 @@ export function Header() {
         <C.Container>
             <div className="logo-nav">
                 <Link href="/" passHref>
-                    <div className="logo-container">
+                    <button className="logo-container">
                         <Image src={logo} alt="logo" layout="fill" />
-                    </div>
+                    </button>
                 </Link>
                 <div className="desktop-menu-wrapper"><Nav /></div>
 
@@ -29,9 +29,9 @@ export function Header() {
                 <Link href="/advertise/form" passHref><C.Button>Advertise</C.Button></Link>
                 <div className="desktop-menu-wrapper">
                     <C.ProfileTabContainer>
-                        <div className="user-image-container" onClick={e => setShowProfileTab(v => !v)}>
+                        <button className="user-image-container" onClick={e => setShowProfileTab(v => !v)}>
                             <Image src={user?.photo_url ?? defaultProfileImage} layout="fill" alt="user profile image" />
-                        </div>
+                        </button>
                         <AnimatePresence>
                             {
                                 showProfileTab && (
